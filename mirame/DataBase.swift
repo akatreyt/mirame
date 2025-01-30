@@ -92,7 +92,18 @@ class DataBase {
     }
     
     func photoWithImportedID(id: UUID) -> Photo? {
-        return nil
+        do {
+            let photoById = FetchDescriptor<Photo>(predicate: #Predicate { photo in
+                photo.id == id
+            })
+            
+            if let photo = try sharedModelContainer.mainContext.fetch(photoById).first {
+                return photo
+            }
+            return nil
+        } catch {
+            return nil
+        }
     }
     
     func deleteViewedPhotosIfNeeded(photos: [Photo]) -> Bool {

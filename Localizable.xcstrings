@@ -28,9 +28,6 @@
     "Create deactivation key %@" : {
 
     },
-    "DB is corrupted" : {
-
-    },
     "Deactivated Keys" : {
 
     },
@@ -50,9 +47,6 @@
 
     },
     "Find someone you would like to share photos with and start the sync process by tapping on the %@ icon on the top left" : {
-
-    },
-    "Follow these instructions to start over" : {
 
     },
     "Format to test db" : {

@@ -13,7 +13,7 @@ import AVKit
 import SneakySync
 
 struct EditablePhoto: Identifiable, Equatable {
-    let id: String
+    let id: UUID
     let image: UIImage?
     var editableImage: UIImage?
     var videoData: Data?
@@ -115,18 +115,18 @@ struct PicOptionsView: View {
                 do {
                     var updatedPhotos = [PhotoShareObject]()
                     for photo in photos {
-                        let tempPhoto = photo.shareObject
+                        var tempPhoto = photo.shareObject
                         if let editedData = editablePhotos.first(where: {
                             $0.id == photo.id
                         }) {
                             if let videoData = editedData.videoData {
-                                tempPhoto.iamgeData = videoData
+                                tempPhoto.imageData = videoData
                             } else {
-                                tempPhoto.iamgeData = editedData.editableImage?.pngData()
+                                tempPhoto.imageData = editedData.editableImage?.pngData()
                             }
                         }
                         tempPhoto.allowedNumberOfViews = limitedNumberOfViews ? numberOfViews : -1
-                        tempPhoto.screenShotsAllowed = allowScreenshots ? 1 : 0
+                        tempPhoto.screenShotsAllowed = allowScreenshots
                         tempPhoto.disableFeedPreview = disableFeedPreview
                         
                         updatedPhotos.append(tempPhoto)
@@ -166,15 +166,15 @@ struct PicOptionsView: View {
             allKeys = KeychainKeys.shared.allKeys
             
             photos.forEach({ photo in
-                if photo.isVideo == 1 {
+                if let isVideo = photo.isVideo, isVideo {
                     if let url = photo.showVideo(key: KeychainKeys.shared.personalKey),
                        let decryptedData = try? Data(contentsOf: url) {
-                        let editablePhoto = EditablePhoto(id: photo.id, image: nil, editableImage: nil, videoData: decryptedData)
+                        let editablePhoto = EditablePhoto(id: photo.id ?? UUID(), image: nil, editableImage: nil, videoData: decryptedData)
                         editablePhotos.append(editablePhoto)
                     }
                 } else {
                     if let decryptedImage = photo.showImage(key: KeychainKeys.shared.personalKey) {
-                        let editablePhoto = EditablePhoto(id: photo.id, image: decryptedImage, editableImage: decryptedImage)
+                        let editablePhoto = EditablePhoto(id: photo.photoID, image: decryptedImage, editableImage: decryptedImage)
                         editablePhotos.append(editablePhoto)
                     }
                 }
@@ -183,29 +183,29 @@ struct PicOptionsView: View {
     }
 }
 
-#Preview {
-    var somePhoto: Photo {
-        var photo = Photo()
-        photo.iamgeData = UIImage(systemName: "square.and.arrow.up")?.jpegData(compressionQuality: 1.0)
-        return photo
-    }
-    
-    var somePhoto2: Photo {
-        var photo = Photo()
-        photo.iamgeData = UIImage(systemName: "sharedwithyou.circle")?.jpegData(compressionQuality: 1.0)
-        return photo
-    }
-    
-    var somePhoto3: Photo {
-        var photo = Photo()
-        photo.iamgeData = UIImage(systemName: "shareplay")?.jpegData(compressionQuality: 1.0)
-        return photo
-    }
-    
-    PicOptionsView(photos: [
-        somePhoto, somePhoto2, somePhoto3
-    ])
-}
+//#Preview {
+//    var somePhoto: Photo {
+//        var photo = Photo()
+//        photo.iamgeData = UIImage(systemName: "square.and.arrow.up")?.jpegData(compressionQuality: 1.0)
+//        return photo
+//    }
+//    
+//    var somePhoto2: Photo {
+//        var photo = Photo()
+//        photo.iamgeData = UIImage(systemName: "sharedwithyou.circle")?.jpegData(compressionQuality: 1.0)
+//        return photo
+//    }
+//    
+//    var somePhoto3: Photo {
+//        var photo = Photo()
+//        photo.iamgeData = UIImage(systemName: "shareplay")?.jpegData(compressionQuality: 1.0)
+//        return photo
+//    }
+//    
+//    PicOptionsView(photos: [
+//        somePhoto, somePhoto2, somePhoto3
+//    ])
+//}
 
 
 struct ActivityView: UIViewControllerRepresentable {

@@ -88,15 +88,6 @@ struct AllKeysView: View {
             })
             
             Spacer()
-            
-            if let url = DataBase.exportPersonalDBKey() {
-                Button(action: {
-                    shareURL = url
-                }, label: {
-                    Image(systemName: "cylinder")
-                        .font(.title2)
-                })
-            }
         }
     }
     

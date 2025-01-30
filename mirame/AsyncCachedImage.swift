@@ -43,7 +43,7 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
     func getImageData() async -> Image? {
         guard let photo else { return nil }
         
-        if let unlockedData = PhotoDataCache.shared.cache[photo.id] {
+        if let unlockedData = PhotoDataCache.shared.cache[photo.photoID.uuidString] {
             if let uiImage = UIImage(data: unlockedData) {
                 return Image(uiImage: uiImage)
             }
@@ -51,11 +51,11 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
         
         var image: UIImage?
         
-        if photo.isVideo == 1 {
+        if let isVideo = photo.isVideo, isVideo {
             image = UIImage(systemName: "play")
         }
         
-        if photo.localImage == 1 {
+        if let localImage = photo.localImage, localImage {
             let key = KeychainKeys.shared.personalKey
             if let _image = photo.showImage(key: key) {
                 image = _image
@@ -69,7 +69,7 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
         }
         
         if let image {
-            PhotoDataCache.shared.cache[photo.id] = image.resized(toWidth: 300)!.jpegData(compressionQuality: 1)
+            PhotoDataCache.shared.cache[photo.photoID.uuidString] = image.resized(toWidth: 300)!.jpegData(compressionQuality: 1)
             return Image(uiImage: image)
         }
         return nil

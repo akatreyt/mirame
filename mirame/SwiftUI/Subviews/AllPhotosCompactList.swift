@@ -10,27 +10,27 @@ import SwiftUI
 
 struct AllPhotosCompactList: View {
     @Binding var selectMultiple: Bool
-    @State var selectedIDs = [String]()
+    @Binding var selectedIDs: [UUID]
     @Binding var viewType: AllPhotosViewType
     @Binding var photoToShow: PhotoToShow?
-    @ObservedObject var photoDataStore = PhotoDataStore.shared
+    var photos: [Photo]
     
     var body: some View {
         List {
-            ForEach(photoDataStore.photos) { photo in
+            ForEach(photos) { photo in
                 HStack {
                     PhotoDetailView(photo: photo)
                         .cornerRadius(8)
-                        .border(.red, width: (selectMultiple && selectedIDs.contains(photo.id)) ? 4 : 0)
+                        .border(.red, width: (selectMultiple && selectedIDs.contains(photo.photoID)) ? 4 : 0)
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if viewType == .Taken {
                         if selectMultiple {
-                            if selectedIDs.contains(photo.id) {
-                                selectedIDs.removeAll(where: { $0 == photo.id })
+                            if selectedIDs.contains(photo.photoID) {
+                                selectedIDs.removeAll(where: { $0 == photo.photoID })
                             } else {
-                                selectedIDs.append(photo.id)
+                                selectedIDs.append(photo.photoID)
                             }
                         } else {
                             photoToShow = PhotoToShow(

@@ -6,15 +6,15 @@
 //  Copyright © 2025 Trey Tartt. All rights reserved.
 //
 import SwiftUI
-import RealmSwift
 
-struct AllPhotosPreviewList: View, Identifiable {
-    var id: UUID = UUID()
-    @ObservedObject var photoDataStore = PhotoDataStore.shared
-    @ObservedObject var allPhotosViewModel: AllPhotosViewModel
+struct AllPhotosPreviewList: View {
     @Binding var photoToShow: PhotoToShow?
+    @Binding var viewType: AllPhotosViewType
+    @Binding var selectMultiple: Bool
+    @Binding var selectedIDs: [UUID]
+    var photos: [Photo]
     
-    @State var scaledImages: [String: Image] = [:]
+    var scaledImages: [String: Image] = [:]
     
     /*
      border(
@@ -24,19 +24,19 @@ struct AllPhotosPreviewList: View, Identifiable {
     
     var body: some View {
         List {
-            ForEach(photoDataStore.photos, id: \.self) { photo in
+            ForEach(photos, id: \.self) { photo in
                 PhotoDetailViewPreview(photo: photo)
-                    .border(.red, width: (allPhotosViewModel.selectMultiple && allPhotosViewModel.selectedIDs.contains(photo.id)) ? 4 : 0)
+                    .border(.red, width: (selectMultiple && selectedIDs.contains(photo.photoID)) ? 4 : 0)
                     .cornerRadius(8)
                     .contentShape(Rectangle())
                     .listRowSeparator(.hidden)
                     .onTapGesture {
-                        if allPhotosViewModel.viewType == .Taken {
-                            if allPhotosViewModel.selectMultiple {
-                                if allPhotosViewModel.selectedIDs.contains(photo.id) {
-                                    allPhotosViewModel.selectedIDs.removeAll(where: { $0 == photo.id })
+                        if viewType == .Taken {
+                            if selectMultiple {
+                                if selectedIDs.contains(photo.photoID) {
+                                    selectedIDs.removeAll(where: { $0 == photo.photoID })
                                 } else {
-                                    allPhotosViewModel.selectedIDs.append(photo.id)
+                                    selectedIDs.append(photo.photoID)
                                 }
                             } else {
                                 photoToShow = PhotoToShow(
@@ -61,13 +61,6 @@ struct AllPhotosPreviewList: View, Identifiable {
     }
     
     func delete(at offsets: IndexSet) {
-        if let offset = offsets.first {
-            do {
-                let photo = PhotoDataStore.shared.photos[offset]
-                try DataBase.deleteLocally(photo: photo)
-            } catch {
-                print(error)
-            }
-        }
+        DataBase.shared.deleteLocally(photo: photos[offsets.first!])
     }
 }

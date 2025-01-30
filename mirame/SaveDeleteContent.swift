@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 import AVFoundation
 import AVKit
-import Realm
-import RealmSwift
 import SneakySync
 
 /*
@@ -27,24 +25,35 @@ class SaveDeleteContent {
     required init(){}
     
     @discardableResult
-    static func savePhoto(importedPhotoID: String?, image: UIImage, keyDataSet: KeyDataSet, isLocal: Bool, allowedNumOfViews: Int = -1, allowScreenShots : Bool = false, takenDate : Date = Date(), disableFeedPreview : Bool) async throws -> String {
+    static func savePhoto(importedPhotoID: UUID?, image: UIImage, keyDataSet: KeyDataSet, isLocal: Bool, allowedNumOfViews: Int = -1, allowScreenShots : Bool = true, takenDate : Date = Date(), disableFeedPreview : Bool) async throws -> String {
         
         let newImage = image.fixOrientation()
-        let newPhoto = Photo()
+        
         if let _data = newImage.pngData() {
             let enctrypedData = try PrivateKeyStuff.encryptUsing(data: _data, keyDataSet: keyDataSet)
-            newPhoto.iamgeData = enctrypedData
-            newPhoto.savedDate = Date()
-            newPhoto.privateKeyUUID = keyDataSet.id.uuidString
-            newPhoto.localImage = isLocal ? 1 : 0
-            newPhoto.allowedNumberOfViews = allowedNumOfViews
-            newPhoto.screenShotsAllowed = allowScreenShots ? 1 : 0
-            newPhoto.takenDate = takenDate
-            newPhoto.importedID = importedPhotoID
-            newPhoto.disableFeedPreview = disableFeedPreview
+            
+            let newPhoto = Photo(
+                id: UUID(),
+                imageData: enctrypedData,
+                savedDate: Date(),
+                takenBy: nil,
+                takenDate: takenDate,
+                isVideo: false,
+                videoFileName: nil,
+                localImage: isLocal,
+                allowedNumberOfViews: allowedNumOfViews,
+                screenShotsAllowed: allowScreenShots,
+                numberOfViews: 0,
+                lastViewDate: nil,
+                privateKeyUUID: keyDataSet.id.uuidString,
+                keyName: keyDataSet.name,
+                isFavorite: false,
+                importedID: importedPhotoID,
+                disableFeedPreview: disableFeedPreview
+            )
             
             do{
-                if let id = try await DataBase.saveLocally(photo: newPhoto) {
+                if let id = try await DataBase.shared.saveLocally(photo: newPhoto) {
                     return id
                 } else {
                     throw UIAlertTypes.errorSaving
@@ -58,7 +67,7 @@ class SaveDeleteContent {
     }
     
     @discardableResult
-    static func saveVideo(importedPhotoID: String?, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool) async throws -> Photo {
+    static func saveVideo(importedPhotoID: UUID, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool) async throws -> Photo {
         do{
             // unencrypted video data
             let data = try Data(contentsOf: fileURL)
@@ -68,56 +77,67 @@ class SaveDeleteContent {
             
             let encryptedData = try PrivateKeyStuff.encryptUsing(data: data, keyDataSet: keyDataSet)
             let fileName = try VideoEncryption.saveVideoFileInDocuemnts(data: encryptedData)
-            let newPhoto = Photo()
-            newPhoto.videoURL = fileName
-            newPhoto.savedDate = Date()
-            newPhoto.isVideo = 1
-            newPhoto.privateKeyUUID = keyDataSet.id.uuidString
-            newPhoto.localImage = isLocal ? 1 : 0
-            newPhoto.takenDate = Date()
-            newPhoto.importedID = importedPhotoID
-            newPhoto.disableFeedPreview = disableFeedPreview
+            let newPhoto = Photo(
+                id: UUID(),
+                imageData: nil,
+                savedDate: Date(),
+                takenBy: nil,
+                takenDate:  Date(),
+                isVideo: true,
+                videoFileName: fileName,
+                localImage: isLocal,
+                allowedNumberOfViews: -1,
+                screenShotsAllowed: true,
+                numberOfViews: 0,
+                lastViewDate: nil,
+                privateKeyUUID: keyDataSet.id.uuidString,
+                keyName: keyDataSet.name,
+                isFavorite: false,
+                importedID: importedPhotoID,
+                disableFeedPreview: disableFeedPreview
+            )
             
-            try await DataBase.saveLocally(photo: newPhoto)
+            try await DataBase.shared.saveLocally(photo: newPhoto)
             return newPhoto
         }catch{
             throw error
         }
     }
     
+    @MainActor
     func delete(photo:Photo)throws {
         do{
-            try DataBase.deleteLocally(photo: photo)
+            try DataBase.shared.deleteLocally(photo: photo)
         }catch{
             throw error
         }
     }
     
-//    static func deleteOldVideoFiles() {
-//        var videoFiles = [String]()
-//        DataBase.getAllPhotosResults(withFilter: "localImage == 0").forEach({ photo in
-//            if photo.isVideo == 1{
-//                videoFiles.append(photo.videoURL!)
-//            }
-//        })
-//        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        do {
-//            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
-//            print(directoryContents)
-//            
-//            let movFiles = directoryContents.filter{ $0.pathExtension == "mov" }
-//            let movFileNames = movFiles.map{ $0.deletingPathExtension().lastPathComponent }
-//            for movFile in movFileNames{
-//                let _movFile = movFile+".mov"
-//                if !videoFiles.contains(_movFile){
-//                    let url = getCompleteDocumentsURL(fileName: _movFile)
-//                    try FileManager.default.removeItem(at: URL(fileURLWithPath: url.path))
-//                }
-//            }
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
+    //    static func deleteOldVideoFiles() {
+    //        var videoFiles = [String]()
+    //        DataBase.getAllPhotosResults(withFilter: "localImage == 0").forEach({ photo in
+    //            if photo.isVideo == 1{
+    //                videoFiles.append(photo.videoURL!)
+    //            }
+    //        })
+    //        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    //        do {
+    //            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
+    //            print(directoryContents)
+    //
+    //            let movFiles = directoryContents.filter{ $0.pathExtension == "mov" }
+    //            let movFileNames = movFiles.map{ $0.deletingPathExtension().lastPathComponent }
+    //            for movFile in movFileNames{
+    //                let _movFile = movFile+".mov"
+    //                if !videoFiles.contains(_movFile){
+    //                    let url = getCompleteDocumentsURL(fileName: _movFile)
+    //                    try FileManager.default.removeItem(at: URL(fileURLWithPath: url.path))
+    //                }
+    //            }
+    //        } catch {
+    //            print(error.localizedDescription)
+    //        }
+    //    }
     
     static func getCompleteDocumentsURL(fileName:String)->URL{
         let completeURL = URL(fileURLWithPath: Constants.documentDirectoryPath.appendingPathComponent(fileName))

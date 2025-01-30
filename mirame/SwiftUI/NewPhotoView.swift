@@ -38,7 +38,7 @@ struct NewPhotoView: View {
                 }, newURL: { url in
                     Task {
                         do {
-                            try await DataBase.saveVideo(url)
+                            try await DataBase.shared.saveVideo(url)
                             dismiss()
                         } catch {
                             alertConfig = AlertConfig(

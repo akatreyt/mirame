@@ -78,7 +78,7 @@ struct SettingsView: View {
         .alert("Delete Everything", isPresented: $deleteEverything) {
             Button("Delete", role: .destructive, action: {
                 BioAuthView.authenticate(completedAuthSuccess: {
-                    DataBase.deleteAll()
+                    DataBase.shared.deleteAll()
                     KeychainKeys.shared.deleteAll()
                 }, failedAuth: {
                     

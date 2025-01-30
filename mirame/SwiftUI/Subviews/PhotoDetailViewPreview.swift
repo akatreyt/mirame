@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import RealmSwift
 
 class PhotoDataCache {
     static let shared = PhotoDataCache()
@@ -15,11 +14,11 @@ class PhotoDataCache {
 }
 
 struct PhotoDetailViewPreview: View {
-    @ObservedRealmObject var photo: Photo
+    var photo: Photo
     
     var body: some View {
         ZStack {
-            if photo.isVideo == 1 {
+            if let isVideo = photo.isVideo, isVideo {
                 Color(uiColor: .systemGroupedBackground)
 
                 VStack {
@@ -71,7 +70,7 @@ struct PhotoDetailViewPreview: View {
                     Image(systemName: "calendar")
                     Text("\(photo.takenDate ?? Date(), style: .date)")
                     Spacer()
-                    Text("\(photo.numberOfViews)")
+                    Text("\(photo.numberOfViews ?? 0)")
                     Image(systemName: "eye")
                 }
                 .padding()

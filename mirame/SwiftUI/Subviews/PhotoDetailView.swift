@@ -6,7 +6,6 @@
 //  Copyright © 2024 Trey Tartt. All rights reserved.
 //
 import SwiftUI
-import RealmSwift
 
 enum PhotoType {
     case image
@@ -18,7 +17,7 @@ struct PhotoDetailView: View, Identifiable {
         photo.id
     }
     
-    @ObservedRealmObject var photo: Photo
+    var photo: Photo
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -28,15 +27,15 @@ struct PhotoDetailView: View, Identifiable {
             }
             
             HStack {
-                if photo.isVideo == 0 {
-                    Image(systemName: "photo")
-                } else {
+                if let isVideo = photo.isVideo, isVideo {
                     Image(systemName: "video")
+                } else {
+                    Image(systemName: "photo")
                 }
                 
                 Spacer()
                 Image(systemName: "eye")
-                Text("\(photo.numberOfViews)")
+                Text("\(photo.numberOfViews ?? 0)")
                 
                 Spacer()
                 Image(systemName: "lock")

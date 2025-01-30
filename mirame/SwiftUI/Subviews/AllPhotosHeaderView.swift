@@ -14,12 +14,13 @@ struct AllPhotosHeaderView: View {
     @Binding var importImageItem: [PhotosPickerItem]
     @Binding var showKeys: Bool
     @Binding var showSettings: Bool
+    @Binding var showTakeImage: Bool
     
     var body: some View {
         HStack {
             HStack {
                 Button(action: {
-//                    showTakeImage.toggle()
+                    showTakeImage.toggle()
                 }, label: {
                     Image(systemName: "camera")
                         .font(.title2)

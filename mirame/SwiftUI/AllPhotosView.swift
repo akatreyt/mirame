@@ -8,68 +8,154 @@
 
 import SwiftUI
 import SneakyCamPackage
-import Realm
 import ScreenShield
 import PhotosUI
+import SwiftData
 
 struct AllPhotosView: View {
-    @StateObject var viewModel: AllPhotosViewModel = .init()
-    @ObservedObject var photoDataStore = PhotoDataStore.shared
-    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var photos: [Photo]
+        
     @State var showKeys: Bool = false
     @State var photoToShow: PhotoToShow?
     @State var showTakeImage: Bool = false
     @State var showSettings: Bool = false
-    
+    @State var selectMultiple: Bool = false
+    @State var selectedIDs: [UUID] = []
+    @State var mediaType: AllPhotosFilterType = .All
     @State private var importImageItem = [PhotosPickerItem]()
-    
+    @State var showAlert: Bool = false
+    @State var showSharePhotos: Bool = false
     @State var alertConfig: AlertConfig? {
         didSet {
             showAlert = alertConfig != nil
         }
     }
-    @State var showAlert: Bool = false
     
     @MainActor
     @State var scaledImages = [String : Image]()
     
-    @State var showSharePhotos: Bool = false
+    @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
+    @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
+    @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
+    
+    var sortedPhotos: [Photo] {
+        var filteredItems = [Photo]()
+        
+        filteredItems = photos.compactMap({ photo in
+            if photo.videoFileName != nil || photo.imageData != nil {
+                return photo
+            }
+            return nil
+        })
+        
+        switch viewType {
+        case .Taken:
+            filteredItems = filteredItems.compactMap({ photo in
+                if let localImage = photo.localImage,
+                   localImage {
+                    return photo
+                }
+                return nil
+            })
+        case .Saved:
+            filteredItems = filteredItems.compactMap({ photo in
+                if let localImage = photo.localImage,
+                   !localImage {
+                    return photo
+                }
+                return nil
+            })
+        case .favorites:
+            filteredItems = filteredItems.compactMap({ photo in
+                if let isFavorite = photo.isFavorite,
+                   isFavorite {
+                    return photo
+                }
+                return nil
+            })
+        }
+        
+        switch mediaType {
+        case .Photo:
+            filteredItems = filteredItems.compactMap({ photo in
+                if let isVideo = photo.isVideo,
+                   !isVideo {
+                    return photo
+                }
+                return nil
+            })
+        case .Video:
+            filteredItems = filteredItems.compactMap({ photo in
+                if let isVideo = photo.isVideo,
+                   isVideo {
+                    return photo
+                }
+                return nil
+            })
+        case .All:
+            break
+        }
+                
+        switch sortBy {
+        case .DateSavedAsc:
+            filteredItems = filteredItems.sorted { $0.savedDate ?? Date() < $1.savedDate ?? Date() }
+        case .DateSavedDesc:
+            filteredItems = filteredItems.sorted { $0.savedDate ?? Date() > $1.savedDate ?? Date() }
+        case .DateTakenAsc:
+            filteredItems = filteredItems.sorted { $0.takenDate ?? Date() < $1.takenDate ?? Date() }
+        case .DateTakenDesc:
+            filteredItems = filteredItems.sorted { $0.takenDate ?? Date() > $1.takenDate ?? Date() }
+        case .viewCountAsc:
+            filteredItems = filteredItems.sorted { $0.numberOfViews ?? 0 < $1.numberOfViews ?? 0 }
+        case .viewCountDesc:
+            filteredItems = filteredItems.sorted { $0.numberOfViews ?? 0 > $1.numberOfViews ?? 0 }
+        }
+        return filteredItems
+    }
     
     var body: some View {
         VStack {
             AllPhotosHeaderView(
-                viewType: $viewModel.viewType,
+                viewType: $viewType,
                 importImageItem: $importImageItem,
                 showKeys: $showKeys,
-                showSettings: $showSettings)
+                showSettings: $showSettings,
+                showTakeImage: $showTakeImage)
                 .padding([.leading, .trailing])
             
             viewPhotosTypePicker()
                 .padding(.horizontal)
             
-            if photoDataStore.photos.isEmpty {
-                AllPhotosEmptyView(viewType: $viewModel.viewType)
+            if sortedPhotos.isEmpty {
+                AllPhotosEmptyView(viewType: $viewType)
             } else {
-                switch viewModel.layoutType {
+                switch layoutType {
                 case .list:
                     AllPhotosCompactList(
-                        selectMultiple: $viewModel.selectMultiple,
-                        viewType: $viewModel.viewType,
-                        photoToShow: $photoToShow)
+                        selectMultiple: $selectMultiple,
+                        selectedIDs: $selectedIDs,
+                        viewType: $viewType,
+                        photoToShow: $photoToShow,
+                        photos: sortedPhotos)
                 case .preview:
-                    AllPhotosPreviewList(allPhotosViewModel: viewModel,
-                                         photoToShow: $photoToShow)
+                    AllPhotosPreviewList(
+                        photoToShow: $photoToShow,
+                        viewType: $viewType,
+                        selectMultiple: $selectMultiple,
+                        selectedIDs: $selectedIDs,
+                        photos: sortedPhotos)
                         .protectScreenshot()
                 }
                 
-                if viewModel.viewType == .Taken && viewModel.selectMultiple {
+                if viewType == .Taken && selectMultiple {
                     Button(action: {
                         showSharePhotos.toggle()
                     }, label: {
                         VStack {
                             Image(systemName: "shareplay")
                                 .font(.title)
-                            Text("\(viewModel.selectedIDs.count) selected")
+                            Text("\(selectedIDs.count) selected")
                                 .font(.caption)
                         }
                         .contentShape(Rectangle())
@@ -78,13 +164,13 @@ struct AllPhotosView: View {
                 }
             }
             AllPhotosFooterView(
-                viewType: $viewModel.viewType,
-                mediaType: $viewModel.mediaType,
-                sortBy: $viewModel.sortBy,
-                layoutType: $viewModel.layoutType,
-                selectMultiple: $viewModel.selectMultiple,
+                viewType: $viewType,
+                mediaType: $mediaType,
+                sortBy: $sortBy,
+                layoutType: $layoutType,
+                selectMultiple: $selectMultiple,
                 viewRandom: {
-                    if let photo = viewModel.viewRandom() {
+                    if let photo = viewRandom() {
                         photoToShow = photo
                     }
                 })
@@ -110,7 +196,7 @@ struct AllPhotosView: View {
                content: { thingy in
             ViewPhotoView(photo: thingy.photo, keyDataSet: thingy.keyDataSet)
                 .onDisappear(perform: {
-                    if DataBase.deleteViewedPhotosIfNeeded() {
+                    if DataBase.shared.deleteViewedPhotosIfNeeded() {
                         alertConfig = AlertConfig(
                             title: "Max number of views reached",
                             message: "Item has been deleted",
@@ -119,12 +205,12 @@ struct AllPhotosView: View {
                 })
         })
         .sheet(isPresented: $showSharePhotos, content: {
-            let photos = photoDataStore.photos.filter( { viewModel.selectedIDs.contains($0.id) })
+            let photos = photos.filter( { selectedIDs.contains($0.photoID) })
             PicOptionsView(photos: Array(photos))
         })
         .onAppear() {
             ScreenShield.shared.protectFromScreenRecording()
-            if DataBase.deleteViewedPhotosIfNeeded() {
+            if DataBase.shared.deleteViewedPhotosIfNeeded() {
                 alertConfig = AlertConfig(
                     title: "Max number of views reached",
                     message: "Item has been deleted",
@@ -144,7 +230,7 @@ struct AllPhotosView: View {
     
     @ViewBuilder
     func viewPhotosTypePicker() -> some View {
-        Picker("", selection: $viewModel.viewType) {
+        Picker("", selection: $viewType) {
             ForEach(AllPhotosViewType.allCases, id: \.self) {
                 Text($0.description)
             }
@@ -188,8 +274,29 @@ struct AllPhotosView: View {
         }
         importImageItem = []
     }
+    
+    func viewRandom() -> PhotoToShow? {
+        if let photo = photos.randomElement()  {
+            if let localImage = photo.localImage, localImage {
+                return PhotoToShow(
+                    id: UUID(),
+                    photo: photo,
+                    keyDataSet: KeychainKeys.shared.personalKey)
+            } else {
+                if let keyUUID = photo.privateKeyUUID,
+                   let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
+                   let _ = photo.decrypt(withKey: key) {
+                    return PhotoToShow(
+                        id: UUID(),
+                        photo: photo,
+                        keyDataSet: key)
+                }
+            }
+        }
+        return nil
+    }
 }
-
-#Preview {
-    AllPhotosView()
-}
+//
+//#Preview {
+//    AllPhotosView()
+//}

@@ -41,14 +41,14 @@ class ImportExport {
                 let photoToShow = try JSONDecoder().decode(PhotoShareObject.self, from: item)
                 
                 // if this photo already exist update the image data but keep all other data
-                if let photo = DataBase.photoWithImportedID(id: photoToShow.id),
-                   let imageData = photoToShow.iamgeData {
-                    try photo.update(imagedata: imageData)
+                if let photo = DataBase.shared.photoWithImportedID(id: photoToShow.id),
+                   let imageData = photoToShow.imageData {
+                    try DataBase.shared.update(photo: photo, imageData: imageData)
                     allResults.append((true, 0, nil))
                 } else {
-                    if let imageData = photoToShow.iamgeData {
-                        if photoToShow.isVideo == 1 {
-                            if let videoURL = photoToShow.videoURL {
+                    if let imageData = photoToShow.imageData {
+                        if photoToShow.isVideo {
+                            if let videoURL = photoToShow.videoFileName {
                                 // get image from imported file, its decoded at this stage
                                 // save image to docs so we can use the same saveVideo function as taking a video
                                 // but it saves
@@ -75,7 +75,7 @@ class ImportExport {
                                                                                keyDataSet: keyDataSet,
                                                                                isLocal: false,
                                                                                allowedNumOfViews: photoToShow.allowedNumberOfViews,
-                                                                               allowScreenShots: photoToShow.screenShotsAllowed == 1 ? true : false,
+                                                                               allowScreenShots: photoToShow.screenShotsAllowed,
                                                                                takenDate:takenDate,
                                                                                disableFeedPreview: photoToShow.disableFeedPreview ?? false)
                                 allResults.append((true, 0, nil))

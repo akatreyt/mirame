@@ -39,13 +39,11 @@ struct ViewPhotoView: View {
     var body: some View {
         VStack(spacing: 0) {
             if let key = keyDataSet {
-                if let date = photo.takenDate {
-                    Text(date, style: .date)
-                        .padding()
-                }
+                Text(photo.takenDate ?? Date(), style: .date)
+                    .padding()
                 
                 ZStack {
-                    if photo.isVideo == 1 {
+                    if let isVideo = photo.isVideo, isVideo {
                         if let videoURL = photo.showVideo(key: key) {
                             VideoPlayer(player: AVPlayer(url: videoURL))
                                 .protectScreenshot()
@@ -56,7 +54,7 @@ struct ViewPhotoView: View {
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .protectScreenshot() 
+                                    .protectScreenshot()
                             }
                         }
                     }
@@ -64,7 +62,7 @@ struct ViewPhotoView: View {
                 
                 HStack {
                     Button(action: {
-                        isFavorite = (try? photo.favorite(isFavorite: !isFavorite)) ?? false
+                        isFavorite = (try? DataBase.shared.favorite(photo: photo, isFavorite: !isFavorite)) ?? false
                     }, label: {
                         isFavorite ? Image(systemName: "heart.fill")
                             .font(.title) : Image(systemName: "heart").font(.title)
@@ -72,7 +70,7 @@ struct ViewPhotoView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     
-                    if photo.localImage == 1 {
+                    if let localImage = photo.localImage, localImage {
                         Button(action: {
                             showShare.toggle()
                         }, label: {
@@ -83,7 +81,7 @@ struct ViewPhotoView: View {
                         .frame(maxWidth: .infinity)
                         
                         Button(action: {
-                            try? DataBase.deleteLocally(photo: photo)
+                            DataBase.shared.deleteLocally(photo: photo)
                             dismiss()
                         }, label: {
                             Image(systemName: "trash")
@@ -102,7 +100,7 @@ struct ViewPhotoView: View {
         }
         .onAppear() {
             isFavorite = photo.isFavorite ?? false
-            try? photo.incrementViewCount()
+            DataBase.shared.incrementViewCount(photo: photo)
             ScreenShield.shared.protectFromScreenRecording()
         }
         .alert(

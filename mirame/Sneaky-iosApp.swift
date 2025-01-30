@@ -6,6 +6,7 @@
 //  Copyright © 2024 Trey Tartt. All rights reserved.
 //
 import SwiftUI
+import SwiftData
 
 @main
 struct NewIn14App: App {
@@ -58,17 +59,10 @@ struct NewIn14App: App {
                         
                     }
                 } else {
-                    if DataBase.canOpenRealm() {
-                        AllPhotosView()
-                            .onAppear() {
-//                                SaveDeleteContent.deleteOldVideoFiles()
-                            }
-                    } else {
-                        VStack {
-                            Text("DB is corrupted")
-                            Text("Follow these instructions to start over")
+                    AllPhotosView()
+                        .onAppear() {
+                            //                                SaveDeleteContent.deleteOldVideoFiles()
                         }
-                    }
                 }
             }
             .onOpenURL { url in
@@ -116,7 +110,6 @@ struct NewIn14App: App {
                 }
             }
         }
+        .modelContainer(DataBase.shared.sharedModelContainer)
     }
-    
-    
 }

@@ -27,7 +27,7 @@ class TestDataCreator {
     
     @MainActor
     func populateTestData() async {
-        DataBase.deleteAll()
+        DataBase.shared.deleteAll()
         KeychainKeys.shared.deleteAll()
         
         try! KeychainKeys.shared.saveLocally(key: fakeImportKeyDataSet)
@@ -57,21 +57,23 @@ class TestDataCreator {
     
     func saveImage(_ image: UIImage, isLocal: Bool) async {
         if isLocal {
-            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID().uuidString,
-                                                     image: image,
-                                                     keyDataSet: KeychainKeys.shared.personalKey,
-                                                     isLocal: true,
-                                                     allowedNumOfViews: -1,
-                                                     allowScreenShots: false,
-                                                     takenDate: Date(), disableFeedPreview: Bool.random())
+            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID(),
+                                                           image: image,
+                                                           keyDataSet: KeychainKeys.shared.personalKey,
+                                                           isLocal: true,
+                                                           allowedNumOfViews: -1,
+                                                           allowScreenShots: false,
+                                                           takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
+                                                           disableFeedPreview: Bool.random())
         } else {
-            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID().uuidString,
-                                                     image: image,
-                                                     keyDataSet: fakeImportKeyDataSet,
-                                                     isLocal: false,
-                                                     allowedNumOfViews: -1,
-                                                     allowScreenShots: false,
-                                                     takenDate: Date(), disableFeedPreview: Bool.random())
+            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID(),
+                                                           image: image,
+                                                           keyDataSet: fakeImportKeyDataSet,
+                                                           isLocal: false,
+                                                           allowedNumOfViews: -1,
+                                                           allowScreenShots: false,
+                                                           takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
+                                                           disableFeedPreview: Bool.random())
         }
     }
 }

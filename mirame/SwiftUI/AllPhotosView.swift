@@ -37,52 +37,25 @@ struct AllPhotosView: View {
     
     var body: some View {
         VStack {
-            header()
+            AllPhotosHeaderView(
+                viewType: $viewModel.viewType,
+                importImageItem: $importImageItem,
+                showKeys: $showKeys,
+                showSettings: $showSettings)
                 .padding([.leading, .trailing])
             
             viewPhotosTypePicker()
                 .padding(.horizontal)
             
             if photoDataStore.photos.isEmpty {
-                if viewModel.viewType == .Saved {
-                    Text("No photos found.")
-                        .padding()
-                    
-                    Text("Find someone to share photos with and share a key by tapping the \(Image(systemName: "key")), located on the top right, to share keys")
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                }
-                if viewModel.viewType == .Taken {
-                    Text("You havent taken any photos yet")
-                        .padding()
-                    
-                    Text("Tap \(Image(systemName: "camera")), located on the top left, to take a few")
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                }
-                if viewModel.viewType == .favorites {
-                    Text("No favorites")
-                        .padding()
-                    
-                    Text("Once you favorite some photos, by tapping on the \(Image(systemName: "heart")) when viewing the photo, they will be located here for quick access")
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                }
-                Spacer()
-                if viewModel.viewType == .Saved {
-                    Text("When you have some photos use the options on the bottom of the screen to filter photos or vidoes, sort the photos, view a random photo, switch between list and preview mode")
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                } else {
-                    Text("When you have some photos use the options on the bottom of the screen to filter photos or vidoes, sort the photos, view a random photo, switch between list and preview mode, select multiple for quick sharing")
-                        .multilineTextAlignment(.leading)
-                        .padding()
-                }
-                Image(systemName: "arrow.down")
+                AllPhotosEmptyView(viewType: $viewModel.viewType)
             } else {
                 switch viewModel.layoutType {
                 case .list:
-                    allPhotosList()
+                    AllPhotosCompactList(
+                        selectMultiple: $viewModel.selectMultiple,
+                        viewType: $viewModel.viewType,
+                        photoToShow: $photoToShow)
                 case .preview:
                     AllPhotosPreviewList(allPhotosViewModel: viewModel,
                                          photoToShow: $photoToShow)
@@ -104,7 +77,17 @@ struct AllPhotosView: View {
                     Divider()
                 }
             }
-            footer()
+            AllPhotosFooterView(
+                viewType: $viewModel.viewType,
+                mediaType: $viewModel.mediaType,
+                sortBy: $viewModel.sortBy,
+                layoutType: $viewModel.layoutType,
+                selectMultiple: $viewModel.selectMultiple,
+                viewRandom: {
+                    if let photo = viewModel.viewRandom() {
+                        photoToShow = photo
+                    }
+                })
                 .padding()
         }
         .sheet(isPresented: $showKeys) {
@@ -160,41 +143,6 @@ struct AllPhotosView: View {
     }
     
     @ViewBuilder
-    func allPhotosList() -> some View {
-        List {
-            ForEach(photoDataStore.photos) { photo in
-                HStack {
-                    PhotoDetailView(photo: photo)
-                    .cornerRadius(8)
-                    .border(.red, width: (viewModel.selectMultiple && viewModel.selectedIDs.contains(photo.id)) ? 4 : 0)
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    if viewModel.viewType == .Taken {
-                        if viewModel.selectMultiple {
-                            if viewModel.selectedIDs.contains(photo.id) {
-                                viewModel.selectedIDs.removeAll(where: { $0 == photo.id })
-                            } else {
-                                viewModel.selectedIDs.append(photo.id)
-                            }
-                        } else {
-                            photoToShow = PhotoToShow(
-                                id: UUID(),
-                                photo: photo,
-                                keyDataSet: KeychainKeys.shared.personalKey)
-                        }
-                    } else {
-                        if let keyUUID = photo.privateKeyUUID,
-                           let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
-                            photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
     func viewPhotosTypePicker() -> some View {
         Picker("", selection: $viewModel.viewType) {
             ForEach(AllPhotosViewType.allCases, id: \.self) {
@@ -203,135 +151,7 @@ struct AllPhotosView: View {
         }
         .pickerStyle(.segmented)
     }
-    
-    @ViewBuilder
-    func header() -> some View {
-        HStack {
-            HStack {
-                Button(action: {
-                    showTakeImage.toggle()
-                }, label: {
-                    Image(systemName: "camera")
-                        .font(.title2)
-                })
-                
-                if viewModel.viewType == .Taken {
-                    Divider()
-                        .frame(height: 22)
-                    
-                    PhotosPicker(selection: $importImageItem, label: {
-                        Image(systemName: "photo.badge.plus")
-                            .font(.title2)
-                    })
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            HStack{
-                Image("name")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 44)
-                //                .foregroundStyle(.white)
-            }
-            
-            HStack {
-                Button(action: {
-                    showKeys.toggle()
-                }, label: {
-                    Image(systemName: "key")
-                        .font(.title2)
-                })
-                Divider()
-                    .frame(height: 22)
-                Button(action: {
-                    showSettings.toggle()
-                }, label: {
-                    Image(systemName: "gear")
-                        .font(.title2)
-                })
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-        }
-    }
-    
-    @ViewBuilder
-    func footer() -> some View {
-        HStack {
-            Menu(content: {
-                Picker("Filter", selection: $viewModel.mediaType) {
-                    ForEach(AllPhotosFilterType.allCases, id: \.self) {
-                        Text($0.rawValue)
-                    }
-                }
-            }, label: {
-                Image(systemName: "eye.slash")
-                    .font(.title2)
-            })
-            
-            Spacer()
-            
-            Menu(content: {
-                Picker("", selection: $viewModel.sortBy, content: {
-                    ForEach(AllPhotosSortType.allCases, id: \.self) {
-                        Text($0.description)
-                    }
-                })
-            }, label: {
-                Image(systemName: "arrow.up.arrow.down")
-                    .font(.title2)
-            })
-            
-            
-            Spacer()
-            
-            Button(action: {
-                if let data = viewModel.viewRandom() {
-                    photoToShow = data
-                }
-            }, label: {
-                Image(systemName: "shuffle.circle")
-                    .font(.title2)
-            })
-            
-            Spacer()
-            
-            Button(action: {
-                switch viewModel.layoutType {
-                case .list:
-                    viewModel.layoutType = .preview
-                case .preview:
-                    viewModel.layoutType = .list
-                }
-            }, label: {
-                switch viewModel.layoutType {
-                case .list:
-                    Image(systemName: "photo")
-                        .font(.title2)
-                case .preview:
-                    Image(systemName: "list.bullet.rectangle")
-                        .font(.title2)
-                }
-            })
-            
-            if viewModel.viewType == .Taken {
-                Spacer()
-                
-                Button(action: {
-                    viewModel.selectMultiple.toggle()
-                }, label: {
-                    if viewModel.selectMultiple {
-                        Image(systemName: "photo.fill.on.rectangle.fill")
-                            .font(.title2)
-                    } else {
-                        Image(systemName: "photo.on.rectangle")
-                            .font(.title2)
-                    }
-                })
-            }
-        }
-    }
-    
+
     func parseSelectdImages() {
         for item in importImageItem {
             item.loadTransferable(type: Data.self) { result in

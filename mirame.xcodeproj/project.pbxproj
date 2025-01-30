@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD992D2A269B00202801 /* ZLImageEditor */; };
 		1C0ADD9C2D2A26A200202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD9B2D2A26A200202801 /* ZLImageEditor */; };
-		1C3D3F1B2D31F88600C6DB0F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1A2D31F88600C6DB0F /* RealmSwift */; };
-		1C3D3F1C2D31F88600C6DB0F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1A2D31F88600C6DB0F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		1C3D3F1E2D31F89300C6DB0F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1D2D31F89300C6DB0F /* RealmSwift */; };
-		1C3D3F1F2D31F89300C6DB0F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1D2D31F89300C6DB0F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343582D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343592D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
@@ -29,6 +25,10 @@
 		1CB6BEA2274ADE7D002C0F3C /* SneakyCamPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEA1274ADE7D002C0F3C /* SneakyCamPackage */; };
 		1CB6BEA8274ADE7D002C0F3C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEA7274ADE7D002C0F3C /* KeychainSwift */; };
 		1CB6BEB0274ADE7D002C0F3C /* SwiftyCam in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEAF274ADE7D002C0F3C /* SwiftyCam */; };
+		1CCE0DC12D4BC92E00171062 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1CCE0DC02D4BC92E00171062 /* RealmSwift */; };
+		1CCE0DC22D4BC92E00171062 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1CCE0DC02D4BC92E00171062 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1CCE0DC42D4BC93600171062 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1CCE0DC32D4BC93600171062 /* RealmSwift */; };
+		1CCE0DC52D4BC93600171062 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1CCE0DC32D4BC93600171062 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1CDCDF432D3C0D62007C5623 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 1CDCDF422D3C0D62007C5623 /* ScreenShield */; };
 		1CDCDF452D3C0D68007C5623 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 1CDCDF442D3C0D68007C5623 /* ScreenShield */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1C3D3F1F2D31F89300C6DB0F /* RealmSwift in Embed Frameworks */,
+				1CCE0DC22D4BC92E00171062 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,7 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1C3D3F1C2D31F88600C6DB0F /* RealmSwift in Embed Frameworks */,
+				1CCE0DC52D4BC93600171062 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +451,10 @@
 				SwiftUI/PhotoToShow.swift,
 				SwiftUI/PicOptionsView.swift,
 				SwiftUI/SettingsView.swift,
+				SwiftUI/Subviews/AllPhotosCompactList.swift,
+				SwiftUI/Subviews/AllPhotosEmptyView.swift,
+				SwiftUI/Subviews/AllPhotosFooterView.swift,
+				SwiftUI/Subviews/AllPhotosHeaderView.swift,
 				SwiftUI/Subviews/AllPhotosPreviewList.swift,
 				SwiftUI/Subviews/PhotoDetailView.swift,
 				SwiftUI/Subviews/PhotoDetailViewPreview.swift,
@@ -806,6 +810,10 @@
 				SwiftUI/PhotoToShow.swift,
 				SwiftUI/PicOptionsView.swift,
 				SwiftUI/SettingsView.swift,
+				SwiftUI/Subviews/AllPhotosCompactList.swift,
+				SwiftUI/Subviews/AllPhotosEmptyView.swift,
+				SwiftUI/Subviews/AllPhotosFooterView.swift,
+				SwiftUI/Subviews/AllPhotosHeaderView.swift,
 				SwiftUI/Subviews/AllPhotosPreviewList.swift,
 				SwiftUI/Subviews/PhotoDetailView.swift,
 				SwiftUI/Subviews/PhotoDetailViewPreview.swift,
@@ -831,9 +839,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C3D3F1E2D31F89300C6DB0F /* RealmSwift in Frameworks */,
 				1CB6BEB0274ADE7D002C0F3C /* SwiftyCam in Frameworks */,
 				1CB6BEA8274ADE7D002C0F3C /* KeychainSwift in Frameworks */,
+				1CCE0DC12D4BC92E00171062 /* RealmSwift in Frameworks */,
 				1CDCDF432D3C0D62007C5623 /* ScreenShield in Frameworks */,
 				1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */,
 				1CB6BEA2274ADE7D002C0F3C /* SneakyCamPackage in Frameworks */,
@@ -853,9 +861,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C3D3F1B2D31F88600C6DB0F /* RealmSwift in Frameworks */,
 				1CB6BE9E274ADE72002C0F3C /* SwiftyCam in Frameworks */,
 				1CB6BE96274ADE72002C0F3C /* KeychainSwift in Frameworks */,
+				1CCE0DC42D4BC93600171062 /* RealmSwift in Frameworks */,
 				1CDCDF452D3C0D68007C5623 /* ScreenShield in Frameworks */,
 				1C8E01FA2D3DF53100759565 /* SneakySync in Frameworks */,
 				1CB6BE90274ADE71002C0F3C /* SneakyCamPackage in Frameworks */,
@@ -930,9 +938,9 @@
 				1CB6BEA7274ADE7D002C0F3C /* KeychainSwift */,
 				1CB6BEAF274ADE7D002C0F3C /* SwiftyCam */,
 				1C0ADD992D2A269B00202801 /* ZLImageEditor */,
-				1C3D3F1D2D31F89300C6DB0F /* RealmSwift */,
 				1CDCDF422D3C0D62007C5623 /* ScreenShield */,
 				1C8E01F72D3DF52A00759565 /* SneakySync */,
+				1CCE0DC02D4BC92E00171062 /* RealmSwift */,
 			);
 			productName = "sneaky-ios";
 			productReference = 1C0F849521DBFCB500B1B9F9 /* mirame.app */;
@@ -976,9 +984,9 @@
 				1CB6BE95274ADE72002C0F3C /* KeychainSwift */,
 				1CB6BE9D274ADE72002C0F3C /* SwiftyCam */,
 				1C0ADD9B2D2A26A200202801 /* ZLImageEditor */,
-				1C3D3F1A2D31F88600C6DB0F /* RealmSwift */,
 				1CDCDF442D3C0D68007C5623 /* ScreenShield */,
 				1C8E01F92D3DF53100759565 /* SneakySync */,
+				1CCE0DC32D4BC93600171062 /* RealmSwift */,
 			);
 			productName = "sneaky-ios";
 			productReference = 1CE2028621F63DDE00DD67AA /* mirame-dev.app */;
@@ -1019,9 +1027,9 @@
 				1CFB67FF274AD1AC007429BB /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */,
 				1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */,
-				1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */,
 				1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */,
 				1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */,
+				1CCE0DB92D4BC8D800171062 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 1C0F849621DBFCB500B1B9F9 /* Products */;
 			projectDirPath = "";
@@ -1416,14 +1424,6 @@
 				minimumVersion = 2.0.3;
 			};
 		};
-		1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/akatreyt/SwiftyCamPackage";
@@ -1435,6 +1435,14 @@
 		1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/akatreyt/sneakysync";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1CCE0DB92D4BC8D800171062 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -1477,16 +1485,6 @@
 			package = 1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
 			productName = ZLImageEditor;
 		};
-		1C3D3F1A2D31F88600C6DB0F /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		1C3D3F1D2D31F89300C6DB0F /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		1C8E01F72D3DF52A00759565 /* SneakySync */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */;
@@ -1526,6 +1524,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */;
 			productName = SwiftyCam;
+		};
+		1CCE0DC02D4BC92E00171062 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CCE0DB92D4BC8D800171062 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		1CCE0DC32D4BC93600171062 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CCE0DB92D4BC8D800171062 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		1CDCDF422D3C0D62007C5623 /* ScreenShield */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -197,7 +197,7 @@ struct AllPhotosView: View {
                content: { thingy in
             ViewPhotoView(photo: thingy.photo, keyDataSet: thingy.keyDataSet)
                 .onDisappear(perform: {
-                    if DataBase.shared.deleteViewedPhotosIfNeeded() {
+                    if DataBase.shared.deleteViewedPhotosIfNeeded(photos: [thingy.photo]) {
                         alertConfig = AlertConfig(
                             title: "Max number of views reached",
                             message: "Item has been deleted",
@@ -211,7 +211,7 @@ struct AllPhotosView: View {
         })
         .onAppear() {
             ScreenShield.shared.protectFromScreenRecording()
-            if DataBase.shared.deleteViewedPhotosIfNeeded() {
+            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
                 alertConfig = AlertConfig(
                     title: "Max number of views reached",
                     message: "Item has been deleted",

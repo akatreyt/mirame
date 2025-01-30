@@ -28,7 +28,7 @@ class DataBase {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-        
+    
     func deleteAll() {
         do {
             try sharedModelContainer.mainContext.delete(model: Photo.self)
@@ -95,21 +95,27 @@ class DataBase {
         return nil
     }
     
-    func deleteViewedPhotosIfNeeded() -> Bool {
-//        var deletedOne = false
-//        let filter = "localImage == 0 && " + haveDataFilter
-//        DataBase.realm.objects(Photo.self).filter(filter).filter({
-//            $0.localImage == 0 &&
-//            $0.numberOfViews >= $0._allowedNumberOfViewsCount
-//        }).forEach({ photo in
-//            do {
-//                try DataBase.deleteLocally(photo: photo)
-//                deletedOne = true
-//            } catch {
-//                
-//            }
-//        })
+    func deleteViewedPhotosIfNeeded(photos: [Photo]) -> Bool {
+        var deletedOne = false
         
+        var activePhotos = photos.filter({ photo in
+            (photo.imageData != nil || photo.videoFileName != nil)
+        })
+        
+        for photo in activePhotos {
+            if let isLocal = photo.localImage,
+               !isLocal,
+               let maxNumberOfViews = photo.allowedNumberOfViews,
+               maxNumberOfViews != -1,
+               photo.numberOfViews ?? .min >= maxNumberOfViews {
+                do {
+                    DataBase.shared.deleteLocally(photo: photo)
+                    deletedOne = true
+                } catch {
+                    print(error)
+                }
+            }
+        }
         //        DB.getAllPhotos().forEach({ photo in
         //            do {
         //                try! realm.write {
@@ -120,6 +126,6 @@ class DataBase {
         //            }
         //        })
         
-        return false
+        return deletedOne
     }
 }

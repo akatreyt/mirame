@@ -246,8 +246,9 @@ extension Photo{
             return nil
         }
         
-        if let _decryptedData = try? PrivateKeyStuff.decryptUsing(data: _data, keyDataSet: keyDataSet) {
-            return Data(base64Encoded: _decryptedData)!
+        if let _decryptedData = try? PrivateKeyStuff.decryptUsing(data: _data, keyDataSet: keyDataSet),
+           let data = Data(base64Encoded: _decryptedData) {
+            return data
         }
         return nil
     }

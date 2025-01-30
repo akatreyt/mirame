@@ -11,6 +11,7 @@ import SneakyCamPackage
 import ScreenShield
 import PhotosUI
 import SwiftData
+import SneakySync
 
 struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
@@ -276,24 +277,31 @@ struct AllPhotosView: View {
     }
     
     func viewRandom() -> PhotoToShow? {
-        if let photo = photos.randomElement()  {
-            if let localImage = photo.localImage, localImage {
-                return PhotoToShow(
-                    id: UUID(),
-                    photo: photo,
-                    keyDataSet: KeychainKeys.shared.personalKey)
-            } else {
-                if let keyUUID = photo.privateKeyUUID,
-                   let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
-                   let _ = photo.decrypt(withKey: key) {
-                    return PhotoToShow(
-                        id: UUID(),
-                        photo: photo,
-                        keyDataSet: key)
+        guard photos.count > 0 else { return nil }
+        
+        var returnPhoto: Photo? = nil
+        var keyDataSet: KeyDataSet? = nil
+        
+        while returnPhoto == nil {
+            if let photo = photos.randomElement()  {
+                if let localImage = photo.localImage, localImage {
+                    keyDataSet = KeychainKeys.shared.personalKey
+                    returnPhoto = photo
+                } else {
+                    if let keyUUID = photo.privateKeyUUID,
+                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
+                       let _ = photo.decrypt(withKey: key) {
+                        keyDataSet = key
+                        returnPhoto = photo
+                    }
                 }
             }
         }
-        return nil
+        
+        return PhotoToShow(
+            id: UUID(),
+            photo: returnPhoto!,
+            keyDataSet: keyDataSet!)
     }
 }
 //

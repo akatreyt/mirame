@@ -53,7 +53,7 @@ class SaveDeleteContent {
             )
             
             do{
-                if let id = try await DataBase.shared.saveLocally(photo: newPhoto) {
+                if let id = try await DataBase.shared.savePhotoToDB(photo: newPhoto) {
                     return id
                 } else {
                     throw UIAlertTypes.errorSaving
@@ -67,7 +67,7 @@ class SaveDeleteContent {
     }
     
     @discardableResult
-    static func saveVideo(importedPhotoID: UUID, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool) async throws -> Photo {
+    static func saveVideo(importedPhotoID: UUID?, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool) async throws -> Photo {
         do{
             // unencrypted video data
             let data = try Data(contentsOf: fileURL)
@@ -97,8 +97,11 @@ class SaveDeleteContent {
                 disableFeedPreview: disableFeedPreview
             )
             
-            try await DataBase.shared.saveLocally(photo: newPhoto)
-            return newPhoto
+            if let id = try await DataBase.shared.savePhotoToDB(photo: newPhoto) {
+                return newPhoto
+            } else {
+                throw UIAlertTypes.errorSaving
+            }
         }catch{
             throw error
         }

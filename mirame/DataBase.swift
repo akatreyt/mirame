@@ -37,7 +37,8 @@ class DataBase {
         }
     }
     
-    func saveLocally(photo: Photo) -> String? {
+    @discardableResult
+    func savePhotoToDB(photo: Photo) -> String? {
         sharedModelContainer.mainContext.insert(photo)
         return photo.id?.uuidString
     }
@@ -92,10 +93,6 @@ class DataBase {
     
     func photoWithImportedID(id: UUID) -> Photo? {
         return nil
-    }
-    
-    func saveVideo(_ url: URL) async throws {
-  
     }
     
     func deleteViewedPhotosIfNeeded() -> Bool {

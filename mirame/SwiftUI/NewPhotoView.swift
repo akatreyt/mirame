@@ -26,7 +26,6 @@ struct NewPhotoView: View {
     enum NewPhotoViewStatus {
         case takePhoto
         case editPhoto(UIImage)
-//        case editVideo
     }
     
     var body: some View {
@@ -38,7 +37,12 @@ struct NewPhotoView: View {
                 }, newURL: { url in
                     Task {
                         do {
-                            try await DataBase.shared.saveVideo(url)
+                            try await SaveDeleteContent.saveVideo(
+                                importedPhotoID: nil,
+                                keyDataSet: KeychainKeys.shared.personalKey,
+                                fileURL: url,
+                                isLocal: true,
+                                disableFeedPreview: false)
                             dismiss()
                         } catch {
                             alertConfig = AlertConfig(

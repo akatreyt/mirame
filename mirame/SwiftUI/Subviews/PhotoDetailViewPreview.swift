@@ -1,0 +1,96 @@
+//
+//  PhotoDetailViewPreview.swift
+//  mirame-ios
+//
+//  Created by Trey Tartt on 1/5/25.
+//  Copyright © 2025 Trey Tartt. All rights reserved.
+//
+
+import SwiftUI
+import RealmSwift
+
+class PhotoDataCache {
+    static let shared = PhotoDataCache()
+    var cache: [String: Data] = [:]
+}
+
+struct PhotoDetailViewPreview: View {
+    @ObservedRealmObject var photo: Photo
+    
+    var body: some View {
+        ZStack {
+            if photo.isVideo == 1 {
+                Color(uiColor: .systemGroupedBackground)
+
+                VStack {
+                    Spacer()
+                    Image(systemName: "video")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                    Spacer()
+                }
+                .frame(height: 300)
+            } else {
+                AsyncCachedImage(photo: photo,
+                                 content: { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(minWidth: 0)
+                        .frame(height: 300)
+                        .clipped()
+                        .cornerRadius(8)
+                        .padding(-20)
+                        .background(photo.disableFeedPreview ?? false ? .ultraThinMaterial : .regular)
+                }, placeholder: {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .frame(height: 300)
+                        .padding(.bottom, 50)
+                })
+                .overlay(content: {
+                    if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
+                        Image(systemName: "eye.slash")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minWidth: 0)
+                            .frame(height: 300)
+                            .clipped()
+                            .cornerRadius(8)
+                            .padding(90)
+                            .background(.ultraThinMaterial)
+                            .foregroundStyle(.secondary)
+                    }
+                })
+            }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Image(systemName: "calendar")
+                    Text("\(photo.takenDate ?? Date(), style: .date)")
+                    Spacer()
+                    Text("\(photo.numberOfViews)")
+                    Image(systemName: "eye")
+                }
+                .padding()
+                .background(.ultraThinMaterial)
+            }
+        }
+        .overlay (
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(UIColor.systemBackground), lineWidth: 3)
+        )
+    }
+}
+
+//#Preview {
+//    PhotoDetailViewPreview(
+//        photoID: "1",
+//        dateTaken: Date(),
+//        lastDateOpened: Date(),
+//        viewCount: 4,
+//        photoType: .image,
+//        imageData: nil)
+//}

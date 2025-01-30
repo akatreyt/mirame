@@ -1,0 +1,1543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD992D2A269B00202801 /* ZLImageEditor */; };
+		1C0ADD9C2D2A26A200202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD9B2D2A26A200202801 /* ZLImageEditor */; };
+		1C3D3F1B2D31F88600C6DB0F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1A2D31F88600C6DB0F /* RealmSwift */; };
+		1C3D3F1C2D31F88600C6DB0F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1A2D31F88600C6DB0F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1C3D3F1E2D31F89300C6DB0F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1D2D31F89300C6DB0F /* RealmSwift */; };
+		1C3D3F1F2D31F89300C6DB0F /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1C3D3F1D2D31F89300C6DB0F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
+		1C6343582D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
+		1C6343592D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
+		1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */ = {isa = PBXBuildFile; productRef = 1C8E01F72D3DF52A00759565 /* SneakySync */; };
+		1C8E01FA2D3DF53100759565 /* SneakySync in Frameworks */ = {isa = PBXBuildFile; productRef = 1C8E01F92D3DF53100759565 /* SneakySync */; };
+		1C9A1EC72399ABD9003C01C5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */; };
+		1C9A1ECA2399ABD9003C01C5 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9A1EC92399ABD9003C01C5 /* PreviewViewController.swift */; };
+		1C9A1ECD2399ABD9003C01C5 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C9A1ECB2399ABD9003C01C5 /* MainInterface.storyboard */; };
+		1C9A1ED12399ABD9003C01C5 /* MiramePreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1C9A1ED62399AEFF003C01C5 /* MiramePreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1CB6BE90274ADE71002C0F3C /* SneakyCamPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BE8F274ADE71002C0F3C /* SneakyCamPackage */; };
+		1CB6BE96274ADE72002C0F3C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BE95274ADE72002C0F3C /* KeychainSwift */; };
+		1CB6BE9E274ADE72002C0F3C /* SwiftyCam in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BE9D274ADE72002C0F3C /* SwiftyCam */; };
+		1CB6BEA2274ADE7D002C0F3C /* SneakyCamPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEA1274ADE7D002C0F3C /* SneakyCamPackage */; };
+		1CB6BEA8274ADE7D002C0F3C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEA7274ADE7D002C0F3C /* KeychainSwift */; };
+		1CB6BEB0274ADE7D002C0F3C /* SwiftyCam in Frameworks */ = {isa = PBXBuildFile; productRef = 1CB6BEAF274ADE7D002C0F3C /* SwiftyCam */; };
+		1CDCDF432D3C0D62007C5623 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 1CDCDF422D3C0D62007C5623 /* ScreenShield */; };
+		1CDCDF452D3C0D68007C5623 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 1CDCDF442D3C0D68007C5623 /* ScreenShield */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1C9A1ECF2399ABD9003C01C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C0F848D21DBFCB500B1B9F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C9A1EC42399ABD8003C01C5;
+			remoteInfo = SneakyPreview;
+		};
+		1C9A1ED72399AEFF003C01C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C0F848D21DBFCB500B1B9F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C9A1EC42399ABD8003C01C5;
+			remoteInfo = SneakyPreview;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1C3D3F152D31F82800C6DB0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1C3D3F1F2D31F89300C6DB0F /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C3D3F192D31F83000C6DB0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1C3D3F1C2D31F88600C6DB0F /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9A1ED22399ABD9003C01C5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1C9A1ED12399ABD9003C01C5 /* MiramePreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9A1ED92399AEFF003C01C5 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1C9A1ED62399AEFF003C01C5 /* MiramePreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1C0F849521DBFCB500B1B9F9 /* mirame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mirame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mirame-dev.entitlements"; sourceTree = "<group>"; };
+		1C6343562D416057003FF791 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiramePreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		1C9A1EC92399ABD9003C01C5 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		1C9A1ECC2399ABD9003C01C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1C9A1ECE2399ABD9003C01C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CE2028621F63DDE00DD67AA /* mirame-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mirame-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"AES-256.swift",
+				AirDropOnlyActivityItemSource.swift,
+				AlertConfig.swift,
+				AppDelegate.swift,
+				AsyncCachedImage.swift,
+				DataBase.swift,
+				DocumentsFetcher.swift,
+				Enums/AllPhotosFilterType.swift,
+				Enums/AllPhotosSortType.swift,
+				Enums/AllPhotosViewLayoutType.swift,
+				Enums/AllPhotosViewType.swift,
+				Enums/Constants.swift,
+				Enums/KeysProtocolError.swift,
+				Extensions.swift,
+				FileParser.swift,
+				FileWriter.swift,
+				ImportExport.swift,
+				KeychainKeys.swift,
+				Model/PersonalKey.swift,
+				Model/Photo.swift,
+				NewShareFileObj.swift,
+				PhotoEncryption.swift,
+				Resources/Assets.xcassets,
+				Resources/LaunchScreen_v2.storyboard,
+				Resources/Sounds/beep_2.m4a,
+				Resources/Sounds/beep.mp3,
+				Resources/Sounds/shutter.mp3,
+				Resources/test_data/001.jpg,
+				Resources/test_data/002.jpg,
+				Resources/test_data/003.jpg,
+				Resources/test_data/004.jpg,
+				Resources/test_data/005.jpg,
+				Resources/test_data/006.jpg,
+				Resources/test_data/007.jpg,
+				Resources/test_data/008.jpg,
+				Resources/test_data/009.jpg,
+				Resources/test_data/010.jpg,
+				Resources/test_data/011.jpg,
+				Resources/test_data/012.jpg,
+				Resources/test_data/013.jpg,
+				Resources/test_data/014.jpg,
+				Resources/test_data/015.jpg,
+				Resources/test_data/016.jpg,
+				Resources/test_data/017.jpg,
+				Resources/test_data/018.jpg,
+				Resources/test_data/019.jpg,
+				Resources/test_data/020.jpg,
+				Resources/test_data/021.jpg,
+				Resources/test_data/022.jpg,
+				Resources/test_data/023.jpg,
+				Resources/test_data/024.jpg,
+				Resources/test_data/025.jpg,
+				Resources/test_data/026.jpg,
+				Resources/test_data/027.jpg,
+				Resources/test_data/028.jpg,
+				Resources/test_data/029.jpg,
+				Resources/test_data/030.jpg,
+				Resources/test_data/031.jpg,
+				Resources/test_data/032.jpg,
+				Resources/test_data/033.jpg,
+				Resources/test_data/034.jpg,
+				Resources/test_data/035.jpg,
+				Resources/test_data/036.jpg,
+				Resources/test_data/037.jpg,
+				Resources/test_data/038.jpg,
+				Resources/test_data/039.jpg,
+				Resources/test_data/040.jpg,
+				Resources/test_data/041.jpg,
+				Resources/test_data/042.jpg,
+				Resources/test_data/043.jpg,
+				Resources/test_data/044.jpg,
+				Resources/test_data/045.jpg,
+				Resources/test_data/046.jpg,
+				Resources/test_data/047.jpg,
+				Resources/test_data/048.jpg,
+				Resources/test_data/049.jpg,
+				Resources/test_data/050.jpg,
+				Resources/test_data/051.jpg,
+				Resources/test_data/052.jpg,
+				Resources/test_data/053.jpg,
+				Resources/test_data/054.jpg,
+				Resources/test_data/055.jpg,
+				Resources/test_data/056.jpg,
+				Resources/test_data/057.jpg,
+				Resources/test_data/058.jpg,
+				Resources/test_data/059.jpg,
+				Resources/test_data/060.jpg,
+				Resources/test_data/061.jpg,
+				Resources/test_data/062.jpg,
+				Resources/test_data/063.jpg,
+				Resources/test_data/064.jpg,
+				Resources/test_data/065.jpg,
+				Resources/test_data/066.jpg,
+				Resources/test_data/067.jpg,
+				Resources/test_data/068.jpg,
+				Resources/test_data/069.jpg,
+				Resources/test_data/070.jpg,
+				Resources/test_data/071.jpg,
+				Resources/test_data/072.jpg,
+				Resources/test_data/073.jpg,
+				Resources/test_data/074.jpg,
+				Resources/test_data/075.jpg,
+				Resources/test_data/076.jpg,
+				Resources/test_data/077.jpg,
+				Resources/test_data/078.jpg,
+				Resources/test_data/079.jpg,
+				Resources/test_data/080.jpg,
+				Resources/test_data/081.jpg,
+				Resources/test_data/082.jpg,
+				Resources/test_data/083.jpg,
+				Resources/test_data/084.jpg,
+				Resources/test_data/085.jpg,
+				Resources/test_data/086.jpg,
+				Resources/test_data/087.jpg,
+				Resources/test_data/088.jpg,
+				Resources/test_data/089.jpg,
+				Resources/test_data/090.jpg,
+				Resources/test_data/091.jpg,
+				Resources/test_data/092.jpg,
+				Resources/test_data/093.jpg,
+				Resources/test_data/094.jpg,
+				Resources/test_data/095.jpg,
+				Resources/test_data/096.jpg,
+				Resources/test_data/097.jpg,
+				Resources/test_data/098.jpg,
+				Resources/test_data/099.jpg,
+				Resources/test_data/100.jpg,
+				Resources/test_data/101.jpg,
+				Resources/test_data/102.jpg,
+				Resources/test_data/103.jpg,
+				Resources/test_data/104.jpg,
+				Resources/test_data/105.jpg,
+				Resources/test_data/106.jpg,
+				Resources/test_data/107.jpg,
+				Resources/test_data/108.jpg,
+				Resources/test_data/109.jpg,
+				Resources/test_data/110.jpg,
+				Resources/test_data/111.jpg,
+				Resources/test_data/112.jpg,
+				Resources/test_data/113.jpg,
+				Resources/test_data/114.jpg,
+				Resources/test_data/115.jpg,
+				Resources/test_data/116.jpg,
+				Resources/test_data/117.jpg,
+				Resources/test_data/118.jpg,
+				Resources/test_data/119.jpg,
+				Resources/test_data/120.jpg,
+				Resources/test_data/121.jpg,
+				Resources/test_data/122.jpg,
+				Resources/test_data/123.jpg,
+				Resources/test_data/124.jpg,
+				Resources/test_data/125.jpg,
+				Resources/test_data/126.jpg,
+				Resources/test_data/127.jpg,
+				Resources/test_data/128.jpg,
+				Resources/test_data/129.jpg,
+				Resources/test_data/130.jpg,
+				Resources/test_data/131.jpg,
+				Resources/test_data/132.jpg,
+				Resources/test_data/133.jpg,
+				Resources/test_data/134.jpg,
+				Resources/test_data/135.jpg,
+				Resources/test_data/136.jpg,
+				Resources/test_data/137.jpg,
+				Resources/test_data/138.jpg,
+				Resources/test_data/139.jpg,
+				Resources/test_data/140.jpg,
+				Resources/test_data/141.jpg,
+				Resources/test_data/142.jpg,
+				Resources/test_data/143.jpg,
+				Resources/test_data/144.jpg,
+				Resources/test_data/145.jpg,
+				Resources/test_data/146.jpg,
+				Resources/test_data/147.jpg,
+				Resources/test_data/148.jpg,
+				Resources/test_data/149.jpg,
+				Resources/test_data/150.jpg,
+				Resources/test_data/151.jpg,
+				Resources/test_data/152.jpg,
+				Resources/test_data/153.jpg,
+				Resources/test_data/154.jpg,
+				Resources/test_data/155.jpg,
+				Resources/test_data/156.jpg,
+				Resources/test_data/157.jpg,
+				Resources/test_data/158.jpg,
+				Resources/test_data/159.jpg,
+				Resources/test_data/160.jpg,
+				Resources/test_data/161.jpg,
+				Resources/test_data/162.jpg,
+				Resources/test_data/163.jpg,
+				Resources/test_data/164.jpg,
+				Resources/test_data/165.jpg,
+				Resources/test_data/166.jpg,
+				Resources/test_data/167.jpg,
+				Resources/test_data/168.jpg,
+				Resources/test_data/169.jpg,
+				Resources/test_data/170.jpg,
+				Resources/test_data/171.jpg,
+				Resources/test_data/172.jpg,
+				Resources/test_data/173.jpg,
+				Resources/test_data/174.jpg,
+				Resources/test_data/175.jpg,
+				Resources/test_data/176.jpg,
+				Resources/test_data/177.jpg,
+				Resources/test_data/178.jpg,
+				Resources/test_data/179.jpg,
+				Resources/test_data/180.jpg,
+				Resources/test_data/181.jpg,
+				Resources/test_data/182.jpg,
+				Resources/test_data/183.jpg,
+				Resources/test_data/184.jpg,
+				Resources/test_data/185.jpg,
+				Resources/test_data/186.jpg,
+				Resources/test_data/187.jpg,
+				Resources/test_data/188.jpg,
+				Resources/test_data/189.jpg,
+				Resources/test_data/190.jpg,
+				Resources/test_data/191.jpg,
+				Resources/test_data/192.jpg,
+				Resources/test_data/193.jpg,
+				Resources/test_data/194.jpg,
+				Resources/test_data/195.jpg,
+				Resources/test_data/196.jpg,
+				Resources/test_data/197.jpg,
+				Resources/test_data/198.jpg,
+				Resources/test_data/199.jpg,
+				Resources/test_data/200.jpg,
+				Resources/test_data/201.jpg,
+				Resources/test_data/202.jpg,
+				Resources/test_data/203.jpg,
+				Resources/test_data/204.jpg,
+				Resources/test_data/205.jpg,
+				Resources/test_data/206.jpg,
+				Resources/test_data/207.jpg,
+				Resources/test_data/208.jpg,
+				Resources/test_data/209.jpg,
+				Resources/test_data/210.jpg,
+				Resources/test_data/211.jpg,
+				Resources/test_data/212.jpg,
+				Resources/test_data/213.jpg,
+				Resources/test_data/214.jpg,
+				Resources/test_data/215.jpg,
+				Resources/test_data/216.jpg,
+				Resources/test_data/217.jpg,
+				Resources/test_data/218.jpg,
+				Resources/test_data/219.jpg,
+				Resources/test_data/220.jpg,
+				Resources/test_data/221.jpg,
+				Resources/test_data/222.jpg,
+				Resources/test_data/223.jpg,
+				Resources/test_data/224.jpg,
+				Resources/test_data/225.jpg,
+				Resources/test_data/226.jpg,
+				Resources/test_data/227.jpg,
+				Resources/test_data/228.jpg,
+				Resources/test_data/229.jpg,
+				Resources/test_data/230.jpg,
+				Resources/test_data/231.jpg,
+				Resources/test_data/232.jpg,
+				Resources/test_data/233.jpg,
+				Resources/test_data/234.jpg,
+				Resources/test_data/235.jpg,
+				Resources/test_data/236.jpg,
+				Resources/test_data/237.jpg,
+				Resources/test_data/238.jpg,
+				Resources/test_data/239.jpg,
+				Resources/test_data/240.jpg,
+				Resources/test_data/241.jpg,
+				Resources/test_data/242.jpg,
+				Resources/test_data/243.jpg,
+				Resources/test_data/244.jpg,
+				Resources/test_data/245.jpg,
+				Resources/test_data/246.jpg,
+				Resources/test_data/247.jpg,
+				Resources/test_data/248.jpg,
+				Resources/test_data/249.jpg,
+				Resources/test_data/250.jpg,
+				Resources/test_data/251.jpg,
+				Resources/test_data/252.jpg,
+				Resources/test_data/253.jpg,
+				Resources/test_data/254.jpg,
+				Resources/test_data/255.jpg,
+				Resources/test_data/256.jpg,
+				Resources/test_data/257.jpg,
+				Resources/test_data/258.jpg,
+				Resources/test_data/259.jpg,
+				Resources/test_data/260.jpg,
+				Resources/test_data/261.jpg,
+				Resources/test_data/262.jpg,
+				Resources/test_data/263.jpg,
+				Resources/test_data/264.jpg,
+				Resources/test_data/265.jpg,
+				Resources/test_data/266.jpg,
+				Resources/test_data/267.jpg,
+				Resources/test_data/268.jpg,
+				Resources/test_data/269.jpg,
+				Resources/test_data/270.jpg,
+				Resources/test_data/271.jpg,
+				Resources/test_data/272.jpg,
+				Resources/test_data/273.jpg,
+				Resources/test_data/274.jpg,
+				Resources/test_data/275.jpg,
+				Resources/test_data/276.jpg,
+				Resources/test_data/277.jpg,
+				Resources/test_data/278.jpg,
+				Resources/test_data/279.jpg,
+				Resources/test_data/280.jpg,
+				Resources/test_data/281.jpg,
+				Resources/test_data/282.jpg,
+				Resources/test_data/283.jpg,
+				Resources/test_data/284.jpg,
+				Resources/test_data/285.jpg,
+				Resources/test_data/286.jpg,
+				Resources/test_data/287.jpg,
+				Resources/test_data/288.jpg,
+				Resources/test_data/289.jpg,
+				Resources/test_data/290.jpg,
+				Resources/test_data/291.jpg,
+				Resources/test_data/292.jpg,
+				Resources/test_data/293.jpg,
+				Resources/test_data/294.jpg,
+				Resources/test_data/295.jpg,
+				Resources/test_data/296.jpg,
+				Resources/test_data/297.jpg,
+				Resources/test_data/298.jpg,
+				Resources/test_data/299.jpg,
+				Resources/test_data/300.jpg,
+				Resources/test_data/import_key.sneakyPIIC,
+				SaveDeleteContent.swift,
+				"Sneaky-iosApp.swift",
+				SwiftUI/AllKeysView.swift,
+				SwiftUI/AllPhotosView.swift,
+				SwiftUI/AllPhotosViewModel.swift,
+				SwiftUI/BioAuthView.swift,
+				SwiftUI/NewPhotoView.swift,
+				SwiftUI/PhotoToShow.swift,
+				SwiftUI/PicOptionsView.swift,
+				SwiftUI/SettingsView.swift,
+				SwiftUI/Subviews/AllPhotosPreviewList.swift,
+				SwiftUI/Subviews/PhotoDetailView.swift,
+				SwiftUI/Subviews/PhotoDetailViewPreview.swift,
+				SwiftUI/Subviews/QRCodeView.swift,
+				SwiftUI/Subviews/SneakyCamViewControllerView.swift,
+				SwiftUI/Subviews/UIActivityViewControllerView.swift,
+				SwiftUI/Subviews/ZLImageEditorViewController.swift,
+				SwiftUI/UIViewLifeCycleHandler.swift,
+				SwiftUI/ViewPhotoView.swift,
+				TestDataCreator.swift,
+				ZoomableScrollView.swift,
+			);
+			target = 1C0F849421DBFCB500B1B9F9 /* mirame */;
+		};
+		1CCA115B2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"AES-256.swift",
+				AirDropOnlyActivityItemSource.swift,
+				AlertConfig.swift,
+				AppDelegate.swift,
+				AsyncCachedImage.swift,
+				DataBase.swift,
+				DocumentsFetcher.swift,
+				Enums/AllPhotosFilterType.swift,
+				Enums/AllPhotosSortType.swift,
+				Enums/AllPhotosViewLayoutType.swift,
+				Enums/AllPhotosViewType.swift,
+				Enums/Constants.swift,
+				Enums/KeysProtocolError.swift,
+				Extensions.swift,
+				FileParser.swift,
+				FileWriter.swift,
+				ImportExport.swift,
+				KeychainKeys.swift,
+				Model/PersonalKey.swift,
+				Model/Photo.swift,
+				NewShareFileObj.swift,
+				PhotoEncryption.swift,
+				Resources/Assets.xcassets,
+				Resources/LaunchScreen_v2.storyboard,
+				Resources/Sounds/beep_2.m4a,
+				Resources/Sounds/beep.mp3,
+				Resources/Sounds/shutter.mp3,
+				Resources/test_data/001.jpg,
+				Resources/test_data/002.jpg,
+				Resources/test_data/003.jpg,
+				Resources/test_data/004.jpg,
+				Resources/test_data/005.jpg,
+				Resources/test_data/006.jpg,
+				Resources/test_data/007.jpg,
+				Resources/test_data/008.jpg,
+				Resources/test_data/009.jpg,
+				Resources/test_data/010.jpg,
+				Resources/test_data/011.jpg,
+				Resources/test_data/012.jpg,
+				Resources/test_data/013.jpg,
+				Resources/test_data/014.jpg,
+				Resources/test_data/015.jpg,
+				Resources/test_data/016.jpg,
+				Resources/test_data/017.jpg,
+				Resources/test_data/018.jpg,
+				Resources/test_data/019.jpg,
+				Resources/test_data/020.jpg,
+				Resources/test_data/021.jpg,
+				Resources/test_data/022.jpg,
+				Resources/test_data/023.jpg,
+				Resources/test_data/024.jpg,
+				Resources/test_data/025.jpg,
+				Resources/test_data/026.jpg,
+				Resources/test_data/027.jpg,
+				Resources/test_data/028.jpg,
+				Resources/test_data/029.jpg,
+				Resources/test_data/030.jpg,
+				Resources/test_data/031.jpg,
+				Resources/test_data/032.jpg,
+				Resources/test_data/033.jpg,
+				Resources/test_data/034.jpg,
+				Resources/test_data/035.jpg,
+				Resources/test_data/036.jpg,
+				Resources/test_data/037.jpg,
+				Resources/test_data/038.jpg,
+				Resources/test_data/039.jpg,
+				Resources/test_data/040.jpg,
+				Resources/test_data/041.jpg,
+				Resources/test_data/042.jpg,
+				Resources/test_data/043.jpg,
+				Resources/test_data/044.jpg,
+				Resources/test_data/045.jpg,
+				Resources/test_data/046.jpg,
+				Resources/test_data/047.jpg,
+				Resources/test_data/048.jpg,
+				Resources/test_data/049.jpg,
+				Resources/test_data/050.jpg,
+				Resources/test_data/051.jpg,
+				Resources/test_data/052.jpg,
+				Resources/test_data/053.jpg,
+				Resources/test_data/054.jpg,
+				Resources/test_data/055.jpg,
+				Resources/test_data/056.jpg,
+				Resources/test_data/057.jpg,
+				Resources/test_data/058.jpg,
+				Resources/test_data/059.jpg,
+				Resources/test_data/060.jpg,
+				Resources/test_data/061.jpg,
+				Resources/test_data/062.jpg,
+				Resources/test_data/063.jpg,
+				Resources/test_data/064.jpg,
+				Resources/test_data/065.jpg,
+				Resources/test_data/066.jpg,
+				Resources/test_data/067.jpg,
+				Resources/test_data/068.jpg,
+				Resources/test_data/069.jpg,
+				Resources/test_data/070.jpg,
+				Resources/test_data/071.jpg,
+				Resources/test_data/072.jpg,
+				Resources/test_data/073.jpg,
+				Resources/test_data/074.jpg,
+				Resources/test_data/075.jpg,
+				Resources/test_data/076.jpg,
+				Resources/test_data/077.jpg,
+				Resources/test_data/078.jpg,
+				Resources/test_data/079.jpg,
+				Resources/test_data/080.jpg,
+				Resources/test_data/081.jpg,
+				Resources/test_data/082.jpg,
+				Resources/test_data/083.jpg,
+				Resources/test_data/084.jpg,
+				Resources/test_data/085.jpg,
+				Resources/test_data/086.jpg,
+				Resources/test_data/087.jpg,
+				Resources/test_data/088.jpg,
+				Resources/test_data/089.jpg,
+				Resources/test_data/090.jpg,
+				Resources/test_data/091.jpg,
+				Resources/test_data/092.jpg,
+				Resources/test_data/093.jpg,
+				Resources/test_data/094.jpg,
+				Resources/test_data/095.jpg,
+				Resources/test_data/096.jpg,
+				Resources/test_data/097.jpg,
+				Resources/test_data/098.jpg,
+				Resources/test_data/099.jpg,
+				Resources/test_data/100.jpg,
+				Resources/test_data/101.jpg,
+				Resources/test_data/102.jpg,
+				Resources/test_data/103.jpg,
+				Resources/test_data/104.jpg,
+				Resources/test_data/105.jpg,
+				Resources/test_data/106.jpg,
+				Resources/test_data/107.jpg,
+				Resources/test_data/108.jpg,
+				Resources/test_data/109.jpg,
+				Resources/test_data/110.jpg,
+				Resources/test_data/111.jpg,
+				Resources/test_data/112.jpg,
+				Resources/test_data/113.jpg,
+				Resources/test_data/114.jpg,
+				Resources/test_data/115.jpg,
+				Resources/test_data/116.jpg,
+				Resources/test_data/117.jpg,
+				Resources/test_data/118.jpg,
+				Resources/test_data/119.jpg,
+				Resources/test_data/120.jpg,
+				Resources/test_data/121.jpg,
+				Resources/test_data/122.jpg,
+				Resources/test_data/123.jpg,
+				Resources/test_data/124.jpg,
+				Resources/test_data/125.jpg,
+				Resources/test_data/126.jpg,
+				Resources/test_data/127.jpg,
+				Resources/test_data/128.jpg,
+				Resources/test_data/129.jpg,
+				Resources/test_data/130.jpg,
+				Resources/test_data/131.jpg,
+				Resources/test_data/132.jpg,
+				Resources/test_data/133.jpg,
+				Resources/test_data/134.jpg,
+				Resources/test_data/135.jpg,
+				Resources/test_data/136.jpg,
+				Resources/test_data/137.jpg,
+				Resources/test_data/138.jpg,
+				Resources/test_data/139.jpg,
+				Resources/test_data/140.jpg,
+				Resources/test_data/141.jpg,
+				Resources/test_data/142.jpg,
+				Resources/test_data/143.jpg,
+				Resources/test_data/144.jpg,
+				Resources/test_data/145.jpg,
+				Resources/test_data/146.jpg,
+				Resources/test_data/147.jpg,
+				Resources/test_data/148.jpg,
+				Resources/test_data/149.jpg,
+				Resources/test_data/150.jpg,
+				Resources/test_data/151.jpg,
+				Resources/test_data/152.jpg,
+				Resources/test_data/153.jpg,
+				Resources/test_data/154.jpg,
+				Resources/test_data/155.jpg,
+				Resources/test_data/156.jpg,
+				Resources/test_data/157.jpg,
+				Resources/test_data/158.jpg,
+				Resources/test_data/159.jpg,
+				Resources/test_data/160.jpg,
+				Resources/test_data/161.jpg,
+				Resources/test_data/162.jpg,
+				Resources/test_data/163.jpg,
+				Resources/test_data/164.jpg,
+				Resources/test_data/165.jpg,
+				Resources/test_data/166.jpg,
+				Resources/test_data/167.jpg,
+				Resources/test_data/168.jpg,
+				Resources/test_data/169.jpg,
+				Resources/test_data/170.jpg,
+				Resources/test_data/171.jpg,
+				Resources/test_data/172.jpg,
+				Resources/test_data/173.jpg,
+				Resources/test_data/174.jpg,
+				Resources/test_data/175.jpg,
+				Resources/test_data/176.jpg,
+				Resources/test_data/177.jpg,
+				Resources/test_data/178.jpg,
+				Resources/test_data/179.jpg,
+				Resources/test_data/180.jpg,
+				Resources/test_data/181.jpg,
+				Resources/test_data/182.jpg,
+				Resources/test_data/183.jpg,
+				Resources/test_data/184.jpg,
+				Resources/test_data/185.jpg,
+				Resources/test_data/186.jpg,
+				Resources/test_data/187.jpg,
+				Resources/test_data/188.jpg,
+				Resources/test_data/189.jpg,
+				Resources/test_data/190.jpg,
+				Resources/test_data/191.jpg,
+				Resources/test_data/192.jpg,
+				Resources/test_data/193.jpg,
+				Resources/test_data/194.jpg,
+				Resources/test_data/195.jpg,
+				Resources/test_data/196.jpg,
+				Resources/test_data/197.jpg,
+				Resources/test_data/198.jpg,
+				Resources/test_data/199.jpg,
+				Resources/test_data/200.jpg,
+				Resources/test_data/201.jpg,
+				Resources/test_data/202.jpg,
+				Resources/test_data/203.jpg,
+				Resources/test_data/204.jpg,
+				Resources/test_data/205.jpg,
+				Resources/test_data/206.jpg,
+				Resources/test_data/207.jpg,
+				Resources/test_data/208.jpg,
+				Resources/test_data/209.jpg,
+				Resources/test_data/210.jpg,
+				Resources/test_data/211.jpg,
+				Resources/test_data/212.jpg,
+				Resources/test_data/213.jpg,
+				Resources/test_data/214.jpg,
+				Resources/test_data/215.jpg,
+				Resources/test_data/216.jpg,
+				Resources/test_data/217.jpg,
+				Resources/test_data/218.jpg,
+				Resources/test_data/219.jpg,
+				Resources/test_data/220.jpg,
+				Resources/test_data/221.jpg,
+				Resources/test_data/222.jpg,
+				Resources/test_data/223.jpg,
+				Resources/test_data/224.jpg,
+				Resources/test_data/225.jpg,
+				Resources/test_data/226.jpg,
+				Resources/test_data/227.jpg,
+				Resources/test_data/228.jpg,
+				Resources/test_data/229.jpg,
+				Resources/test_data/230.jpg,
+				Resources/test_data/231.jpg,
+				Resources/test_data/232.jpg,
+				Resources/test_data/233.jpg,
+				Resources/test_data/234.jpg,
+				Resources/test_data/235.jpg,
+				Resources/test_data/236.jpg,
+				Resources/test_data/237.jpg,
+				Resources/test_data/238.jpg,
+				Resources/test_data/239.jpg,
+				Resources/test_data/240.jpg,
+				Resources/test_data/241.jpg,
+				Resources/test_data/242.jpg,
+				Resources/test_data/243.jpg,
+				Resources/test_data/244.jpg,
+				Resources/test_data/245.jpg,
+				Resources/test_data/246.jpg,
+				Resources/test_data/247.jpg,
+				Resources/test_data/248.jpg,
+				Resources/test_data/249.jpg,
+				Resources/test_data/250.jpg,
+				Resources/test_data/251.jpg,
+				Resources/test_data/252.jpg,
+				Resources/test_data/253.jpg,
+				Resources/test_data/254.jpg,
+				Resources/test_data/255.jpg,
+				Resources/test_data/256.jpg,
+				Resources/test_data/257.jpg,
+				Resources/test_data/258.jpg,
+				Resources/test_data/259.jpg,
+				Resources/test_data/260.jpg,
+				Resources/test_data/261.jpg,
+				Resources/test_data/262.jpg,
+				Resources/test_data/263.jpg,
+				Resources/test_data/264.jpg,
+				Resources/test_data/265.jpg,
+				Resources/test_data/266.jpg,
+				Resources/test_data/267.jpg,
+				Resources/test_data/268.jpg,
+				Resources/test_data/269.jpg,
+				Resources/test_data/270.jpg,
+				Resources/test_data/271.jpg,
+				Resources/test_data/272.jpg,
+				Resources/test_data/273.jpg,
+				Resources/test_data/274.jpg,
+				Resources/test_data/275.jpg,
+				Resources/test_data/276.jpg,
+				Resources/test_data/277.jpg,
+				Resources/test_data/278.jpg,
+				Resources/test_data/279.jpg,
+				Resources/test_data/280.jpg,
+				Resources/test_data/281.jpg,
+				Resources/test_data/282.jpg,
+				Resources/test_data/283.jpg,
+				Resources/test_data/284.jpg,
+				Resources/test_data/285.jpg,
+				Resources/test_data/286.jpg,
+				Resources/test_data/287.jpg,
+				Resources/test_data/288.jpg,
+				Resources/test_data/289.jpg,
+				Resources/test_data/290.jpg,
+				Resources/test_data/291.jpg,
+				Resources/test_data/292.jpg,
+				Resources/test_data/293.jpg,
+				Resources/test_data/294.jpg,
+				Resources/test_data/295.jpg,
+				Resources/test_data/296.jpg,
+				Resources/test_data/297.jpg,
+				Resources/test_data/298.jpg,
+				Resources/test_data/299.jpg,
+				Resources/test_data/300.jpg,
+				Resources/test_data/import_key.sneakyPIIC,
+				SaveDeleteContent.swift,
+				"Sneaky-iosApp.swift",
+				SwiftUI/AllKeysView.swift,
+				SwiftUI/AllPhotosView.swift,
+				SwiftUI/AllPhotosViewModel.swift,
+				SwiftUI/BioAuthView.swift,
+				SwiftUI/NewPhotoView.swift,
+				SwiftUI/PhotoToShow.swift,
+				SwiftUI/PicOptionsView.swift,
+				SwiftUI/SettingsView.swift,
+				SwiftUI/Subviews/AllPhotosPreviewList.swift,
+				SwiftUI/Subviews/PhotoDetailView.swift,
+				SwiftUI/Subviews/PhotoDetailViewPreview.swift,
+				SwiftUI/Subviews/QRCodeView.swift,
+				SwiftUI/Subviews/SneakyCamViewControllerView.swift,
+				SwiftUI/Subviews/UIActivityViewControllerView.swift,
+				SwiftUI/Subviews/ZLImageEditorViewController.swift,
+				SwiftUI/UIViewLifeCycleHandler.swift,
+				SwiftUI/ViewPhotoView.swift,
+				TestDataCreator.swift,
+				ZoomableScrollView.swift,
+			);
+			target = 1CE2025921F63DDE00DD67AA /* mirame-dev */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1CCA10D02D205C3000A50203 /* mirame */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1CCA115B2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = mirame; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1C0F849221DBFCB500B1B9F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C3D3F1E2D31F89300C6DB0F /* RealmSwift in Frameworks */,
+				1CB6BEB0274ADE7D002C0F3C /* SwiftyCam in Frameworks */,
+				1CB6BEA8274ADE7D002C0F3C /* KeychainSwift in Frameworks */,
+				1CDCDF432D3C0D62007C5623 /* ScreenShield in Frameworks */,
+				1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */,
+				1CB6BEA2274ADE7D002C0F3C /* SneakyCamPackage in Frameworks */,
+				1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9A1EC22399ABD8003C01C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C9A1EC72399ABD9003C01C5 /* QuickLook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CE2027521F63DDE00DD67AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C3D3F1B2D31F88600C6DB0F /* RealmSwift in Frameworks */,
+				1CB6BE9E274ADE72002C0F3C /* SwiftyCam in Frameworks */,
+				1CB6BE96274ADE72002C0F3C /* KeychainSwift in Frameworks */,
+				1CDCDF452D3C0D68007C5623 /* ScreenShield in Frameworks */,
+				1C8E01FA2D3DF53100759565 /* SneakySync in Frameworks */,
+				1CB6BE90274ADE71002C0F3C /* SneakyCamPackage in Frameworks */,
+				1C0ADD9C2D2A26A200202801 /* ZLImageEditor in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C0F848C21DBFCB500B1B9F9 = {
+			isa = PBXGroup;
+			children = (
+				1C6343562D416057003FF791 /* Localizable.xcstrings */,
+				1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */,
+				1CCA10D02D205C3000A50203 /* mirame */,
+				1C9A1EC82399ABD9003C01C5 /* MiramePreview */,
+				1C0F849621DBFCB500B1B9F9 /* Products */,
+				2EBB44918E9C065CAF15BEF6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1C0F849621DBFCB500B1B9F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1C0F849521DBFCB500B1B9F9 /* mirame.app */,
+				1CE2028621F63DDE00DD67AA /* mirame-dev.app */,
+				1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1C9A1EC82399ABD9003C01C5 /* MiramePreview */ = {
+			isa = PBXGroup;
+			children = (
+				1C9A1EC92399ABD9003C01C5 /* PreviewViewController.swift */,
+				1C9A1ECB2399ABD9003C01C5 /* MainInterface.storyboard */,
+				1C9A1ECE2399ABD9003C01C5 /* Info.plist */,
+			);
+			path = MiramePreview;
+			sourceTree = "<group>";
+		};
+		2EBB44918E9C065CAF15BEF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C0F849421DBFCB500B1B9F9 /* mirame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C0F84A721DBFCBB00B1B9F9 /* Build configuration list for PBXNativeTarget "mirame" */;
+			buildPhases = (
+				1C0F849121DBFCB500B1B9F9 /* Sources */,
+				1C0F849221DBFCB500B1B9F9 /* Frameworks */,
+				1C0F849321DBFCB500B1B9F9 /* Resources */,
+				1C9A1ED92399AEFF003C01C5 /* Embed Foundation Extensions */,
+				1C3D3F152D31F82800C6DB0F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C9A1ED82399AEFF003C01C5 /* PBXTargetDependency */,
+			);
+			name = mirame;
+			packageProductDependencies = (
+				1CB6BEA1274ADE7D002C0F3C /* SneakyCamPackage */,
+				1CB6BEA7274ADE7D002C0F3C /* KeychainSwift */,
+				1CB6BEAF274ADE7D002C0F3C /* SwiftyCam */,
+				1C0ADD992D2A269B00202801 /* ZLImageEditor */,
+				1C3D3F1D2D31F89300C6DB0F /* RealmSwift */,
+				1CDCDF422D3C0D62007C5623 /* ScreenShield */,
+				1C8E01F72D3DF52A00759565 /* SneakySync */,
+			);
+			productName = "sneaky-ios";
+			productReference = 1C0F849521DBFCB500B1B9F9 /* mirame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1C9A1EC42399ABD8003C01C5 /* MiramePreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C9A1ED52399ABD9003C01C5 /* Build configuration list for PBXNativeTarget "MiramePreview" */;
+			buildPhases = (
+				1C9A1EC12399ABD8003C01C5 /* Sources */,
+				1C9A1EC22399ABD8003C01C5 /* Frameworks */,
+				1C9A1EC32399ABD8003C01C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiramePreview;
+			productName = SneakyPreview;
+			productReference = 1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		1CE2025921F63DDE00DD67AA /* mirame-dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CE2028321F63DDE00DD67AA /* Build configuration list for PBXNativeTarget "mirame-dev" */;
+			buildPhases = (
+				1CE2025B21F63DDE00DD67AA /* Sources */,
+				1CE2027521F63DDE00DD67AA /* Frameworks */,
+				1CE2027721F63DDE00DD67AA /* Resources */,
+				1C9A1ED22399ABD9003C01C5 /* Embed Foundation Extensions */,
+				1C3D3F192D31F83000C6DB0F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C9A1ED02399ABD9003C01C5 /* PBXTargetDependency */,
+			);
+			name = "mirame-dev";
+			packageProductDependencies = (
+				1CB6BE8F274ADE71002C0F3C /* SneakyCamPackage */,
+				1CB6BE95274ADE72002C0F3C /* KeychainSwift */,
+				1CB6BE9D274ADE72002C0F3C /* SwiftyCam */,
+				1C0ADD9B2D2A26A200202801 /* ZLImageEditor */,
+				1C3D3F1A2D31F88600C6DB0F /* RealmSwift */,
+				1CDCDF442D3C0D68007C5623 /* ScreenShield */,
+				1C8E01F92D3DF53100759565 /* SneakySync */,
+			);
+			productName = "sneaky-ios";
+			productReference = 1CE2028621F63DDE00DD67AA /* mirame-dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1C0F848D21DBFCB500B1B9F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1400;
+				ORGANIZATIONNAME = "Trey Tartt";
+				TargetAttributes = {
+					1C0F849421DBFCB500B1B9F9 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					1C9A1EC42399ABD8003C01C5 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					1CE2025921F63DDE00DD67AA = {
+						LastSwiftMigration = 1020;
+					};
+				};
+			};
+			buildConfigurationList = 1C0F849021DBFCB500B1B9F9 /* Build configuration list for PBXProject "mirame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1C0F848C21DBFCB500B1B9F9;
+			packageReferences = (
+				1CFB67ED274ACD49007429BB /* XCRemoteSwiftPackageReference "SneakyCamPackage" */,
+				1CFB67FF274AD1AC007429BB /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */,
+				1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */,
+				1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */,
+				1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */,
+			);
+			productRefGroup = 1C0F849621DBFCB500B1B9F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1C0F849421DBFCB500B1B9F9 /* mirame */,
+				1CE2025921F63DDE00DD67AA /* mirame-dev */,
+				1C9A1EC42399ABD8003C01C5 /* MiramePreview */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C0F849321DBFCB500B1B9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9A1EC32399ABD8003C01C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C6343592D41605E003FF791 /* Localizable.xcstrings in Resources */,
+				1C9A1ECD2399ABD9003C01C5 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CE2027721F63DDE00DD67AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C6343582D41605E003FF791 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1C0F849121DBFCB500B1B9F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9A1EC12399ABD8003C01C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C9A1ECA2399ABD9003C01C5 /* PreviewViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CE2025B21F63DDE00DD67AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1C9A1ED02399ABD9003C01C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C9A1EC42399ABD8003C01C5 /* MiramePreview */;
+			targetProxy = 1C9A1ECF2399ABD9003C01C5 /* PBXContainerItemProxy */;
+		};
+		1C9A1ED82399AEFF003C01C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C9A1EC42399ABD8003C01C5 /* MiramePreview */;
+			targetProxy = 1C9A1ED72399AEFF003C01C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1C9A1ECB2399ABD9003C01C5 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C9A1ECC2399ABD9003C01C5 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1C0F84A521DBFCBB00B1B9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1C0F84A621DBFCBB00B1B9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1C0F84A821DBFCBB00B1B9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = mirame/mirame.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = mirame/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C0F84A921DBFCBB00B1B9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = mirame/mirame.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = mirame/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1C9A1ED32399ABD9003C01C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = MiramePreview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-dev.SneakyPreview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C9A1ED42399ABD9003C01C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = MiramePreview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-dev.SneakyPreview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1CE2028421F63DDE00DD67AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "mirame-dev.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = "mirame/Resources/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1CE2028521F63DDE00DD67AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "mirame-dev.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = "mirame/Resources/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1C0F849021DBFCB500B1B9F9 /* Build configuration list for PBXProject "mirame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C0F84A521DBFCBB00B1B9F9 /* Debug */,
+				1C0F84A621DBFCBB00B1B9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C0F84A721DBFCBB00B1B9F9 /* Build configuration list for PBXNativeTarget "mirame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C0F84A821DBFCBB00B1B9F9 /* Debug */,
+				1C0F84A921DBFCBB00B1B9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C9A1ED52399ABD9003C01C5 /* Build configuration list for PBXNativeTarget "MiramePreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C9A1ED32399ABD9003C01C5 /* Debug */,
+				1C9A1ED42399ABD9003C01C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CE2028321F63DDE00DD67AA /* Build configuration list for PBXNativeTarget "mirame-dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CE2028421F63DDE00DD67AA /* Debug */,
+				1CE2028521F63DDE00DD67AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/longitachi/ZLImageEditor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+		1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/SwiftyCamPackage";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/sneakysync";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JayantBadlani/ScreenShield";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
+		1CFB67ED274ACD49007429BB /* XCRemoteSwiftPackageReference "SneakyCamPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/SneakyCamPackage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1CFB67FF274AD1AC007429BB /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1C0ADD992D2A269B00202801 /* ZLImageEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
+			productName = ZLImageEditor;
+		};
+		1C0ADD9B2D2A26A200202801 /* ZLImageEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
+			productName = ZLImageEditor;
+		};
+		1C3D3F1A2D31F88600C6DB0F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		1C3D3F1D2D31F89300C6DB0F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C3D3F112D31F7C800C6DB0F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		1C8E01F72D3DF52A00759565 /* SneakySync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */;
+			productName = SneakySync;
+		};
+		1C8E01F92D3DF53100759565 /* SneakySync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */;
+			productName = SneakySync;
+		};
+		1CB6BE8F274ADE71002C0F3C /* SneakyCamPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CFB67ED274ACD49007429BB /* XCRemoteSwiftPackageReference "SneakyCamPackage" */;
+			productName = SneakyCamPackage;
+		};
+		1CB6BE95274ADE72002C0F3C /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CFB67FF274AD1AC007429BB /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		1CB6BE9D274ADE72002C0F3C /* SwiftyCam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */;
+			productName = SwiftyCam;
+		};
+		1CB6BEA1274ADE7D002C0F3C /* SneakyCamPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CFB67ED274ACD49007429BB /* XCRemoteSwiftPackageReference "SneakyCamPackage" */;
+			productName = SneakyCamPackage;
+		};
+		1CB6BEA7274ADE7D002C0F3C /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CFB67FF274AD1AC007429BB /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		1CB6BEAF274ADE7D002C0F3C /* SwiftyCam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */;
+			productName = SwiftyCam;
+		};
+		1CDCDF422D3C0D62007C5623 /* ScreenShield */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */;
+			productName = ScreenShield;
+		};
+		1CDCDF442D3C0D68007C5623 /* ScreenShield */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */;
+			productName = ScreenShield;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1C0F848D21DBFCB500B1B9F9 /* Project object */;
+}

@@ -1,0 +1,96 @@
+{
+  "originHash" : "5a14bf5fadf3f82537981048ac6770862f09c86779905b279ff25753141c086a",
+  "pins" : [
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "32a99b537d1c6f3529a08257c28a5feb70c0c5af"
+      }
+    },
+    {
+      "identity" : "multicastdelegate",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/v-grigoriev/MulticastDelegate.git",
+      "state" : {
+        "revision" : "d650db9f294d2ebeab9e48e1825b6a16af860a62",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "85eeca41654cc9070ad81a21a4b1d153ad467c33",
+        "version" : "14.13.1"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "1f09fb14dd9d275b5686016fe8508d491b87cb0b"
+      }
+    },
+    {
+      "identity" : "scnrecorder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gorastudio-ceo/SCNRecorder/",
+      "state" : {
+        "branch" : "master",
+        "revision" : "057c5b0cb3c82b77b120ba0262016e9ef05f4fc2"
+      }
+    },
+    {
+      "identity" : "screenshield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JayantBadlani/ScreenShield",
+      "state" : {
+        "revision" : "9586e6a305426398250e0bdc19cbd463437f1af1",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "sneakycampackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/akatreyt/SneakyCamPackage",
+      "state" : {
+        "branch" : "master",
+        "revision" : "cb2fd3af65fcb60adc21c4ab659aa9722343224d"
+      }
+    },
+    {
+      "identity" : "sneakysync",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/akatreyt/sneakysync",
+      "state" : {
+        "branch" : "master",
+        "revision" : "48b3da64b600582c42084c54fad11f6b713b0425"
+      }
+    },
+    {
+      "identity" : "swiftycampackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/akatreyt/SwiftyCamPackage",
+      "state" : {
+        "branch" : "main",
+        "revision" : "432966c4d60d10f5309015681192909619441631"
+      }
+    },
+    {
+      "identity" : "zlimageeditor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/longitachi/ZLImageEditor",
+      "state" : {
+        "revision" : "563e57e8e862a865127b9cf2a019aff57c0c88fb",
+        "version" : "2.0.3"
+      }
+    }
+  ],
+  "version" : 3
+}

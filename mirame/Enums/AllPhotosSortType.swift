@@ -11,17 +11,17 @@ enum AllPhotosSortType: String, CaseIterable, CustomStringConvertible {
     var description: String{
         switch self {
         case .DateSavedAsc:
-            return "Date Saved - Latest"
+            return "Saved: Yesterday -> Today"
         case .DateSavedDesc:
-            return "Date Saved - Oldest"
+            return "Saved: Today -> Yesterday"
         case .DateTakenAsc:
-            return "Date Taken - Oldest"
+            return "Taken: Yesterday -> Today"
         case .DateTakenDesc:
-            return "Date Taken - Latest"
+            return "Taken: Today -> Yesterday"
         case .viewCountAsc:
-            return "View Count - Less"
+            return "Viewed Less"
         case .viewCountDesc:
-            return "View Count - More"
+            return "Viewed More"
         }
     }
     

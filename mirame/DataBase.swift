@@ -98,7 +98,7 @@ class DataBase {
     func deleteViewedPhotosIfNeeded(photos: [Photo]) -> Bool {
         var deletedOne = false
         
-        var activePhotos = photos.filter({ photo in
+        let activePhotos = photos.filter({ photo in
             (photo.imageData != nil || photo.videoFileName != nil)
         })
         
@@ -108,12 +108,8 @@ class DataBase {
                let maxNumberOfViews = photo.allowedNumberOfViews,
                maxNumberOfViews != -1,
                photo.numberOfViews ?? .min >= maxNumberOfViews {
-                do {
-                    DataBase.shared.deleteLocally(photo: photo)
-                    deletedOne = true
-                } catch {
-                    print(error)
-                }
+                DataBase.shared.deleteLocally(photo: photo)
+                deletedOne = true
             }
         }
         //        DB.getAllPhotos().forEach({ photo in

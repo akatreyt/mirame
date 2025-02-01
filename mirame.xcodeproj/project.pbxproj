@@ -108,7 +108,6 @@
 		1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"AES-256.swift",
 				AirDropOnlyActivityItemSource.swift,
 				AlertConfig.swift,
 				AppDelegate.swift,
@@ -466,7 +465,6 @@
 		1CCA115B2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"AES-256.swift",
 				AirDropOnlyActivityItemSource.swift,
 				AlertConfig.swift,
 				AppDelegate.swift,

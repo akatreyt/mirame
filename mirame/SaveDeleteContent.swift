@@ -53,7 +53,7 @@ class SaveDeleteContent {
             )
             
             do{
-                if let id = try await DataBase.shared.savePhotoToDB(photo: newPhoto) {
+                if let id = await DataBase.shared.savePhotoToDB(photo: newPhoto) {
                     return id
                 } else {
                     throw UIAlertTypes.errorSaving
@@ -97,7 +97,7 @@ class SaveDeleteContent {
                 disableFeedPreview: disableFeedPreview
             )
             
-            if let id = try await DataBase.shared.savePhotoToDB(photo: newPhoto) {
+            if let _ = await DataBase.shared.savePhotoToDB(photo: newPhoto) {
                 return newPhoto
             } else {
                 throw UIAlertTypes.errorSaving
@@ -109,11 +109,7 @@ class SaveDeleteContent {
     
     @MainActor
     func delete(photo:Photo)throws {
-        do{
-            try DataBase.shared.deleteLocally(photo: photo)
-        }catch{
-            throw error
-        }
+        DataBase.shared.deleteLocally(photo: photo)
     }
     
     //    static func deleteOldVideoFiles() {

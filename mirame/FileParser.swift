@@ -34,13 +34,14 @@ class FileParser {
                 }
             }
         } catch {
-            let accessGranted = url.startAccessingSecurityScopedResource()
-            if url.absoluteString.contains(Constants.mirameExtension) {
-                let data = try Data(contentsOf: url)
-                
-                for parser in parsers {
-                    if let alertConfig = await parser.parseAndSave(data: data) {
-                        return alertConfig
+            if url.startAccessingSecurityScopedResource() {
+                if url.absoluteString.contains(Constants.mirameExtension) {
+                    let data = try Data(contentsOf: url)
+                    
+                    for parser in parsers {
+                        if let alertConfig = await parser.parseAndSave(data: data) {
+                            return alertConfig
+                        }
                     }
                 }
             }

@@ -22,7 +22,7 @@ class ImportExport {
             })
             let allPhotosData = try JSONEncoder().encode(allPhotos)
             let enctrypedData = try PrivateKeyStuff.encryptUsing(data: allPhotosData, keyDataSet: keyDataSet)
-            try FileWriter.write(data: enctrypedData, toURL: tmpFileURL)
+            let _ = try FileWriter.write(data: enctrypedData, toURL: tmpFileURL)
             
             return tmpFileURL
         }catch{

@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsView: View {
     @State private var deleteEverything = false
     
-    let icons = ["AltIcon1", "AltIcon2", "AltIcon8", "AltIcon9", "AltIcon3", "AltIcon4", "AltIcon5", "AltIcon6", "AltIcon7"]
+    let icons = ["AltIcon1", "AltIcon2", "AltIcon8", "AltIcon10", "AltIcon11", "AltIcon9", "AltIcon3", "AltIcon4", "AltIcon5", "AltIcon6", "AltIcon7"]
     
     var body: some View {
         List {

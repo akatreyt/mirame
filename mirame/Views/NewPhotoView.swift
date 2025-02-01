@@ -75,7 +75,7 @@ struct NewPhotoView: View {
                             do {
                                 try await SaveDeleteContent.savePhoto(
                                     importedPhotoID: nil,
-                                    image: image,
+                                    image: newImage,
                                     keyDataSet: KeychainKeys.shared.personalKey,
                                     isLocal: true,
                                     allowedNumOfViews: -1,

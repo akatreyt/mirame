@@ -17,7 +17,7 @@ struct AllPhotosEmptyView: View {
                 Text("No photos found.")
                     .padding()
                 
-                Text("Find someone to share photos with and share a key by tapping the \(Image(systemName: "key")), located on the top right, to share keys")
+                Text("Find someone to share photos with and share a key by tapping the \(Image(systemName: "key")), located on the top right")
                     .multilineTextAlignment(.leading)
                     .padding()
             }

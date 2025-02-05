@@ -42,16 +42,20 @@ struct AllPhotosEmptyView: View {
                     .padding()
             }
             Spacer()
-            if viewType == .Saved {
-                Text("When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode.")
-                    .multilineTextAlignment(.leading)
-                    .padding()
+            if viewType == .favorites {
+                
             } else {
-                Text("When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode, and select multiple for quick sharing.")
-                    .multilineTextAlignment(.leading)
-                    .padding()
+                if viewType == .Saved {
+                    Text("When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode.")
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                } else {
+                    Text("When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode, and select multiple for quick sharing.")
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                }
+                Image(systemName: "arrow.down")
             }
-            Image(systemName: "arrow.down")
         }
     }
 }

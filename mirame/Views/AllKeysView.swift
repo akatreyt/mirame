@@ -48,6 +48,7 @@ struct AllKeysView: View {
                 Spacer()
             } else {
                 allKeysList(keys: KeychainKeys.shared.allKeys)
+                    .padding(.top, -8)
             }
         }
         .alert("New Key", isPresented: $showNewKeyNameAlert) {

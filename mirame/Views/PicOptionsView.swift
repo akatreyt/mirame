@@ -110,6 +110,7 @@ struct PicOptionsView: View {
                     Text("Pick a key to share with")
                 }
             }
+            .padding(.top, -8)
             
             Button(action: {
                 do {

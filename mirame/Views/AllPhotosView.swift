@@ -161,6 +161,8 @@ struct AllPhotosView: View {
                         }
                         .contentShape(Rectangle())
                     })
+                    .padding(.top, 5)
+                    
                     Divider()
                 }
             }

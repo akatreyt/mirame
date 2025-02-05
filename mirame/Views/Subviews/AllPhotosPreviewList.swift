@@ -31,7 +31,7 @@ struct AllPhotosPreviewList: View {
                     .contentShape(Rectangle())
                     .listRowSeparator(.hidden)
                     .onTapGesture {
-                        if viewType == .Taken {
+                        if let local = photo.localImage, local {
                             if selectMultiple {
                                 if selectedIDs.contains(photo.photoID) {
                                     selectedIDs.removeAll(where: { $0 == photo.photoID })

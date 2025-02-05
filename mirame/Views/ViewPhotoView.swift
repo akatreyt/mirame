@@ -64,8 +64,14 @@ struct ViewPhotoView: View {
                     Button(action: {
                         isFavorite = (try? DataBase.shared.favorite(photo: photo, isFavorite: !isFavorite)) ?? false
                     }, label: {
-                        isFavorite ? Image(systemName: "heart.fill")
-                            .font(.title) : Image(systemName: "heart").font(.title)
+                        if isFavorite {
+                            Image(systemName: "heart.fill")
+                                .foregroundStyle(.red)
+                                .font(.title)
+                        } else {
+                            Image(systemName: "heart")
+                                .font(.title)
+                        }
                     })
                     .padding()
                     .frame(maxWidth: .infinity)

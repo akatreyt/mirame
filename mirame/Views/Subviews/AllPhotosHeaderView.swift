@@ -38,12 +38,11 @@ struct AllPhotosHeaderView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack{
-                Image("name")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 50, height: 44)
-            }
+            Image("name")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 44)
+                .padding(.horizontal, 16)
             
             HStack {
                 Button(action: {

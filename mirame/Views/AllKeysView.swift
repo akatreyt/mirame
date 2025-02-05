@@ -33,11 +33,15 @@ struct AllKeysView: View {
             header()
                 .padding()
             
+            Divider()
+            
             if KeychainKeys.shared.allKeys.isEmpty {
-                Text("No keys found.")
+                Text("No keys found")
+                    .font(.title)
+                    .multilineTextAlignment(.leading)
                     .padding()
                 
-                Text("Find someone you would like to share photos with and start the sync process by tapping on the \(Image(systemName: "plus.app")) icon on the top left")
+                Text("Find someone you would like to share photos with and start the sync process by tapping on the \(Image(systemName: "plus.app")) on the top left.")
                     .multilineTextAlignment(.leading)
                     .padding()
                 
@@ -73,7 +77,7 @@ struct AllKeysView: View {
             Button("Cancel", action: { })
         },
                message: {
-            Text("This will create a deactivation key and when the user opens it all the media for this key will be delete")
+            Text("This will create a deactivation key, and when the user opens it, all the media for this key will be deleted.")
         })
     }
     

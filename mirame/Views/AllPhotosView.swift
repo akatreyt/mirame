@@ -179,21 +179,15 @@ struct AllPhotosView: View {
                 })
                 .padding()
         }
-        .sheet(isPresented: $showKeys) {
-            print("Sheet dismissed!")
-        } content: {
+        .sheet(isPresented: $showKeys, content: {
             AllKeysView()
-        }
-        .sheet(isPresented: $showSettings) {
-            print("Sheet dismissed!")
-        } content: {
+        })
+        .sheet(isPresented: $showSettings, content: {
             SettingsView()
-        }
-        .fullScreenCover(isPresented: $showTakeImage) {
-            print("Sheet dismissed!")
-        } content: {
+        })
+        .fullScreenCover(isPresented: $showTakeImage, content: {
             NewPhotoView()
-        }
+        })
         .sheet(item: $photoToShow,
                onDismiss: {},
                content: { thingy in

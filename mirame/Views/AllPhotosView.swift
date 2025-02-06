@@ -15,9 +15,11 @@ import SneakySync
 
 struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Query private var photos: [Photo]
         
     @State var showKeys: Bool = false
+    @State var showStoreView: Bool = false
     @State var photoToShow: PhotoToShow?
     @State var showTakeImage: Bool = false
     @State var showSettings: Bool = false
@@ -35,7 +37,7 @@ struct AllPhotosView: View {
     
     @MainActor
     @State var scaledImages = [String : Image]()
-    
+    @AppStorage("isUnlocked") private var isUnlocked = false
     @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
     @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
@@ -138,6 +140,7 @@ struct AllPhotosView: View {
                         selectedIDs: $selectedIDs,
                         viewType: $viewType,
                         photoToShow: $photoToShow,
+                        showStoreView: $showStoreView,
                         photos: sortedPhotos)
                 case .preview:
                     AllPhotosPreviewList(
@@ -145,6 +148,7 @@ struct AllPhotosView: View {
                         viewType: $viewType,
                         selectMultiple: $selectMultiple,
                         selectedIDs: $selectedIDs,
+                        showStoreView: $showStoreView,
                         photos: sortedPhotos)
                         .protectScreenshot()
                 }
@@ -166,6 +170,7 @@ struct AllPhotosView: View {
                     Divider()
                 }
             }
+            
             AllPhotosFooterView(
                 viewType: $viewType,
                 mediaType: $mediaType,
@@ -187,6 +192,9 @@ struct AllPhotosView: View {
         })
         .fullScreenCover(isPresented: $showTakeImage, content: {
             NewPhotoView()
+        })
+        .sheet(isPresented: $showStoreView, content: {
+            SubscriptionView()
         })
         .sheet(item: $photoToShow,
                onDismiss: {},
@@ -222,6 +230,15 @@ struct AllPhotosView: View {
         })
         .onChange(of: importImageItem) {
             parseSelectdImages()
+        }
+        .subscriptionStatusTask(for: "54DA0067") { taskState in
+            if case .loading = taskState { return }
+            
+            if let value = taskState.value {
+                isUnlocked = value.map(\.state).contains { [.subscribed, .inBillingRetryPeriod, .inGracePeriod].contains($0) } == true
+            } else {
+                isUnlocked = false
+            }
         }
     }
     

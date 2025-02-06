@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     @State private var deleteEverything = false
+    @State private var isPresentedManageSubscription = false
+    @AppStorage("isUnlocked") private var isUnlocked = false
     
     let icons = ["AltIcon1", "AltIcon2", "AltIcon8", "AltIcon10", "AltIcon11", "AltIcon9", "AltIcon3", "AltIcon4", "AltIcon5", "AltIcon6", "AltIcon7"]
     
@@ -74,7 +77,21 @@ struct SettingsView: View {
             }, header: {
                 Text("icon")
             })
+            
+            if isUnlocked {
+                Button("Manage Subscription") {
+                    isPresentedManageSubscription = true
+                }
+            } else {
+                ProductView(id: "unlocked") {
+                    Image("AltIcon1-preview")
+                        .resizable()
+                        .frame(width: 88, height: 88)
+                        .cornerRadius(10)
+                }
+            }
         }
+        .manageSubscriptionsSheet(isPresented: $isPresentedManageSubscription)
         .alert("Delete Everything", isPresented: $deleteEverything) {
             Button("Delete", role: .destructive, action: {
                 BioAuthView.authenticate(completedAuthSuccess: {

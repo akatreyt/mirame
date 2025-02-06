@@ -12,6 +12,11 @@ struct AllPhotosPreviewList: View {
     @Binding var viewType: AllPhotosViewType
     @Binding var selectMultiple: Bool
     @Binding var selectedIDs: [UUID]
+    
+    @Binding var showStoreView: Bool
+    @AppStorage("isUnlocked") private var isUnlocked = false
+    @State private var showUnlockMessage = false
+    
     var photos: [Photo]
     
     var scaledImages: [String: Image] = [:]
@@ -24,30 +29,34 @@ struct AllPhotosPreviewList: View {
     
     var body: some View {
         List {
-            ForEach(photos, id: \.self) { photo in
-                PhotoDetailViewPreview(photo: photo)
+            ForEach(Array(photos.enumerated()), id: \.element) { index, photo in
+                PhotoDetailViewPreview(photo: photo, isLocked: !isUnlocked && index != 0)
                     .border(.red, width: (selectMultiple && selectedIDs.contains(photo.photoID)) ? 4 : 0)
                     .cornerRadius(8)
                     .contentShape(Rectangle())
                     .listRowSeparator(.hidden)
                     .onTapGesture {
-                        if let local = photo.localImage, local {
-                            if selectMultiple {
-                                if selectedIDs.contains(photo.photoID) {
-                                    selectedIDs.removeAll(where: { $0 == photo.photoID })
+                        if !isUnlocked && index != 0 {
+                            showUnlockMessage = true
+                        } else {
+                            if let local = photo.localImage, local {
+                                if selectMultiple {
+                                    if selectedIDs.contains(photo.photoID) {
+                                        selectedIDs.removeAll(where: { $0 == photo.photoID })
+                                    } else {
+                                        selectedIDs.append(photo.photoID)
+                                    }
                                 } else {
-                                    selectedIDs.append(photo.photoID)
+                                    photoToShow = PhotoToShow(
+                                        id: UUID(),
+                                        photo: photo,
+                                        keyDataSet: KeychainKeys.shared.personalKey)
                                 }
                             } else {
-                                photoToShow = PhotoToShow(
-                                    id: UUID(),
-                                    photo: photo,
-                                    keyDataSet: KeychainKeys.shared.personalKey)
-                            }
-                        } else {
-                            if let keyUUID = photo.privateKeyUUID,
-                               let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
-                                photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                                if let keyUUID = photo.privateKeyUUID,
+                                   let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
+                                    photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                                }
                             }
                         }
                     }
@@ -58,6 +67,13 @@ struct AllPhotosPreviewList: View {
         .edgesIgnoringSafeArea(.all)
         .listStyle(.grouped)
         .contentMargins(.top, 0)
+        .alert("Subscribe to mírame to view all photos?", isPresented: $showUnlockMessage) {
+            Button("Yes", role: .none) {
+                showStoreView = true
+            }
+            
+            Button("No", role: .cancel) { }
+        }
     }
     
     func delete(at offsets: IndexSet) {

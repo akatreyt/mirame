@@ -13,11 +13,16 @@ struct AllPhotosCompactList: View {
     @Binding var selectedIDs: [UUID]
     @Binding var viewType: AllPhotosViewType
     @Binding var photoToShow: PhotoToShow?
+    
+    @Binding var showStoreView: Bool
+    @AppStorage("isUnlocked") private var isUnlocked = false
+    @State private var showUnlockMessage = false
+    
     var photos: [Photo]
     
     var body: some View {
         List {
-            ForEach(photos) { photo in
+            ForEach(Array(photos.enumerated()), id: \.element) { index, photo in
                 HStack {
                     PhotoDetailView(photo: photo)
                         .cornerRadius(8)
@@ -25,27 +30,38 @@ struct AllPhotosCompactList: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    if viewType == .Taken {
-                        if selectMultiple {
-                            if selectedIDs.contains(photo.photoID) {
-                                selectedIDs.removeAll(where: { $0 == photo.photoID })
+                    if !isUnlocked && index != 0 {
+                        showUnlockMessage = true
+                    } else {
+                        if viewType == .Taken {
+                            if selectMultiple {
+                                if selectedIDs.contains(photo.photoID) {
+                                    selectedIDs.removeAll(where: { $0 == photo.photoID })
+                                } else {
+                                    selectedIDs.append(photo.photoID)
+                                }
                             } else {
-                                selectedIDs.append(photo.photoID)
+                                photoToShow = PhotoToShow(
+                                    id: UUID(),
+                                    photo: photo,
+                                    keyDataSet: KeychainKeys.shared.personalKey)
                             }
                         } else {
-                            photoToShow = PhotoToShow(
-                                id: UUID(),
-                                photo: photo,
-                                keyDataSet: KeychainKeys.shared.personalKey)
-                        }
-                    } else {
-                        if let keyUUID = photo.privateKeyUUID,
-                           let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
-                            photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                            if let keyUUID = photo.privateKeyUUID,
+                               let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
+                                photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                            }
                         }
                     }
                 }
             }
+        }
+        .alert("Subscribe to mírame to view all photos?", isPresented: $showUnlockMessage) {
+            Button("Yes", role: .none) {
+                showStoreView = true
+            }
+            
+            Button("No", role: .cancel) { }
         }
     }
 }

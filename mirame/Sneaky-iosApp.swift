@@ -22,7 +22,8 @@ struct NewIn14App: App {
     @State var newFileURL: URL?
     @State private var isUnlocked = false
     @State var codeToRunAfterAuth: (() -> Void)?
-    
+    @State private var subscriptions = Subscriptions()
+
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -109,6 +110,7 @@ struct NewIn14App: App {
                     isUnlocked = false
                 }
             }
+            .environment(subscriptions)
         }
         .modelContainer(DataBase.shared.sharedModelContainer)
     }

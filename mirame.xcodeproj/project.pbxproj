@@ -12,6 +12,8 @@
 		1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343582D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343592D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
+		1C6758132D545B210086A7D1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6758122D545B210086A7D1 /* StoreKit.framework */; };
+		1C6758142D545B280086A7D1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6758122D545B210086A7D1 /* StoreKit.framework */; };
 		1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */ = {isa = PBXBuildFile; productRef = 1C8E01F72D3DF52A00759565 /* SneakySync */; };
 		1C8E01FA2D3DF53100759565 /* SneakySync in Frameworks */ = {isa = PBXBuildFile; productRef = 1C8E01F92D3DF53100759565 /* SneakySync */; };
 		1C9A1EC72399ABD9003C01C5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */; };
@@ -95,6 +97,7 @@
 		1C0F849521DBFCB500B1B9F9 /* mirame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mirame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mirame-dev.entitlements"; sourceTree = "<group>"; };
 		1C6343562D416057003FF791 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		1C6758122D545B210086A7D1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiramePreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		1C9A1EC92399ABD9003C01C5 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 				PhotoEncryption.swift,
 				Resources/Assets.xcassets,
 				Resources/LaunchScreen_v2.storyboard,
+				Resources/Products.storekit,
 				Resources/Sounds/beep_2.m4a,
 				Resources/Sounds/beep.mp3,
 				Resources/Sounds/shutter.mp3,
@@ -437,6 +441,7 @@
 				Resources/test_data/import_key.sneakyPIIC,
 				SaveDeleteContent.swift,
 				"Sneaky-iosApp.swift",
+				Subscriptions.swift,
 				TestDataCreator.swift,
 				Views/AllKeysView.swift,
 				Views/AllPhotosView.swift,
@@ -445,6 +450,7 @@
 				Views/PhotoToShow.swift,
 				Views/PicOptionsView.swift,
 				Views/SettingsView.swift,
+				Views/SubscriptionView.swift,
 				Views/Subviews/AllPhotosCompactList.swift,
 				Views/Subviews/AllPhotosEmptyView.swift,
 				Views/Subviews/AllPhotosFooterView.swift,
@@ -488,6 +494,7 @@
 				PhotoEncryption.swift,
 				Resources/Assets.xcassets,
 				Resources/LaunchScreen_v2.storyboard,
+				Resources/Products.storekit,
 				Resources/Sounds/beep_2.m4a,
 				Resources/Sounds/beep.mp3,
 				Resources/Sounds/shutter.mp3,
@@ -794,6 +801,7 @@
 				Resources/test_data/import_key.sneakyPIIC,
 				SaveDeleteContent.swift,
 				"Sneaky-iosApp.swift",
+				Subscriptions.swift,
 				TestDataCreator.swift,
 				Views/AllKeysView.swift,
 				Views/AllPhotosView.swift,
@@ -802,6 +810,7 @@
 				Views/PhotoToShow.swift,
 				Views/PicOptionsView.swift,
 				Views/SettingsView.swift,
+				Views/SubscriptionView.swift,
 				Views/Subviews/AllPhotosCompactList.swift,
 				Views/Subviews/AllPhotosEmptyView.swift,
 				Views/Subviews/AllPhotosFooterView.swift,
@@ -831,6 +840,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB6BEB0274ADE7D002C0F3C /* SwiftyCam in Frameworks */,
+				1C6758142D545B280086A7D1 /* StoreKit.framework in Frameworks */,
 				1CB6BEA8274ADE7D002C0F3C /* KeychainSwift in Frameworks */,
 				1CDCDF432D3C0D62007C5623 /* ScreenShield in Frameworks */,
 				1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */,
@@ -852,6 +862,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB6BE9E274ADE72002C0F3C /* SwiftyCam in Frameworks */,
+				1C6758132D545B210086A7D1 /* StoreKit.framework in Frameworks */,
 				1CB6BE96274ADE72002C0F3C /* KeychainSwift in Frameworks */,
 				1CDCDF452D3C0D68007C5623 /* ScreenShield in Frameworks */,
 				1C8E01FA2D3DF53100759565 /* SneakySync in Frameworks */,
@@ -899,6 +910,7 @@
 		2EBB44918E9C065CAF15BEF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C6758122D545B210086A7D1 /* StoreKit.framework */,
 				1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */,
 			);
 			name = Frameworks;

@@ -15,6 +15,7 @@ class PhotoDataCache {
 
 struct PhotoDetailViewPreview: View {
     var photo: Photo
+    var isLocked: Bool
     
     var body: some View {
         ZStack {
@@ -49,8 +50,8 @@ struct PhotoDetailViewPreview: View {
                         .padding(.bottom, 50)
                 })
                 .overlay(content: {
-                    if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
-                        Image(systemName: "eye.slash")
+                    if isLocked {
+                        Image(systemName: "lock")
                             .resizable()
                             .scaledToFit()
                             .frame(minWidth: 0)
@@ -60,6 +61,19 @@ struct PhotoDetailViewPreview: View {
                             .padding(90)
                             .background(.ultraThinMaterial)
                             .foregroundStyle(.secondary)
+                    } else {
+                        if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
+                            Image(systemName: "eye.slash")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(minWidth: 0)
+                                .frame(height: 300)
+                                .clipped()
+                                .cornerRadius(8)
+                                .padding(90)
+                                .background(.ultraThinMaterial)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 })
             }

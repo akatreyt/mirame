@@ -61,10 +61,16 @@
     "Limit number of views" : {
 
     },
+    "Manage Subscription" : {
+
+    },
     "NA" : {
 
     },
     "New Key" : {
+
+    },
+    "No" : {
 
     },
     "No favorites" : {
@@ -88,6 +94,9 @@
     "Pick a key to share with" : {
 
     },
+    "Subscribe to mírame to view all photos?" : {
+
+    },
     "Tap %@, located on the top left, to take a few." : {
 
     },
@@ -97,10 +106,16 @@
     "This will create a deactivation key, and when the user opens it, all the media for this key will be deleted." : {
 
     },
+    "Unlock mirame to enjoy unlimited keys and unlimited photos." : {
+
+    },
     "When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode, and select multiple for quick sharing." : {
 
     },
     "When you have some photos, use the options on the bottom of the screen to filter photos or videos, sort the photos, view a random photo, switch between list and preview mode." : {
+
+    },
+    "Yes" : {
 
     },
     "You haven’t taken any photos yet" : {

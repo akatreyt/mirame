@@ -23,7 +23,7 @@ struct SubscriptionView: View {
                     .frame(height: 44)
                     .padding(.horizontal, 16)
                 
-                Text("Unlock mirame to enjoy unlimited keys and unlimited photos.")
+                Text("Unlock mírame to enjoy unlimited keys and unlimited photos.")
                     .multilineTextAlignment(.center)
             }
             .foregroundStyle(.white)

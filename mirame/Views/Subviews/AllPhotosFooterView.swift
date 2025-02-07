@@ -43,7 +43,7 @@ struct AllPhotosFooterView: View {
                 Image(systemName: "arrow.up.arrow.down")
                     .font(.title2)
             })
-            .disabled(!isUnlocked)
+            .disabled(!isUnlocked && viewType == .Saved )
             
             
             Spacer()
@@ -54,7 +54,7 @@ struct AllPhotosFooterView: View {
                 Image(systemName: "shuffle.circle")
                     .font(.title2)
             })
-            .disabled(!isUnlocked)
+            .disabled(!isUnlocked && viewType == .Saved )
             
             Spacer()
             

@@ -171,6 +171,9 @@ struct AllPhotosView: View {
                 }
             }
             
+            Divider()
+                .padding(.top, -8)
+            
             AllPhotosFooterView(
                 viewType: $viewType,
                 mediaType: $mediaType,

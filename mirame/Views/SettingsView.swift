@@ -78,18 +78,33 @@ struct SettingsView: View {
                 Text("icon")
             })
             
-            if isUnlocked {
-                Button("Manage Subscription") {
-                    isPresentedManageSubscription = true
+            Section(content: {
+                Button(action: {
+                    
+                }, label: {
+                    HStack {
+                        Text("Share mírame")
+                        Spacer()
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                })
+            })
+           
+            
+            Section(content: {
+                if isUnlocked {
+                    Button("Manage Subscription") {
+                        isPresentedManageSubscription = true
+                    }
+                } else {
+                    ProductView(id: "unlocked") {
+                        Image("AltIcon1-preview")
+                            .resizable()
+                            .frame(width: 88, height: 88)
+                            .cornerRadius(10)
+                    }
                 }
-            } else {
-                ProductView(id: "unlocked") {
-                    Image("AltIcon1-preview")
-                        .resizable()
-                        .frame(width: 88, height: 88)
-                        .cornerRadius(10)
-                }
-            }
+            })
         }
         .manageSubscriptionsSheet(isPresented: $isPresentedManageSubscription)
         .alert("Delete Everything", isPresented: $deleteEverything) {

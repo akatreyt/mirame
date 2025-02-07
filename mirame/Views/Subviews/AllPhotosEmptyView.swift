@@ -55,6 +55,7 @@ struct AllPhotosEmptyView: View {
                         .padding()
                 }
                 Image(systemName: "arrow.down")
+                    .padding(.bottom, 8)
             }
         }
     }

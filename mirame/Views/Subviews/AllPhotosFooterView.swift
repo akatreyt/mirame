@@ -14,6 +14,7 @@ struct AllPhotosFooterView: View {
     @Binding var sortBy: AllPhotosSortType
     @Binding var layoutType: AllPhotosViewLayoutType
     @Binding var selectMultiple: Bool
+    @Binding var isUnlocked: Bool
     
     let viewRandom: (() -> Void)
     
@@ -42,6 +43,7 @@ struct AllPhotosFooterView: View {
                 Image(systemName: "arrow.up.arrow.down")
                     .font(.title2)
             })
+            .disabled(!isUnlocked)
             
             
             Spacer()
@@ -52,6 +54,7 @@ struct AllPhotosFooterView: View {
                 Image(systemName: "shuffle.circle")
                     .font(.title2)
             })
+            .disabled(!isUnlocked)
             
             Spacer()
             

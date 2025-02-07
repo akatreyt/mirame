@@ -177,6 +177,7 @@ struct AllPhotosView: View {
                 sortBy: $sortBy,
                 layoutType: $layoutType,
                 selectMultiple: $selectMultiple,
+                isUnlocked: $isUnlocked,
                 viewRandom: {
                     if let photo = viewRandom() {
                         photoToShow = photo

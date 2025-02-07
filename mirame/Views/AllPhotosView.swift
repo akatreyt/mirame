@@ -17,7 +17,9 @@ struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query private var photos: [Photo]
-        
+    
+    private var isIAPEnabled = false
+    
     @State var showKeys: Bool = false
     @State var showStoreView: Bool = false
     @State var photoToShow: PhotoToShow?
@@ -41,6 +43,14 @@ struct AllPhotosView: View {
     @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
     @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
+    
+    var subscriptionGroupID: String {
+#if targetEnvironment(simulator)
+        return "54DA0067"
+#else
+        return "21632132"
+#endif
+    }
     
     var sortedPhotos: [Photo] {
         var filteredItems = [Photo]()
@@ -225,6 +235,10 @@ struct AllPhotosView: View {
                     message: "Item has been deleted",
                     buttons: [])
             }
+            
+            if !isIAPEnabled {
+                isUnlocked = true
+            }
         }
         .alert(alertConfig?.title ?? "",
                isPresented: $showAlert,
@@ -235,7 +249,9 @@ struct AllPhotosView: View {
         .onChange(of: importImageItem) {
             parseSelectdImages()
         }
-        .subscriptionStatusTask(for: "54DA0067") { taskState in
+        .subscriptionStatusTask(for: subscriptionGroupID) { taskState in
+            if !isIAPEnabled { return }
+            
             if case .loading = taskState { return }
             
             if let value = taskState.value {

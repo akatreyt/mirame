@@ -20,14 +20,20 @@ struct SubscriptionView: View {
                 Image("name")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 44)
                     .padding(.horizontal, 16)
+                    .foregroundColor(Color(uiColor: .label))
                 
                 Text("Unlock mírame to enjoy unlimited keys and unlimited photos.")
                     .multilineTextAlignment(.center)
+                    .foregroundColor(Color(uiColor: .label))
             }
             .foregroundStyle(.white)
-            .containerBackground(.black, for: .subscriptionStore)
+            .containerBackground(for: .subscriptionStore, content: {
+                Image("smallM")
+                    .resizable(resizingMode: .tile)
+                    .opacity(0.05)
+                    .foregroundColor(Color(uiColor: .secondaryLabel))
+            })
         }
         .storeButton(.visible, for: .restorePurchases, .redeemCode)
         .subscriptionStoreControlStyle(.prominentPicker)

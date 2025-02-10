@@ -148,3 +148,13 @@ extension UIImage {
         return Data()
     }
 }
+
+extension Image {
+    @MainActor
+    func getUIImage(newSize: CGSize) -> UIImage? {
+        let image = resizable()
+            .scaledToFit()
+            .frame(width: newSize.width, height: newSize.height)
+        return ImageRenderer(content: image).uiImage
+    }
+}

@@ -116,7 +116,6 @@
 				AppDelegate.swift,
 				AsyncCachedImage.swift,
 				DataBase.swift,
-				DocumentsFetcher.swift,
 				Enums/AllPhotosFilterType.swift,
 				Enums/AllPhotosSortType.swift,
 				Enums/AllPhotosViewLayoutType.swift,
@@ -439,6 +438,7 @@
 				Resources/test_data/299.jpg,
 				Resources/test_data/300.jpg,
 				Resources/test_data/import_key.sneakyPIIC,
+				Resources/testDownloadFile.json,
 				SaveDeleteContent.swift,
 				"Sneaky-iosApp.swift",
 				Subscriptions.swift,
@@ -446,6 +446,7 @@
 				Views/AllKeysView.swift,
 				Views/AllPhotosView.swift,
 				Views/BioAuthView.swift,
+				Views/DownloadView.swift,
 				Views/NewPhotoView.swift,
 				Views/PhotoToShow.swift,
 				Views/PicOptionsView.swift,
@@ -476,7 +477,6 @@
 				AppDelegate.swift,
 				AsyncCachedImage.swift,
 				DataBase.swift,
-				DocumentsFetcher.swift,
 				Enums/AllPhotosFilterType.swift,
 				Enums/AllPhotosSortType.swift,
 				Enums/AllPhotosViewLayoutType.swift,
@@ -799,6 +799,7 @@
 				Resources/test_data/299.jpg,
 				Resources/test_data/300.jpg,
 				Resources/test_data/import_key.sneakyPIIC,
+				Resources/testDownloadFile.json,
 				SaveDeleteContent.swift,
 				"Sneaky-iosApp.swift",
 				Subscriptions.swift,
@@ -806,6 +807,7 @@
 				Views/AllKeysView.swift,
 				Views/AllPhotosView.swift,
 				Views/BioAuthView.swift,
+				Views/DownloadView.swift,
 				Views/NewPhotoView.swift,
 				Views/PhotoToShow.swift,
 				Views/PicOptionsView.swift,
@@ -1451,7 +1453,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/akatreyt/SneakyCamPackage";
 			requirement = {
-				branch = master;
+				branch = feature/loadFromDocs;
 				kind = branch;
 			};
 		};

@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Taco",
+        "image": "https://www.pngplay.com/wp-content/uploads/8/Taco-PNG-HD-Quality.png",
+        "saveName": "taco.png"
+    },
+    {
+        "name": "Astro",
+        "image": "https://www.pngall.com/wp-content/uploads/5/Astronaut-Helmet-PNG-Pic.png",
+        "saveName": "Astro.png"
+    }
+]

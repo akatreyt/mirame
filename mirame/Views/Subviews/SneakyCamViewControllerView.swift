@@ -27,8 +27,7 @@ struct SneakyCamViewControllerView: UIViewControllerRepresentable {
         vc.videoCompletion = {  url in
             newURL(url)
         }
-        vc.setDocumentFiles(docFiles: DocumentsFetcher.readFiles())
-//        vc.presentationController?.delegate = self
+        vc.setDocumentFiles()
         return vc
     }
     

@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/akatreyt/SneakyCamPackage",
       "state" : {
-        "branch" : "master",
-        "revision" : "4e7e0569b509d2cbaf391527ae5370a934e83b0d"
+        "branch" : "feature/loadFromDocs",
+        "revision" : "f1e25d36d063293755f8463a16cc504daf51e1d3"
       }
     },
     {

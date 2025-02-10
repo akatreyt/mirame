@@ -23,7 +23,7 @@ struct NewIn14App: App {
     @State private var isUnlocked = false
     @State var codeToRunAfterAuth: (() -> Void)?
     @State private var subscriptions = Subscriptions()
-
+    
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -53,9 +53,9 @@ struct NewIn14App: App {
                     .onAppear{
 #if targetEnvironment(simulator)
                         isUnlocked = true
-//                         TestDataCreator.createPhotos()
-                        #else
-//                        authenticate()
+                        //                         TestDataCreator.createPhotos()
+#else
+                        //                        authenticate()
 #endif
                         
                     }

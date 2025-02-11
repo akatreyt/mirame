@@ -1,10 +1,12 @@
 [
     {
+        "id": 1,
         "name": "Taco",
         "image": "https://www.pngplay.com/wp-content/uploads/8/Taco-PNG-HD-Quality.png",
         "saveName": "taco.png"
     },
     {
+        "id": 2,
         "name": "Astro",
         "image": "https://static-00.iconduck.com/assets.00/astronaut-helmet-icon-2048x1978-txyz4uo2.png",
         "saveName": "Astro.png"

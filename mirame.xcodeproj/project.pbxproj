@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD992D2A269B00202801 /* ZLImageEditor */; };
 		1C0ADD9C2D2A26A200202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD9B2D2A26A200202801 /* ZLImageEditor */; };
+		1C59B7152D63AA3900F1FA36 /* SwiftyCam in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B70B2D63AA3900F1FA36 /* SwiftyCam */; };
+		1C59B7162D63AA3900F1FA36 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6758122D545B210086A7D1 /* StoreKit.framework */; };
+		1C59B7172D63AA3900F1FA36 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B7092D63AA3900F1FA36 /* KeychainSwift */; };
+		1C59B7182D63AA3900F1FA36 /* ScreenShield in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B70F2D63AA3900F1FA36 /* ScreenShield */; };
+		1C59B7192D63AA3900F1FA36 /* SneakySync in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B7112D63AA3900F1FA36 /* SneakySync */; };
+		1C59B71A2D63AA3900F1FA36 /* SneakyCamPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B7072D63AA3900F1FA36 /* SneakyCamPackage */; };
+		1C59B71B2D63AA3900F1FA36 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B70D2D63AA3900F1FA36 /* ZLImageEditor */; };
+		1C59B71D2D63AA3900F1FA36 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
+		1C59BB612D63AB9600F1FA36 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C9A1EC62399ABD8003C01C5 /* QuickLook.framework */; };
+		1C59BB6D2D63AB9600F1FA36 /* MirameHGPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1C59BB602D63AB9600F1FA36 /* MirameHGPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343582D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
 		1C6343592D41605E003FF791 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1C6343562D416057003FF791 /* Localizable.xcstrings */; };
@@ -32,6 +42,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1C59BB6B2D63AB9600F1FA36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C0F848D21DBFCB500B1B9F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C59BB5F2D63AB9600F1FA36;
+			remoteInfo = MirameHGPreview;
+		};
 		1C9A1ECF2399ABD9003C01C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1C0F848D21DBFCB500B1B9F9 /* Project object */;
@@ -69,6 +86,27 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1C59B71E2D63AA3900F1FA36 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1C59BB6D2D63AB9600F1FA36 /* MirameHGPreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59B7202D63AA3900F1FA36 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1C9A1ED22399ABD9003C01C5 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +134,10 @@
 /* Begin PBXFileReference section */
 		1C0F849521DBFCB500B1B9F9 /* mirame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mirame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mirame-dev.entitlements"; sourceTree = "<group>"; };
+		1C59B7242D63AA3900F1FA36 /* mirame-hg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mirame-hg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C59B7252D63AA3900F1FA36 /* mirame copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "mirame copy-Info.plist"; path = "/Users/treyt/Desktop/code/mirame/mirame copy-Info.plist"; sourceTree = "<absolute>"; };
+		1C59BB5B2D63AAAA00F1FA36 /* mirame-hg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mirame-hg.entitlements"; sourceTree = "<group>"; };
+		1C59BB602D63AB9600F1FA36 /* MirameHGPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MirameHGPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6343562D416057003FF791 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		1C6758122D545B210086A7D1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiramePreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,10 +146,380 @@
 		1C9A1ECC2399ABD9003C01C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1C9A1ECE2399ABD9003C01C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CCE1BF82D4BF70800171062 /* mirame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mirame.entitlements; sourceTree = "<group>"; };
+		1CD6406C2D63AF0A00ACBA0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CD6406D2D63AF0A00ACBA0A /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-dev.plist"; sourceTree = "<group>"; };
+		1CD6406E2D63AF0A00ACBA0A /* Info-hg.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-hg.plist"; sourceTree = "<group>"; };
 		1CE2028621F63DDE00DD67AA /* mirame-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mirame-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1C59BB6E2D63AB9600F1FA36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1C59BB5F2D63AB9600F1FA36 /* MirameHGPreview */;
+		};
+		1C59BCD82D63AC6D00F1FA36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AirDropOnlyActivityItemSource.swift,
+				AlertConfig.swift,
+				AppDelegate.swift,
+				AsyncCachedImage.swift,
+				DataBase.swift,
+				Enums/AllPhotosFilterType.swift,
+				Enums/AllPhotosSortType.swift,
+				Enums/AllPhotosViewLayoutType.swift,
+				Enums/AllPhotosViewType.swift,
+				Enums/Constants.swift,
+				Enums/KeysProtocolError.swift,
+				Extensions.swift,
+				FileParser.swift,
+				FileWriter.swift,
+				ImportExport.swift,
+				KeychainKeys.swift,
+				Model/PersonalKey.swift,
+				Model/Photo.swift,
+				NewShareFileObj.swift,
+				PhotoEncryption.swift,
+				Resources/Assets.xcassets,
+				Resources/LaunchScreen_v2.storyboard,
+				Resources/Sounds/beep_2.m4a,
+				Resources/Sounds/beep.mp3,
+				Resources/Sounds/shutter.mp3,
+				Resources/test_data/001.jpg,
+				Resources/test_data/002.jpg,
+				Resources/test_data/003.jpg,
+				Resources/test_data/004.jpg,
+				Resources/test_data/005.jpg,
+				Resources/test_data/006.jpg,
+				Resources/test_data/007.jpg,
+				Resources/test_data/008.jpg,
+				Resources/test_data/009.jpg,
+				Resources/test_data/010.jpg,
+				Resources/test_data/011.jpg,
+				Resources/test_data/012.jpg,
+				Resources/test_data/013.jpg,
+				Resources/test_data/014.jpg,
+				Resources/test_data/015.jpg,
+				Resources/test_data/016.jpg,
+				Resources/test_data/017.jpg,
+				Resources/test_data/018.jpg,
+				Resources/test_data/019.jpg,
+				Resources/test_data/020.jpg,
+				Resources/test_data/021.jpg,
+				Resources/test_data/022.jpg,
+				Resources/test_data/023.jpg,
+				Resources/test_data/024.jpg,
+				Resources/test_data/025.jpg,
+				Resources/test_data/026.jpg,
+				Resources/test_data/027.jpg,
+				Resources/test_data/028.jpg,
+				Resources/test_data/029.jpg,
+				Resources/test_data/030.jpg,
+				Resources/test_data/031.jpg,
+				Resources/test_data/032.jpg,
+				Resources/test_data/033.jpg,
+				Resources/test_data/034.jpg,
+				Resources/test_data/035.jpg,
+				Resources/test_data/036.jpg,
+				Resources/test_data/037.jpg,
+				Resources/test_data/038.jpg,
+				Resources/test_data/039.jpg,
+				Resources/test_data/040.jpg,
+				Resources/test_data/041.jpg,
+				Resources/test_data/042.jpg,
+				Resources/test_data/043.jpg,
+				Resources/test_data/044.jpg,
+				Resources/test_data/045.jpg,
+				Resources/test_data/046.jpg,
+				Resources/test_data/047.jpg,
+				Resources/test_data/048.jpg,
+				Resources/test_data/049.jpg,
+				Resources/test_data/050.jpg,
+				Resources/test_data/051.jpg,
+				Resources/test_data/052.jpg,
+				Resources/test_data/053.jpg,
+				Resources/test_data/054.jpg,
+				Resources/test_data/055.jpg,
+				Resources/test_data/056.jpg,
+				Resources/test_data/057.jpg,
+				Resources/test_data/058.jpg,
+				Resources/test_data/059.jpg,
+				Resources/test_data/060.jpg,
+				Resources/test_data/061.jpg,
+				Resources/test_data/062.jpg,
+				Resources/test_data/063.jpg,
+				Resources/test_data/064.jpg,
+				Resources/test_data/065.jpg,
+				Resources/test_data/066.jpg,
+				Resources/test_data/067.jpg,
+				Resources/test_data/068.jpg,
+				Resources/test_data/069.jpg,
+				Resources/test_data/070.jpg,
+				Resources/test_data/071.jpg,
+				Resources/test_data/072.jpg,
+				Resources/test_data/073.jpg,
+				Resources/test_data/074.jpg,
+				Resources/test_data/075.jpg,
+				Resources/test_data/076.jpg,
+				Resources/test_data/077.jpg,
+				Resources/test_data/078.jpg,
+				Resources/test_data/079.jpg,
+				Resources/test_data/080.jpg,
+				Resources/test_data/081.jpg,
+				Resources/test_data/082.jpg,
+				Resources/test_data/083.jpg,
+				Resources/test_data/084.jpg,
+				Resources/test_data/085.jpg,
+				Resources/test_data/086.jpg,
+				Resources/test_data/087.jpg,
+				Resources/test_data/088.jpg,
+				Resources/test_data/089.jpg,
+				Resources/test_data/090.jpg,
+				Resources/test_data/091.jpg,
+				Resources/test_data/092.jpg,
+				Resources/test_data/093.jpg,
+				Resources/test_data/094.jpg,
+				Resources/test_data/095.jpg,
+				Resources/test_data/096.jpg,
+				Resources/test_data/097.jpg,
+				Resources/test_data/098.jpg,
+				Resources/test_data/099.jpg,
+				Resources/test_data/100.jpg,
+				Resources/test_data/101.jpg,
+				Resources/test_data/102.jpg,
+				Resources/test_data/103.jpg,
+				Resources/test_data/104.jpg,
+				Resources/test_data/105.jpg,
+				Resources/test_data/106.jpg,
+				Resources/test_data/107.jpg,
+				Resources/test_data/108.jpg,
+				Resources/test_data/109.jpg,
+				Resources/test_data/110.jpg,
+				Resources/test_data/111.jpg,
+				Resources/test_data/112.jpg,
+				Resources/test_data/113.jpg,
+				Resources/test_data/114.jpg,
+				Resources/test_data/115.jpg,
+				Resources/test_data/116.jpg,
+				Resources/test_data/117.jpg,
+				Resources/test_data/118.jpg,
+				Resources/test_data/119.jpg,
+				Resources/test_data/120.jpg,
+				Resources/test_data/121.jpg,
+				Resources/test_data/122.jpg,
+				Resources/test_data/123.jpg,
+				Resources/test_data/124.jpg,
+				Resources/test_data/125.jpg,
+				Resources/test_data/126.jpg,
+				Resources/test_data/127.jpg,
+				Resources/test_data/128.jpg,
+				Resources/test_data/129.jpg,
+				Resources/test_data/130.jpg,
+				Resources/test_data/131.jpg,
+				Resources/test_data/132.jpg,
+				Resources/test_data/133.jpg,
+				Resources/test_data/134.jpg,
+				Resources/test_data/135.jpg,
+				Resources/test_data/136.jpg,
+				Resources/test_data/137.jpg,
+				Resources/test_data/138.jpg,
+				Resources/test_data/139.jpg,
+				Resources/test_data/140.jpg,
+				Resources/test_data/141.jpg,
+				Resources/test_data/142.jpg,
+				Resources/test_data/143.jpg,
+				Resources/test_data/144.jpg,
+				Resources/test_data/145.jpg,
+				Resources/test_data/146.jpg,
+				Resources/test_data/147.jpg,
+				Resources/test_data/148.jpg,
+				Resources/test_data/149.jpg,
+				Resources/test_data/150.jpg,
+				Resources/test_data/151.jpg,
+				Resources/test_data/152.jpg,
+				Resources/test_data/153.jpg,
+				Resources/test_data/154.jpg,
+				Resources/test_data/155.jpg,
+				Resources/test_data/156.jpg,
+				Resources/test_data/157.jpg,
+				Resources/test_data/158.jpg,
+				Resources/test_data/159.jpg,
+				Resources/test_data/160.jpg,
+				Resources/test_data/161.jpg,
+				Resources/test_data/162.jpg,
+				Resources/test_data/163.jpg,
+				Resources/test_data/164.jpg,
+				Resources/test_data/165.jpg,
+				Resources/test_data/166.jpg,
+				Resources/test_data/167.jpg,
+				Resources/test_data/168.jpg,
+				Resources/test_data/169.jpg,
+				Resources/test_data/170.jpg,
+				Resources/test_data/171.jpg,
+				Resources/test_data/172.jpg,
+				Resources/test_data/173.jpg,
+				Resources/test_data/174.jpg,
+				Resources/test_data/175.jpg,
+				Resources/test_data/176.jpg,
+				Resources/test_data/177.jpg,
+				Resources/test_data/178.jpg,
+				Resources/test_data/179.jpg,
+				Resources/test_data/180.jpg,
+				Resources/test_data/181.jpg,
+				Resources/test_data/182.jpg,
+				Resources/test_data/183.jpg,
+				Resources/test_data/184.jpg,
+				Resources/test_data/185.jpg,
+				Resources/test_data/186.jpg,
+				Resources/test_data/187.jpg,
+				Resources/test_data/188.jpg,
+				Resources/test_data/189.jpg,
+				Resources/test_data/190.jpg,
+				Resources/test_data/191.jpg,
+				Resources/test_data/192.jpg,
+				Resources/test_data/193.jpg,
+				Resources/test_data/194.jpg,
+				Resources/test_data/195.jpg,
+				Resources/test_data/196.jpg,
+				Resources/test_data/197.jpg,
+				Resources/test_data/198.jpg,
+				Resources/test_data/199.jpg,
+				Resources/test_data/200.jpg,
+				Resources/test_data/201.jpg,
+				Resources/test_data/202.jpg,
+				Resources/test_data/203.jpg,
+				Resources/test_data/204.jpg,
+				Resources/test_data/205.jpg,
+				Resources/test_data/206.jpg,
+				Resources/test_data/207.jpg,
+				Resources/test_data/208.jpg,
+				Resources/test_data/209.jpg,
+				Resources/test_data/210.jpg,
+				Resources/test_data/211.jpg,
+				Resources/test_data/212.jpg,
+				Resources/test_data/213.jpg,
+				Resources/test_data/214.jpg,
+				Resources/test_data/215.jpg,
+				Resources/test_data/216.jpg,
+				Resources/test_data/217.jpg,
+				Resources/test_data/218.jpg,
+				Resources/test_data/219.jpg,
+				Resources/test_data/220.jpg,
+				Resources/test_data/221.jpg,
+				Resources/test_data/222.jpg,
+				Resources/test_data/223.jpg,
+				Resources/test_data/224.jpg,
+				Resources/test_data/225.jpg,
+				Resources/test_data/226.jpg,
+				Resources/test_data/227.jpg,
+				Resources/test_data/228.jpg,
+				Resources/test_data/229.jpg,
+				Resources/test_data/230.jpg,
+				Resources/test_data/231.jpg,
+				Resources/test_data/232.jpg,
+				Resources/test_data/233.jpg,
+				Resources/test_data/234.jpg,
+				Resources/test_data/235.jpg,
+				Resources/test_data/236.jpg,
+				Resources/test_data/237.jpg,
+				Resources/test_data/238.jpg,
+				Resources/test_data/239.jpg,
+				Resources/test_data/240.jpg,
+				Resources/test_data/241.jpg,
+				Resources/test_data/242.jpg,
+				Resources/test_data/243.jpg,
+				Resources/test_data/244.jpg,
+				Resources/test_data/245.jpg,
+				Resources/test_data/246.jpg,
+				Resources/test_data/247.jpg,
+				Resources/test_data/248.jpg,
+				Resources/test_data/249.jpg,
+				Resources/test_data/250.jpg,
+				Resources/test_data/251.jpg,
+				Resources/test_data/252.jpg,
+				Resources/test_data/253.jpg,
+				Resources/test_data/254.jpg,
+				Resources/test_data/255.jpg,
+				Resources/test_data/256.jpg,
+				Resources/test_data/257.jpg,
+				Resources/test_data/258.jpg,
+				Resources/test_data/259.jpg,
+				Resources/test_data/260.jpg,
+				Resources/test_data/261.jpg,
+				Resources/test_data/262.jpg,
+				Resources/test_data/263.jpg,
+				Resources/test_data/264.jpg,
+				Resources/test_data/265.jpg,
+				Resources/test_data/266.jpg,
+				Resources/test_data/267.jpg,
+				Resources/test_data/268.jpg,
+				Resources/test_data/269.jpg,
+				Resources/test_data/270.jpg,
+				Resources/test_data/271.jpg,
+				Resources/test_data/272.jpg,
+				Resources/test_data/273.jpg,
+				Resources/test_data/274.jpg,
+				Resources/test_data/275.jpg,
+				Resources/test_data/276.jpg,
+				Resources/test_data/277.jpg,
+				Resources/test_data/278.jpg,
+				Resources/test_data/279.jpg,
+				Resources/test_data/280.jpg,
+				Resources/test_data/281.jpg,
+				Resources/test_data/282.jpg,
+				Resources/test_data/283.jpg,
+				Resources/test_data/284.jpg,
+				Resources/test_data/285.jpg,
+				Resources/test_data/286.jpg,
+				Resources/test_data/287.jpg,
+				Resources/test_data/288.jpg,
+				Resources/test_data/289.jpg,
+				Resources/test_data/290.jpg,
+				Resources/test_data/291.jpg,
+				Resources/test_data/292.jpg,
+				Resources/test_data/293.jpg,
+				Resources/test_data/294.jpg,
+				Resources/test_data/295.jpg,
+				Resources/test_data/296.jpg,
+				Resources/test_data/297.jpg,
+				Resources/test_data/298.jpg,
+				Resources/test_data/299.jpg,
+				Resources/test_data/300.jpg,
+				Resources/testDownloadFile.json,
+				SaveDeleteContent.swift,
+				"Sneaky-iosApp.swift",
+				Subscriptions.swift,
+				TestDataCreator.swift,
+				Views/AllKeysView.swift,
+				Views/AllPhotosView.swift,
+				Views/BioAuthView.swift,
+				Views/DownloadView.swift,
+				Views/NewPhotoView.swift,
+				Views/PhotoToShow.swift,
+				Views/PicOptionsView.swift,
+				Views/SettingsView.swift,
+				Views/SubscriptionView.swift,
+				Views/Subviews/AllPhotosCompactList.swift,
+				Views/Subviews/AllPhotosEmptyView.swift,
+				Views/Subviews/AllPhotosFooterView.swift,
+				Views/Subviews/AllPhotosHeaderView.swift,
+				Views/Subviews/AllPhotosPreviewList.swift,
+				Views/Subviews/PhotoDetailView.swift,
+				Views/Subviews/PhotoDetailViewPreview.swift,
+				Views/Subviews/QRCodeView.swift,
+				Views/Subviews/SneakyCamViewControllerView.swift,
+				Views/Subviews/UIActivityViewControllerView.swift,
+				Views/Subviews/ZLImageEditorViewController.swift,
+				Views/Toggles.swift,
+				Views/UIViewLifeCycleHandler.swift,
+				Views/ViewPhotoView.swift,
+				ZoomableScrollView.swift,
+			);
+			target = 1C59B7042D63AA3900F1FA36 /* mirame-hg */;
+		};
 		1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -463,6 +875,7 @@
 				Views/Subviews/SneakyCamViewControllerView.swift,
 				Views/Subviews/UIActivityViewControllerView.swift,
 				Views/Subviews/ZLImageEditorViewController.swift,
+				Views/Toggles.swift,
 				Views/UIViewLifeCycleHandler.swift,
 				Views/ViewPhotoView.swift,
 				ZoomableScrollView.swift,
@@ -824,6 +1237,7 @@
 				Views/Subviews/SneakyCamViewControllerView.swift,
 				Views/Subviews/UIActivityViewControllerView.swift,
 				Views/Subviews/ZLImageEditorViewController.swift,
+				Views/Toggles.swift,
 				Views/UIViewLifeCycleHandler.swift,
 				Views/ViewPhotoView.swift,
 				ZoomableScrollView.swift,
@@ -833,7 +1247,8 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1CCA10D02D205C3000A50203 /* mirame */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1CCA115B2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = mirame; sourceTree = "<group>"; };
+		1C59BB622D63AB9600F1FA36 /* MirameHGPreview */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1C59BB6E2D63AB9600F1FA36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MirameHGPreview; sourceTree = "<group>"; };
+		1CCA10D02D205C3000A50203 /* mirame */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1CCA115A2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1CCA115B2D205C3000A50203 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1C59BCD82D63AC6D00F1FA36 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = mirame; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -848,6 +1263,28 @@
 				1C8E01F82D3DF52A00759565 /* SneakySync in Frameworks */,
 				1CB6BEA2274ADE7D002C0F3C /* SneakyCamPackage in Frameworks */,
 				1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59B7142D63AA3900F1FA36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C59B7152D63AA3900F1FA36 /* SwiftyCam in Frameworks */,
+				1C59B7162D63AA3900F1FA36 /* StoreKit.framework in Frameworks */,
+				1C59B7172D63AA3900F1FA36 /* KeychainSwift in Frameworks */,
+				1C59B7182D63AA3900F1FA36 /* ScreenShield in Frameworks */,
+				1C59B7192D63AA3900F1FA36 /* SneakySync in Frameworks */,
+				1C59B71A2D63AA3900F1FA36 /* SneakyCamPackage in Frameworks */,
+				1C59B71B2D63AA3900F1FA36 /* ZLImageEditor in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59BB5D2D63AB9600F1FA36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C59BB612D63AB9600F1FA36 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,11 +1318,17 @@
 			children = (
 				1C6343562D416057003FF791 /* Localizable.xcstrings */,
 				1CCE1BF82D4BF70800171062 /* mirame.entitlements */,
+				1C59BB5B2D63AAAA00F1FA36 /* mirame-hg.entitlements */,
 				1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */,
+				1CD6406C2D63AF0A00ACBA0A /* Info.plist */,
+				1CD6406D2D63AF0A00ACBA0A /* Info-dev.plist */,
+				1CD6406E2D63AF0A00ACBA0A /* Info-hg.plist */,
 				1CCA10D02D205C3000A50203 /* mirame */,
 				1C9A1EC82399ABD9003C01C5 /* MiramePreview */,
+				1C59BB622D63AB9600F1FA36 /* MirameHGPreview */,
 				1C0F849621DBFCB500B1B9F9 /* Products */,
 				2EBB44918E9C065CAF15BEF6 /* Frameworks */,
+				1C59B7252D63AA3900F1FA36 /* mirame copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -895,6 +1338,8 @@
 				1C0F849521DBFCB500B1B9F9 /* mirame.app */,
 				1CE2028621F63DDE00DD67AA /* mirame-dev.app */,
 				1C9A1EC52399ABD8003C01C5 /* MiramePreview.appex */,
+				1C59B7242D63AA3900F1FA36 /* mirame-hg.app */,
+				1C59BB602D63AB9600F1FA36 /* MirameHGPreview.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -949,6 +1394,56 @@
 			productReference = 1C0F849521DBFCB500B1B9F9 /* mirame.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1C59B7042D63AA3900F1FA36 /* mirame-hg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C59B7212D63AA3900F1FA36 /* Build configuration list for PBXNativeTarget "mirame-hg" */;
+			buildPhases = (
+				1C59B7132D63AA3900F1FA36 /* Sources */,
+				1C59B7142D63AA3900F1FA36 /* Frameworks */,
+				1C59B71C2D63AA3900F1FA36 /* Resources */,
+				1C59B71E2D63AA3900F1FA36 /* Embed Foundation Extensions */,
+				1C59B7202D63AA3900F1FA36 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C59BB6C2D63AB9600F1FA36 /* PBXTargetDependency */,
+			);
+			name = "mirame-hg";
+			packageProductDependencies = (
+				1C59B7072D63AA3900F1FA36 /* SneakyCamPackage */,
+				1C59B7092D63AA3900F1FA36 /* KeychainSwift */,
+				1C59B70B2D63AA3900F1FA36 /* SwiftyCam */,
+				1C59B70D2D63AA3900F1FA36 /* ZLImageEditor */,
+				1C59B70F2D63AA3900F1FA36 /* ScreenShield */,
+				1C59B7112D63AA3900F1FA36 /* SneakySync */,
+			);
+			productName = "sneaky-ios";
+			productReference = 1C59B7242D63AA3900F1FA36 /* mirame-hg.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1C59BB5F2D63AB9600F1FA36 /* MirameHGPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C59BB6F2D63AB9600F1FA36 /* Build configuration list for PBXNativeTarget "MirameHGPreview" */;
+			buildPhases = (
+				1C59BB5C2D63AB9600F1FA36 /* Sources */,
+				1C59BB5D2D63AB9600F1FA36 /* Frameworks */,
+				1C59BB5E2D63AB9600F1FA36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1C59BB622D63AB9600F1FA36 /* MirameHGPreview */,
+			);
+			name = MirameHGPreview;
+			packageProductDependencies = (
+			);
+			productName = MirameHGPreview;
+			productReference = 1C59BB602D63AB9600F1FA36 /* MirameHGPreview.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		1C9A1EC42399ABD8003C01C5 /* MiramePreview */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1C9A1ED52399ABD9003C01C5 /* Build configuration list for PBXNativeTarget "MiramePreview" */;
@@ -1000,12 +1495,15 @@
 		1C0F848D21DBFCB500B1B9F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Trey Tartt";
 				TargetAttributes = {
 					1C0F849421DBFCB500B1B9F9 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					1C59BB5F2D63AB9600F1FA36 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 					1C9A1EC42399ABD8003C01C5 = {
 						CreatedOnToolsVersion = 11.2.1;
@@ -1038,7 +1536,9 @@
 			targets = (
 				1C0F849421DBFCB500B1B9F9 /* mirame */,
 				1CE2025921F63DDE00DD67AA /* mirame-dev */,
+				1C59B7042D63AA3900F1FA36 /* mirame-hg */,
 				1C9A1EC42399ABD8003C01C5 /* MiramePreview */,
+				1C59BB5F2D63AB9600F1FA36 /* MirameHGPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -1049,6 +1549,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C6343572D41605E003FF791 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59B71C2D63AA3900F1FA36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C59B71D2D63AA3900F1FA36 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59BB5E2D63AB9600F1FA36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1594,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1C59B7132D63AA3900F1FA36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C59BB5C2D63AB9600F1FA36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1C9A1EC12399ABD8003C01C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1097,6 +1626,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1C59BB6C2D63AB9600F1FA36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C59BB5F2D63AB9600F1FA36 /* MirameHGPreview */;
+			targetProxy = 1C59BB6B2D63AB9600F1FA36 /* PBXContainerItemProxy */;
+		};
 		1C9A1ED02399ABD9003C01C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1C9A1EC42399ABD8003C01C5 /* MiramePreview */;
@@ -1247,11 +1781,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = mirame/mirame.entitlements;
+				CODE_SIGN_ENTITLEMENTS = mirame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = V3PF3M6B6U;
-				INFOPLIST_FILE = mirame/Resources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1270,11 +1804,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = mirame/mirame.entitlements;
+				CODE_SIGN_ENTITLEMENTS = mirame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = V3PF3M6B6U;
-				INFOPLIST_FILE = mirame/Resources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1283,6 +1817,118 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1C59B7222D63AA3900F1FA36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "mirame-hg.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = "Info-hg.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "mírame";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-hg";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C59B7232D63AA3900F1FA36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "mirame-hg.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				INFOPLIST_FILE = "Info-hg.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "mírame";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-hg";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1C59BB702D63AB9600F1FA36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MirameHGPreview/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MirameHGPreview;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Trey Tartt. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-hg.MirameHGPreview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1C59BB712D63AB9600F1FA36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3PF3M6B6U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MirameHGPreview/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MirameHGPreview;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Trey Tartt. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tt.mirame-ios-hg.MirameHGPreview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1332,14 +1978,13 @@
 		1CE2028421F63DDE00DD67AA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "mirame-dev.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V3PF3M6B6U;
-				INFOPLIST_FILE = "mirame/Resources/Info-dev.plist";
+				INFOPLIST_FILE = "Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1355,14 +2000,13 @@
 		1CE2028521F63DDE00DD67AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = DevIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "mirame-dev.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V3PF3M6B6U;
-				INFOPLIST_FILE = "mirame/Resources/Info-dev.plist";
+				INFOPLIST_FILE = "Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1396,6 +2040,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		1C59B7212D63AA3900F1FA36 /* Build configuration list for PBXNativeTarget "mirame-hg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C59B7222D63AA3900F1FA36 /* Debug */,
+				1C59B7232D63AA3900F1FA36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C59BB6F2D63AB9600F1FA36 /* Build configuration list for PBXNativeTarget "MirameHGPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C59BB702D63AB9600F1FA36 /* Debug */,
+				1C59BB712D63AB9600F1FA36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1C9A1ED52399ABD9003C01C5 /* Build configuration list for PBXNativeTarget "MiramePreview" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1423,6 +2085,54 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.3;
+			};
+		};
+		1C59B7082D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "SneakyCamPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/SneakyCamPackage";
+			requirement = {
+				branch = feature/loadFromDocs;
+				kind = branch;
+			};
+		};
+		1C59B70A2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		1C59B70C2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/SwiftyCamPackage";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1C59B70E2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "ZLImageEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/longitachi/ZLImageEditor";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+		1C59B7102D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "ScreenShield" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JayantBadlani/ScreenShield";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
+		1C59B7122D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "sneakysync" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/akatreyt/sneakysync";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		1C7E940A274ADCE100624A89 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */ = {
@@ -1477,6 +2187,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
 			productName = ZLImageEditor;
+		};
+		1C59B7072D63AA3900F1FA36 /* SneakyCamPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B7082D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "SneakyCamPackage" */;
+			productName = SneakyCamPackage;
+		};
+		1C59B7092D63AA3900F1FA36 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B70A2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		1C59B70B2D63AA3900F1FA36 /* SwiftyCam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B70C2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "SwiftyCamPackage" */;
+			productName = SwiftyCam;
+		};
+		1C59B70D2D63AA3900F1FA36 /* ZLImageEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B70E2D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
+			productName = ZLImageEditor;
+		};
+		1C59B70F2D63AA3900F1FA36 /* ScreenShield */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B7102D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "ScreenShield" */;
+			productName = ScreenShield;
+		};
+		1C59B7112D63AA3900F1FA36 /* SneakySync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C59B7122D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "sneakysync" */;
+			productName = SneakySync;
 		};
 		1C8E01F72D3DF52A00759565 /* SneakySync */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -17,9 +17,7 @@ struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query private var photos: [Photo]
-    
-    private var isIAPEnabled = false
-    
+        
     @State var showKeys: Bool = false
     @State var showStoreView: Bool = false
     @State var photoToShow: PhotoToShow?
@@ -236,7 +234,7 @@ struct AllPhotosView: View {
                     buttons: [])
             }
             
-            if !isIAPEnabled {
+            if !Toggles.isIapEnabled {
                 isUnlocked = true
             }
         }
@@ -250,7 +248,7 @@ struct AllPhotosView: View {
             parseSelectdImages()
         }
         .subscriptionStatusTask(for: subscriptionGroupID) { taskState in
-            if !isIAPEnabled { return }
+            if !Toggles.isIapEnabled { return }
             
             if case .loading = taskState { return }
             

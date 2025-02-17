@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var deleteEverything = false
     @State private var isPresentedManageSubscription = false
     @AppStorage("isUnlocked") private var isUnlocked = false
+    
     @State private var downloadMore = false
     
     let icons = ["AltIcon1", "AltIcon2", "AltIcon8", "AltIcon10", "AltIcon11", "AltIcon9", "AltIcon3", "AltIcon4", "AltIcon5", "AltIcon6", "AltIcon7"]
@@ -28,7 +29,7 @@ struct SettingsView: View {
             }
             
             if let bundleID = Bundle.main.bundleIdentifier,
-               bundleID.contains("ios-dev") {
+               bundleID.contains("ios-dev") || bundleID.contains("hg"){
                 Section {
                     Button("Format to test db", action: {
                         Task {
@@ -107,8 +108,10 @@ struct SettingsView: View {
                 }
             })
             
-            Button("Download more stuff") {
-                downloadMore = true
+            if Toggles.isDownloadMoreEnabled {
+                Button("Download more stuff") {
+                    downloadMore = true
+                }
             }
         }
         .manageSubscriptionsSheet(isPresented: $isPresentedManageSubscription)

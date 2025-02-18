@@ -70,7 +70,7 @@ class TestDataCreator {
                                                            image: image,
                                                            keyDataSet: fakeImportKeyDataSet,
                                                            isLocal: false,
-                                                           allowedNumOfViews: Int.random(in: 0..<4),
+                                                           allowedNumOfViews: Int.random(in: 1..<4),
                                                            allowScreenShots: false,
                                                            takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
                                                            disableFeedPreview: Bool.random())

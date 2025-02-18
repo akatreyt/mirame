@@ -1318,8 +1318,8 @@
 			children = (
 				1C6343562D416057003FF791 /* Localizable.xcstrings */,
 				1CCE1BF82D4BF70800171062 /* mirame.entitlements */,
-				1C59BB5B2D63AAAA00F1FA36 /* mirame-hg.entitlements */,
 				1C4F303D2759365C000F3D74 /* mirame-dev.entitlements */,
+				1C59BB5B2D63AAAA00F1FA36 /* mirame-hg.entitlements */,
 				1CD6406C2D63AF0A00ACBA0A /* Info.plist */,
 				1CD6406D2D63AF0A00ACBA0A /* Info-dev.plist */,
 				1CD6406E2D63AF0A00ACBA0A /* Info-hg.plist */,

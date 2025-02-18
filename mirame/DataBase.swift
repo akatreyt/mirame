@@ -40,6 +40,11 @@ class DataBase {
     @discardableResult
     func savePhotoToDB(photo: Photo) -> String? {
         sharedModelContainer.mainContext.insert(photo)
+        do {
+            try sharedModelContainer.mainContext.save()
+        } catch {
+            print(error)
+        }
         return photo.id?.uuidString
     }
     
@@ -118,7 +123,8 @@ class DataBase {
                !isLocal,
                let maxNumberOfViews = photo.allowedNumberOfViews,
                maxNumberOfViews != -1,
-               photo.numberOfViews ?? .min >= maxNumberOfViews {
+               let numberOfViews = photo.numberOfViews,
+                numberOfViews >= maxNumberOfViews {
                 DataBase.shared.deleteLocally(photo: photo)
                 deletedOne = true
             }

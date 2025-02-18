@@ -19,7 +19,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.88oak.mirame.mirame</string>
+				<string>com.tt.mirame-ios-hg</string>
 			</array>
 		</dict>
 	</array>
@@ -93,7 +93,7 @@
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
-				<string>mirame</string>
+				<string>mirame-hg</string>
 			</dict>
 		</dict>
 	</array>
@@ -109,7 +109,7 @@
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
-				<string>mirame</string>
+				<string>mirame-hg</string>
 			</dict>
 		</dict>
 	</array>

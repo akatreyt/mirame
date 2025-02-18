@@ -9,7 +9,13 @@
 import Foundation
 
 struct Constants {
-    static let mirameExtension = "mirame"
+    static var mirameExtension: String {
+        if let bundleID = Bundle.main.bundleIdentifier,
+           bundleID.contains("hg") {
+            return "mirame-hg"
+        }
+        return "mirame"
+    }
     
     static var randomPhotoName : String{
         get{

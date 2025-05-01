@@ -16,9 +16,9 @@ import SneakySync
 struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var sortOrder = SortDescriptor(\Photo.numberOfViews, order: .reverse)
+    @State private var sortOrder = SortDescriptor<Photo> (\Photo.numberOfViews, order: .reverse)
     @State private var predicate = #Predicate<Photo> { $0.videoFileName != nil || $0.imageData != nil }
-
+    
     @State var showKeys: Bool = false
     @State var showStoreView: Bool = false
     @State var photoToShow: PhotoToShow?
@@ -123,7 +123,7 @@ struct AllPhotosView: View {
             wantsImported = true
             wantsLocal = true
         }
-
+        
         predicate = #Predicate<Photo> {
             ($0.videoFileName != nil || $0.imageData != nil) &&
             ((wantsPhotos != wantsVideos) ? ($0.isVideo ?? false) == wantsVideos : true) &&
@@ -149,46 +149,36 @@ struct AllPhotosView: View {
             viewPhotosTypePicker()
                 .padding(.horizontal)
             
-//                AllPhotosEmptyView(viewType: $viewType)
-                switch layoutType {
-                case .list:
-                    AllPhotosCompactList(
-                        selectMultiple: $selectMultiple,
-                        selectedPhotosToShare: $selectedPhotosToShare,
-                        viewType: $viewType,
-                        photoToShow: $photoToShow,
-                        showStoreView: $showStoreView,
-                        sortOrder: sortOrder,
-                        predicate: predicate)
-                case .preview:
-                    AllPhotosPreviewList(
-                        viewType: $viewType,
-                        selectMultiple: $selectMultiple,
-                        selectedPhotosToShare: $selectedPhotosToShare,
-                        showStoreView: $showStoreView,
-                        photoToShow: $photoToShow,
-                        sortOrder: sortOrder,
-                        predicate: predicate)
-                    .id(currentFilterID)
-                    .protectScreenshot()
+            //                AllPhotosEmptyView(viewType: $viewType)
+            AllPhotosPreviewList(
+                viewType: $viewType,
+                selectMultiple: $selectMultiple,
+                selectedPhotosToShare: $selectedPhotosToShare,
+                showStoreView: $showStoreView,
+                photoToShow: $photoToShow,
+                sortOrder: $sortOrder,
+                predicate: $predicate,
+                predicateStringTempUpdateThing: $currentFilterID,
+                layoutType: $layoutType)
+            .protectScreenshot()
+            
+            if viewType == .Taken && selectMultiple {
+                Button(action: {
+                    showSharePhotos.toggle()
+                }, label: {
+                    VStack {
+                        Image(systemName: "shareplay")
+                            .font(.title)
+                        Text("\(selectedPhotosToShare.count) selected")
+                            .font(.caption)
+                    }
+                    .contentShape(Rectangle())
+                })
+                .padding(.top, 5)
                 
-                if viewType == .Taken && selectMultiple {
-                    Button(action: {
-                        showSharePhotos.toggle()
-                    }, label: {
-                        VStack {
-                            Image(systemName: "shareplay")
-                                .font(.title)
-                            Text("\(selectedPhotosToShare.count) selected")
-                                .font(.caption)
-                        }
-                        .contentShape(Rectangle())
-                    })
-                    .padding(.top, 5)
-                    
-                    Divider()
-                }
+                Divider()
             }
+            
             
             Divider()
                 .padding(.top, -8)
@@ -206,6 +196,10 @@ struct AllPhotosView: View {
                     }
                 })
             .padding()
+        }
+        .onAppear {
+            let sorted = sortedPhotos
+            updatePhotos(sortOrder: sorted.0, predicate: sorted.1)
         }
         .sheet(isPresented: $showKeys, content: {
             AllKeysView()
@@ -235,19 +229,19 @@ struct AllPhotosView: View {
         .sheet(isPresented: $showSharePhotos, content: {
             PicOptionsView(photos: selectedPhotosToShare)
         })
-//        .onAppear() {
-//            ScreenShield.shared.protectFromScreenRecording()
-//            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
-//                alertConfig = AlertConfig(
-//                    title: "Max number of views reached",
-//                    message: "Item has been deleted",
-//                    buttons: [])
-//            }
-//            
-//            if !Toggles.isIapEnabled {
-//                isUnlocked = true
-//            }
-//        }
+        //        .onAppear() {
+        //            ScreenShield.shared.protectFromScreenRecording()
+        //            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
+        //                alertConfig = AlertConfig(
+        //                    title: "Max number of views reached",
+        //                    message: "Item has been deleted",
+        //                    buttons: [])
+        //            }
+        //
+        //            if !Toggles.isIapEnabled {
+        //                isUnlocked = true
+        //            }
+        //        }
         .alert(alertConfig?.title ?? "",
                isPresented: $showAlert,
                actions: {
@@ -332,29 +326,29 @@ struct AllPhotosView: View {
     func viewRandom() -> PhotoToShow? {
         return nil
         
-//        var returnPhoto: Photo? = nil
-//        var keyDataSet: KeyDataSet? = nil
-//        
-//        while returnPhoto == nil {
-//            if let photo = photos.randomElement()  {
-//                if let localImage = photo.localImage, localImage {
-//                    keyDataSet = KeychainKeys.shared.personalKey
-//                    returnPhoto = photo
-//                } else {
-//                    if let keyUUID = photo.privateKeyUUID,
-//                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
-//                       let _ = photo.decrypt(withKey: key) {
-//                        keyDataSet = key
-//                        returnPhoto = photo
-//                    }
-//                }
-//            }
-//        }
-//        
-//        return PhotoToShow(
-//            id: UUID(),
-//            photo: returnPhoto!,
-//            keyDataSet: keyDataSet!)
+        //        var returnPhoto: Photo? = nil
+        //        var keyDataSet: KeyDataSet? = nil
+        //
+        //        while returnPhoto == nil {
+        //            if let photo = photos.randomElement()  {
+        //                if let localImage = photo.localImage, localImage {
+        //                    keyDataSet = KeychainKeys.shared.personalKey
+        //                    returnPhoto = photo
+        //                } else {
+        //                    if let keyUUID = photo.privateKeyUUID,
+        //                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
+        //                       let _ = photo.decrypt(withKey: key) {
+        //                        keyDataSet = key
+        //                        returnPhoto = photo
+        //                    }
+        //                }
+        //            }
+        //        }
+        //
+        //        return PhotoToShow(
+        //            id: UUID(),
+        //            photo: returnPhoto!,
+        //            keyDataSet: keyDataSet!)
     }
 }
 //

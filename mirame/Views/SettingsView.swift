@@ -12,7 +12,7 @@ import StoreKit
 struct SettingsView: View {
     @State private var deleteEverything = false
     @State private var isPresentedManageSubscription = false
-    @AppStorage("isUnlocked") private var isUnlocked = false
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     
     @State private var downloadMore = false
     
@@ -94,7 +94,7 @@ struct SettingsView: View {
            
             
             Section(content: {
-                if isUnlocked {
+                if madeUnlockPurchase {
                     Button("Manage Subscription") {
                         isPresentedManageSubscription = true
                     }

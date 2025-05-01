@@ -20,10 +20,11 @@ struct NewIn14App: App {
     }
     @State var hasAlert: Bool = false
     @State var newFileURL: URL?
-    @AppStorage("isUnlocked") private var isUnlocked = false
+    @State private var isUnlocked = false
     @State var codeToRunAfterAuth: (() -> Void)?
     @State private var subscriptions = Subscriptions()
-    
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
+
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -66,8 +67,10 @@ struct NewIn14App: App {
                         }
                 }
             }
-            .onAppear{
-                isUnlocked = true
+            .onAppear {
+                if !Toggles.isIapEnabled {
+                    madeUnlockPurchase = true
+                }
             }
             .onOpenURL { url in
                 codeToRunAfterAuth = {

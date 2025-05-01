@@ -40,7 +40,7 @@ struct AllPhotosView: View {
     
     @MainActor
     @State var scaledImages = [String : Image]()
-    @AppStorage("isUnlocked") private var isUnlocked = false
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
     @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
@@ -199,7 +199,7 @@ struct AllPhotosView: View {
                 sortBy: $sortBy,
                 layoutType: $layoutType,
                 selectMultiple: $selectMultiple,
-                isUnlocked: $isUnlocked,
+                isUnlocked: $madeUnlockPurchase,
                 viewRandom: {
                     if let photo = viewRandom() {
                         photoToShow = photo
@@ -275,9 +275,9 @@ struct AllPhotosView: View {
             if case .loading = taskState { return }
             
             if let value = taskState.value {
-                isUnlocked = value.map(\.state).contains { [.subscribed, .inBillingRetryPeriod, .inGracePeriod].contains($0) } == true
+                madeUnlockPurchase = value.map(\.state).contains { [.subscribed, .inBillingRetryPeriod, .inGracePeriod].contains($0) } == true
             } else {
-                isUnlocked = false
+                madeUnlockPurchase = false
             }
         }
     }

@@ -17,7 +17,7 @@ struct AllPhotosCompactList: View {
     @PagedQuery() private var photos: [Photo]
     
     @Binding var showStoreView: Bool
-    @AppStorage("isUnlocked") private var isUnlocked = false
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @State private var showUnlockMessage = false
     
     init(selectMultiple: Binding<Bool>, selectedPhotosToShare: Binding<[Photo]>, viewType: Binding<AllPhotosViewType>, photoToShow: Binding<PhotoToShow?>, showStoreView: Binding<Bool>, isUnlocked: Bool = false, showUnlockMessage: Bool = false, sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
@@ -26,7 +26,7 @@ struct AllPhotosCompactList: View {
         self._viewType = viewType
         self._photoToShow = photoToShow
         self._showStoreView = showStoreView
-        self.isUnlocked = isUnlocked
+        self.madeUnlockPurchase = madeUnlockPurchase
         self.showUnlockMessage = showUnlockMessage
         
         _photos = PagedQuery(
@@ -47,7 +47,7 @@ struct AllPhotosCompactList: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    if !isUnlocked && index != 0 {
+                    if !madeUnlockPurchase && index != 0 {
                         showUnlockMessage = true
                     } else {
                         if viewType == .Taken {

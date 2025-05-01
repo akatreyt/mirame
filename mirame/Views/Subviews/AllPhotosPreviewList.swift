@@ -16,7 +16,7 @@ struct AllPhotosPreviewList: View {
     @PagedQuery var photos: [Photo]
     
     @Binding var showStoreView: Bool
-    @AppStorage("isUnlocked") private var isUnlocked = false
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @State private var showUnlockMessage = false
     
     @State private var sortOrder: SortDescriptor<Photo>
@@ -46,13 +46,13 @@ struct AllPhotosPreviewList: View {
         VStack {
             List {
                 ForEach(Array(photos.enumerated()), id: \.element) { index, photo in
-                    PhotoDetailViewPreview(photo: photo, isLocked: !isUnlocked && index != 0)
+                    PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
                         .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
                         .cornerRadius(8)
                         .contentShape(Rectangle())
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            if !isUnlocked && index != 0 {
+                            if !madeUnlockPurchase && index != 0 {
                                 showUnlockMessage = true
                             } else {
                                 if let local = photo.localImage, local {

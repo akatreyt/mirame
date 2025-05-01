@@ -109,6 +109,9 @@
     "Tap photo to edit" : {
 
     },
+    "text" : {
+
+    },
     "This will create a deactivation key, and when the user opens it, all the media for this key will be deleted." : {
 
     },

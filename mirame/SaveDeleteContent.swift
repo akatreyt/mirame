@@ -25,7 +25,7 @@ class SaveDeleteContent {
     required init(){}
     
     @discardableResult
-    static func savePhoto(importedPhotoID: UUID?, image: UIImage, keyDataSet: KeyDataSet, isLocal: Bool, allowedNumOfViews: Int = -1, allowScreenShots : Bool = true, takenDate : Date = Date(), disableFeedPreview : Bool) async throws -> String {
+    static func savePhoto(importedPhotoID: UUID?, image: UIImage, keyDataSet: KeyDataSet, isLocal: Bool, allowedNumOfViews: Int = -1, allowScreenShots : Bool = true, takenDate : Date = Date(), disableFeedPreview : Bool, writeToDB: Bool = true) async throws -> String {
         
         let newImage = image.fixOrientation()
         
@@ -52,8 +52,9 @@ class SaveDeleteContent {
                 disableFeedPreview: disableFeedPreview
             )
             
+            if !writeToDB { return "-1" }
             do{
-                if let id = await DataBase.shared.savePhotoToDB(photo: newPhoto) {
+                if let id = await DataBase.shared.savePhotoToDB(photo: newPhoto, writeToDB: writeToDB) {
                     return id
                 } else {
                     throw UIAlertTypes.errorSaving
@@ -67,13 +68,15 @@ class SaveDeleteContent {
     }
     
     @discardableResult
-    static func saveVideo(importedPhotoID: UUID?, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool) async throws -> Photo {
+    static func saveVideo(importedPhotoID: UUID?, keyDataSet: KeyDataSet, fileURL: URL, isLocal: Bool, disableFeedPreview : Bool, isAddedAsTestVideo : Bool = false, writeToDB: Bool = true) async throws -> Photo {
         do{
             // unencrypted video data
             let data = try Data(contentsOf: fileURL)
             
-            // delete unencrypted video from file system
-            try FileManager.default.removeItem(at: fileURL)
+            if !isAddedAsTestVideo {
+                // delete unencrypted video from file system
+                try FileManager.default.removeItem(at: fileURL)
+            }
             
             let encryptedData = try PrivateKeyStuff.encryptUsing(data: data, keyDataSet: keyDataSet)
             let fileName = try VideoEncryption.saveVideoFileInDocuemnts(data: encryptedData)
@@ -97,7 +100,7 @@ class SaveDeleteContent {
                 disableFeedPreview: disableFeedPreview
             )
             
-            if let _ = await DataBase.shared.savePhotoToDB(photo: newPhoto) {
+            if let _ = await DataBase.shared.savePhotoToDB(photo: newPhoto, writeToDB: writeToDB) {
                 return newPhoto
             } else {
                 throw UIAlertTypes.errorSaving

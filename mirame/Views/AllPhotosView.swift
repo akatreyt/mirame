@@ -16,8 +16,9 @@ import SneakySync
 struct AllPhotosView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Query private var photos: [Photo]
-        
+    @State private var sortOrder = SortDescriptor(\Photo.numberOfViews, order: .reverse)
+    @State private var predicate = #Predicate<Photo> { $0.videoFileName != nil || $0.imageData != nil }
+
     @State var showKeys: Bool = false
     @State var showStoreView: Bool = false
     @State var photoToShow: PhotoToShow?
@@ -42,6 +43,11 @@ struct AllPhotosView: View {
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
     @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
     
+    func updatePhotos(sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
+        self.sortOrder = sortOrder
+        self.predicate = predicate
+    }
+    
     var subscriptionGroupID: String {
 #if targetEnvironment(simulator)
         return "54DA0067"
@@ -50,79 +56,82 @@ struct AllPhotosView: View {
 #endif
     }
     
-    var sortedPhotos: [Photo] {
-        var filteredItems = [Photo]()
+    var sortedPhotos: (SortDescriptor<Photo>, Predicate<Photo>) {
+        var sortOrder = SortDescriptor(\Photo.takenDate, order: .forward)
+        var predicate = #Predicate<Photo> { $0.videoFileName != nil || $0.imageData != nil }
         
-        filteredItems = photos.compactMap({ photo in
-            if photo.videoFileName != nil || photo.imageData != nil {
-                return photo
-            }
-            return nil
-        })
-        
-        switch viewType {
-        case .Taken:
-            filteredItems = filteredItems.compactMap({ photo in
-                if let localImage = photo.localImage,
-                   localImage {
-                    return photo
-                }
-                return nil
-            })
-        case .Saved:
-            filteredItems = filteredItems.compactMap({ photo in
-                if let localImage = photo.localImage,
-                   !localImage {
-                    return photo
-                }
-                return nil
-            })
-        case .favorites:
-            filteredItems = filteredItems.compactMap({ photo in
-                if let isFavorite = photo.isFavorite,
-                   isFavorite {
-                    return photo
-                }
-                return nil
-            })
-        }
-        
-        switch mediaType {
-        case .Photo:
-            filteredItems = filteredItems.compactMap({ photo in
-                if let isVideo = photo.isVideo,
-                   !isVideo {
-                    return photo
-                }
-                return nil
-            })
-        case .Video:
-            filteredItems = filteredItems.compactMap({ photo in
-                if let isVideo = photo.isVideo,
-                   isVideo {
-                    return photo
-                }
-                return nil
-            })
-        case .All:
-            break
-        }
-                
-        switch sortBy {
+        switch self.sortBy {
         case .DateSavedAsc:
-            filteredItems = filteredItems.sorted { $0.savedDate ?? Date() < $1.savedDate ?? Date() }
+            sortOrder = SortDescriptor(\Photo.savedDate, order: .forward)
         case .DateSavedDesc:
-            filteredItems = filteredItems.sorted { $0.savedDate ?? Date() > $1.savedDate ?? Date() }
+            sortOrder = SortDescriptor(\Photo.savedDate, order: .reverse)
         case .DateTakenAsc:
-            filteredItems = filteredItems.sorted { $0.takenDate ?? Date() < $1.takenDate ?? Date() }
+            sortOrder = SortDescriptor(\Photo.takenDate, order: .forward)
         case .DateTakenDesc:
-            filteredItems = filteredItems.sorted { $0.takenDate ?? Date() > $1.takenDate ?? Date() }
+            sortOrder = SortDescriptor(\Photo.takenDate, order: .reverse)
         case .viewCountAsc:
-            filteredItems = filteredItems.sorted { $0.numberOfViews ?? 0 < $1.numberOfViews ?? 0 }
+            sortOrder = SortDescriptor(\Photo.numberOfViews, order: .forward)
         case .viewCountDesc:
-            filteredItems = filteredItems.sorted { $0.numberOfViews ?? 0 > $1.numberOfViews ?? 0 }
+            sortOrder = SortDescriptor(\Photo.numberOfViews, order: .reverse)
         }
-        return filteredItems
+        
+        var wantsVideos = false
+        var wantsPhotos = false
+        var wantsLocal = false
+        var wantsImported = false
+        var wantsFavorites = false
+        
+        switch (self.viewType, self.mediaType) {
+        case (.Saved, .Photo):
+            wantsPhotos = true
+            wantsImported = true
+        case (.Saved, .Video):
+            wantsVideos = true
+            wantsImported = true
+        case (.Saved, .All):
+            wantsVideos = true
+            wantsPhotos = true
+            wantsImported = true
+            
+        case (.Taken, .Photo):
+            wantsPhotos = true
+            wantsLocal = true
+        case (.Taken, .Video):
+            wantsVideos = true
+            wantsLocal = true
+        case (.Taken, .All):
+            wantsVideos = true
+            wantsPhotos = true
+            wantsLocal = true
+            
+        case (.favorites, .Photo):
+            wantsPhotos = true
+            wantsFavorites = true
+            wantsImported = true
+            wantsLocal = true
+        case (.favorites, .Video):
+            wantsVideos = true
+            wantsFavorites = true
+            wantsImported = true
+            wantsLocal = true
+        case (.favorites, .All):
+            wantsVideos = true
+            wantsPhotos = true
+            wantsFavorites = true
+            wantsImported = true
+            wantsLocal = true
+        }
+        
+        predicate = #Predicate<Photo> {
+            ($0.videoFileName != nil || $0.imageData != nil) &&
+            ($0.localImage ?? false) == wantsLocal &&
+            ($0.localImage ?? false) != wantsImported &&
+            ($0.isVideo ?? false) == wantsVideos &&
+            ($0.isVideo ?? false) != wantsPhotos &&
+            ($0.isFavorite ?? false) == wantsFavorites
+        }
+        
+        return (sortOrder, predicate)
     }
     
     var body: some View {
@@ -133,14 +142,12 @@ struct AllPhotosView: View {
                 showKeys: $showKeys,
                 showSettings: $showSettings,
                 showTakeImage: $showTakeImage)
-                .padding([.leading, .trailing])
+            .padding([.leading, .trailing])
             
             viewPhotosTypePicker()
                 .padding(.horizontal)
             
-            if sortedPhotos.isEmpty {
-                AllPhotosEmptyView(viewType: $viewType)
-            } else {
+//                AllPhotosEmptyView(viewType: $viewType)
                 switch layoutType {
                 case .list:
                     AllPhotosCompactList(
@@ -149,17 +156,18 @@ struct AllPhotosView: View {
                         viewType: $viewType,
                         photoToShow: $photoToShow,
                         showStoreView: $showStoreView,
-                        photos: sortedPhotos)
+                        sortOrder: sortOrder,
+                        predicate: predicate)
                 case .preview:
                     AllPhotosPreviewList(
-                        photoToShow: $photoToShow,
                         viewType: $viewType,
                         selectMultiple: $selectMultiple,
                         selectedIDs: $selectedIDs,
                         showStoreView: $showStoreView,
-                        photos: sortedPhotos)
-                        .protectScreenshot()
-                }
+                        photoToShow: $photoToShow,
+                        sortOrder: sortOrder,
+                        predicate: predicate)
+                    .protectScreenshot()
                 
                 if viewType == .Taken && selectMultiple {
                     Button(action: {
@@ -194,7 +202,7 @@ struct AllPhotosView: View {
                         photoToShow = photo
                     }
                 })
-                .padding()
+            .padding()
         }
         .sheet(isPresented: $showKeys, content: {
             AllKeysView()
@@ -221,23 +229,23 @@ struct AllPhotosView: View {
                     }
                 })
         })
-        .sheet(isPresented: $showSharePhotos, content: {
-            let photos = photos.filter( { selectedIDs.contains($0.photoID) })
-            PicOptionsView(photos: Array(photos))
-        })
-        .onAppear() {
-            ScreenShield.shared.protectFromScreenRecording()
-            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
-                alertConfig = AlertConfig(
-                    title: "Max number of views reached",
-                    message: "Item has been deleted",
-                    buttons: [])
-            }
-            
-            if !Toggles.isIapEnabled {
-                isUnlocked = true
-            }
-        }
+//        .sheet(isPresented: $showSharePhotos, content: {
+//            let photos = photos.filter( { selectedIDs.contains($0.photoID) })
+//            PicOptionsView(photos: Array(photos))
+//        })
+//        .onAppear() {
+//            ScreenShield.shared.protectFromScreenRecording()
+//            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
+//                alertConfig = AlertConfig(
+//                    title: "Max number of views reached",
+//                    message: "Item has been deleted",
+//                    buttons: [])
+//            }
+//            
+//            if !Toggles.isIapEnabled {
+//                isUnlocked = true
+//            }
+//        }
         .alert(alertConfig?.title ?? "",
                isPresented: $showAlert,
                actions: {
@@ -246,6 +254,18 @@ struct AllPhotosView: View {
         })
         .onChange(of: importImageItem) {
             parseSelectdImages()
+        }
+        .onChange(of: $sortBy.wrappedValue) {
+            let sorted = sortedPhotos
+            updatePhotos(sortOrder: sorted.0, predicate: sorted.1)
+        }
+        .onChange(of: $viewType.wrappedValue) {
+            let sorted = sortedPhotos
+            updatePhotos(sortOrder: sorted.0, predicate: sorted.1)
+        }
+        .onChange(of: $mediaType.wrappedValue) {
+            let sorted = sortedPhotos
+            updatePhotos(sortOrder: sorted.0, predicate: sorted.1)
         }
         .subscriptionStatusTask(for: subscriptionGroupID) { taskState in
             if !Toggles.isIapEnabled { return }
@@ -269,7 +289,7 @@ struct AllPhotosView: View {
         }
         .pickerStyle(.segmented)
     }
-
+    
     func parseSelectdImages() {
         for item in importImageItem {
             item.loadTransferable(type: Data.self) { result in
@@ -308,31 +328,31 @@ struct AllPhotosView: View {
     }
     
     func viewRandom() -> PhotoToShow? {
-        guard photos.count > 0 else { return nil }
+        return nil
         
-        var returnPhoto: Photo? = nil
-        var keyDataSet: KeyDataSet? = nil
-        
-        while returnPhoto == nil {
-            if let photo = photos.randomElement()  {
-                if let localImage = photo.localImage, localImage {
-                    keyDataSet = KeychainKeys.shared.personalKey
-                    returnPhoto = photo
-                } else {
-                    if let keyUUID = photo.privateKeyUUID,
-                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
-                       let _ = photo.decrypt(withKey: key) {
-                        keyDataSet = key
-                        returnPhoto = photo
-                    }
-                }
-            }
-        }
-        
-        return PhotoToShow(
-            id: UUID(),
-            photo: returnPhoto!,
-            keyDataSet: keyDataSet!)
+//        var returnPhoto: Photo? = nil
+//        var keyDataSet: KeyDataSet? = nil
+//        
+//        while returnPhoto == nil {
+//            if let photo = photos.randomElement()  {
+//                if let localImage = photo.localImage, localImage {
+//                    keyDataSet = KeychainKeys.shared.personalKey
+//                    returnPhoto = photo
+//                } else {
+//                    if let keyUUID = photo.privateKeyUUID,
+//                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
+//                       let _ = photo.decrypt(withKey: key) {
+//                        keyDataSet = key
+//                        returnPhoto = photo
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return PhotoToShow(
+//            id: UUID(),
+//            photo: returnPhoto!,
+//            keyDataSet: keyDataSet!)
     }
 }
 //

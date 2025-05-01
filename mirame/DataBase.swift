@@ -38,8 +38,11 @@ class DataBase {
     }
     
     @discardableResult
-    func savePhotoToDB(photo: Photo) -> String? {
+    func savePhotoToDB(photo: Photo, writeToDB: Bool = true) -> String? {
         sharedModelContainer.mainContext.insert(photo)
+        
+        if !writeToDB { return "-1" }
+        
         do {
             try sharedModelContainer.mainContext.save()
         } catch {

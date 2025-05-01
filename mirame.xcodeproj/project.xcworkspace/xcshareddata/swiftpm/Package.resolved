@@ -1,5 +1,5 @@
 {
-  "originHash" : "4d80ad9247adb74c8cc05161d02de3d6ff043baf6f2dfd03d6251e6fa7493af5",
+  "originHash" : "a56a1e4c10cb64f07ab8a0f97cf21a63cc43e1e5ba69fb97d3ede0d8b867264a",
   "pins" : [
     {
       "identity" : "keychain-swift",
@@ -38,12 +38,21 @@
       }
     },
     {
+      "identity" : "simplelogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/markbattistella/SimpleLogger",
+      "state" : {
+        "revision" : "7450c138c0afffad1f165cb57f6fda377ac04ebe",
+        "version" : "1.2.0"
+      }
+    },
+    {
       "identity" : "sneakycampackage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/akatreyt/SneakyCamPackage",
       "state" : {
         "branch" : "feature/loadFromDocs",
-        "revision" : "f1e25d36d063293755f8463a16cc504daf51e1d3"
+        "revision" : "50b8212c8feb8074a02173acdd6ca02484b44b87"
       }
     },
     {
@@ -53,6 +62,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "48b3da64b600582c42084c54fad11f6b713b0425"
+      }
+    },
+    {
+      "identity" : "swiftdatapager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/markbattistella/SwiftDataPager",
+      "state" : {
+        "revision" : "33007b09fd3c497d6219c8d703280be4e7bc3d99",
+        "version" : "1.0.1"
       }
     },
     {

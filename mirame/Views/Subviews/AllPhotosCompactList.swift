@@ -7,18 +7,35 @@
 //
 
 import SwiftUI
+import SwiftDataPager
 
 struct AllPhotosCompactList: View {
     @Binding var selectMultiple: Bool
     @Binding var selectedIDs: [UUID]
     @Binding var viewType: AllPhotosViewType
     @Binding var photoToShow: PhotoToShow?
+    @PagedQuery() private var photos: [Photo]
     
     @Binding var showStoreView: Bool
     @AppStorage("isUnlocked") private var isUnlocked = false
     @State private var showUnlockMessage = false
     
-    var photos: [Photo]
+    init(selectMultiple: Binding<Bool>, selectedIDs: Binding<[UUID]>, viewType: Binding<AllPhotosViewType>, photoToShow: Binding<PhotoToShow?>, showStoreView: Binding<Bool>, isUnlocked: Bool = false, showUnlockMessage: Bool = false, sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
+        self._selectMultiple = selectMultiple
+        self._selectedIDs = selectedIDs
+        self._viewType = viewType
+        self._photoToShow = photoToShow
+        self._showStoreView = showStoreView
+        self.isUnlocked = isUnlocked
+        self.showUnlockMessage = showUnlockMessage
+        
+        _photos = PagedQuery(
+            fetchLimit: 20,
+            sortDescriptors: [sortOrder],
+            filterPredicate: predicate,
+            logger: .default
+        )
+    }
     
     var body: some View {
         List {

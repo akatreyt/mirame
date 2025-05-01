@@ -32,48 +32,92 @@ class TestDataCreator {
         
         try! KeychainKeys.shared.saveLocally(key: fakeImportKeyDataSet)
         
-        var isLocal = false
         do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: Bundle.main.bundlePath)
-            var i = 0
-            for file in files {
-                if file.hasSuffix("jpg") {
-                    let url = Bundle.main.url(forResource: file, withExtension: "")!
-                    let data = try! Data(contentsOf: url)
-                    let image = UIImage(data: data)!
-                    await saveImage(image, isLocal: isLocal)
-                    isLocal.toggle()
-                    i += 1
-                    print("added \(i)")
-                    if i > 50 {
-                        return
+            let photos = try FileManager.default.contentsOfDirectory(atPath: Bundle.main.bundlePath).filter({ $0.hasSuffix("jpg") })
+            let videos = try FileManager.default.contentsOfDirectory(atPath: Bundle.main.bundlePath).filter({ $0.hasSuffix("mp4") })
+            var newPhotos = [Photo]()
+            
+            Task {
+                await withTaskGroup(of: Void.self) { group in
+                    for i in 0 ..< 400 {
+                        group.addTask {
+                            let photo = photos.randomElement()
+                            let url = Bundle.main.url(forResource: photo, withExtension: "")!
+                            let data = try! Data(contentsOf: url)
+                            let image = UIImage(data: data)!
+                            let newImage = image.fixOrientation()
+                            
+                            if let _data = newImage.pngData() {
+                                let isLocal = Bool.random()
+                                let keySet = isLocal ? KeychainKeys.shared.personalKey : self.fakeImportKeyDataSet
+                                let enctrypedData = try! PrivateKeyStuff.encryptUsing(data: _data, keyDataSet: keySet)
+                                let newPhoto = Photo(
+                                    id: UUID(),
+                                    imageData: enctrypedData,
+                                    savedDate: Date(),
+                                    takenBy: nil,
+                                    takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
+                                    isVideo: false,
+                                    videoFileName: nil,
+                                    localImage: isLocal,
+                                    allowedNumberOfViews: -1,
+                                    screenShotsAllowed: true,
+                                    numberOfViews: 0,
+                                    lastViewDate: nil,
+                                    privateKeyUUID: keySet.id.uuidString,
+                                    keyName: keySet.name,
+                                    isFavorite: false,
+                                    importedID: UUID(),
+                                    disableFeedPreview: Bool.random()
+                                )
+                                newPhotos.append(newPhoto)
+                            }
+                            print(i)
+                        }
+                    }
+                    
+                    for z in 0 ..< 400 {
+                        group.addTask {
+                            let isLocal = Bool.random()
+                            let keySet = isLocal ? KeychainKeys.shared.personalKey : self.fakeImportKeyDataSet
+                            let video = videos.randomElement()
+                            let url = Bundle.main.url(forResource: video, withExtension: "")!
+                            let data = try! Data(contentsOf: url)
+                            let encryptedData = try! PrivateKeyStuff.encryptUsing(data: data, keyDataSet: keySet)
+                            let fileName = try! VideoEncryption.saveVideoFileInDocuemnts(data: encryptedData)
+                            let newPhoto = Photo(
+                                id: UUID(),
+                                imageData: nil,
+                                savedDate: Date(),
+                                takenBy: nil,
+                                takenDate:  Date(),
+                                isVideo: true,
+                                videoFileName: fileName,
+                                localImage: isLocal,
+                                allowedNumberOfViews: -1,
+                                screenShotsAllowed: true,
+                                numberOfViews: 0,
+                                lastViewDate: nil,
+                                privateKeyUUID: keySet.id.uuidString,
+                                keyName: keySet.name,
+                                isFavorite: false,
+                                importedID: UUID(),
+                                disableFeedPreview: Bool.random()
+                            )
+                            newPhotos.append(newPhoto)
+                            print(z)
+                        }
                     }
                 }
+                print("new photso counts \(newPhotos.count)")
+                for photo in newPhotos {
+                    DataBase.shared.sharedModelContainer.mainContext.insert(photo)
+                }
+                try! DataBase.shared.sharedModelContainer.mainContext.save()
+                print("*************** TEST DATA: Complete ***************")
             }
         } catch {
             print(error)
-        }
-    }
-    
-    func saveImage(_ image: UIImage, isLocal: Bool) async {
-        if isLocal {
-            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID(),
-                                                           image: image,
-                                                           keyDataSet: KeychainKeys.shared.personalKey,
-                                                           isLocal: true,
-                                                           allowedNumOfViews: -1,
-                                                           allowScreenShots: false,
-                                                           takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
-                                                           disableFeedPreview: Bool.random())
-        } else {
-            let _ = try! await SaveDeleteContent.savePhoto(importedPhotoID: UUID(),
-                                                           image: image,
-                                                           keyDataSet: fakeImportKeyDataSet,
-                                                           isLocal: false,
-                                                           allowedNumOfViews: Int.random(in: 1..<4),
-                                                           allowScreenShots: false,
-                                                           takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
-                                                           disableFeedPreview: Bool.random())
         }
     }
 }

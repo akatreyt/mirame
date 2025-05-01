@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C0ADD9A2D2A269B00202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD992D2A269B00202801 /* ZLImageEditor */; };
 		1C0ADD9C2D2A26A200202801 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0ADD9B2D2A26A200202801 /* ZLImageEditor */; };
+		1C360EA92DC335DD00CF97FE /* SwiftDataPager in Frameworks */ = {isa = PBXBuildFile; productRef = 1C360EA82DC335DD00CF97FE /* SwiftDataPager */; };
 		1C59B7152D63AA3900F1FA36 /* SwiftyCam in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B70B2D63AA3900F1FA36 /* SwiftyCam */; };
 		1C59B7162D63AA3900F1FA36 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6758122D545B210086A7D1 /* StoreKit.framework */; };
 		1C59B7172D63AA3900F1FA36 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1C59B7092D63AA3900F1FA36 /* KeychainSwift */; };
@@ -189,13 +190,21 @@
 				Resources/Sounds/beep.mp3,
 				Resources/Sounds/shutter.mp3,
 				Resources/test_data/001.jpg,
+				Resources/test_data/1.mp4,
 				Resources/test_data/002.jpg,
+				Resources/test_data/2.mp4,
 				Resources/test_data/003.jpg,
+				Resources/test_data/3.mp4,
 				Resources/test_data/004.jpg,
+				Resources/test_data/4.mp4,
 				Resources/test_data/005.jpg,
+				Resources/test_data/5.mp4,
 				Resources/test_data/006.jpg,
+				Resources/test_data/6.mp4,
 				Resources/test_data/007.jpg,
+				Resources/test_data/7.mp4,
 				Resources/test_data/008.jpg,
+				Resources/test_data/8.mp4,
 				Resources/test_data/009.jpg,
 				Resources/test_data/010.jpg,
 				Resources/test_data/011.jpg,
@@ -1274,6 +1283,7 @@
 				1C59B7162D63AA3900F1FA36 /* StoreKit.framework in Frameworks */,
 				1C59B7172D63AA3900F1FA36 /* KeychainSwift in Frameworks */,
 				1C59B7182D63AA3900F1FA36 /* ScreenShield in Frameworks */,
+				1C360EA92DC335DD00CF97FE /* SwiftDataPager in Frameworks */,
 				1C59B7192D63AA3900F1FA36 /* SneakySync in Frameworks */,
 				1C59B71A2D63AA3900F1FA36 /* SneakyCamPackage in Frameworks */,
 				1C59B71B2D63AA3900F1FA36 /* ZLImageEditor in Frameworks */,
@@ -1417,6 +1427,7 @@
 				1C59B70D2D63AA3900F1FA36 /* ZLImageEditor */,
 				1C59B70F2D63AA3900F1FA36 /* ScreenShield */,
 				1C59B7112D63AA3900F1FA36 /* SneakySync */,
+				1C360EA82DC335DD00CF97FE /* SwiftDataPager */,
 			);
 			productName = "sneaky-ios";
 			productReference = 1C59B7242D63AA3900F1FA36 /* mirame-hg.app */;
@@ -1529,6 +1540,7 @@
 				1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */,
 				1CDCDF412D3C0D40007C5623 /* XCRemoteSwiftPackageReference "ScreenShield" */,
 				1C8E01F62D3DF4FD00759565 /* XCRemoteSwiftPackageReference "sneakysync" */,
+				1C360EA72DC335DD00CF97FE /* XCRemoteSwiftPackageReference "SwiftDataPager" */,
 			);
 			productRefGroup = 1C0F849621DBFCB500B1B9F9 /* Products */;
 			projectDirPath = "";
@@ -2087,6 +2099,14 @@
 				minimumVersion = 2.0.3;
 			};
 		};
+		1C360EA72DC335DD00CF97FE /* XCRemoteSwiftPackageReference "SwiftDataPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markbattistella/SwiftDataPager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		1C59B7082D63AA3900F1FA36 /* XCRemoteSwiftPackageReference "SneakyCamPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/akatreyt/SneakyCamPackage";
@@ -2187,6 +2207,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C0ADD952D2A25B200202801 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
 			productName = ZLImageEditor;
+		};
+		1C360EA82DC335DD00CF97FE /* SwiftDataPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C360EA72DC335DD00CF97FE /* XCRemoteSwiftPackageReference "SwiftDataPager" */;
+			productName = SwiftDataPager;
 		};
 		1C59B7072D63AA3900F1FA36 /* SneakyCamPackage */ = {
 			isa = XCSwiftPackageProductDependency;

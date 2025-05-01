@@ -48,6 +48,10 @@ class DataBase {
         } catch {
             print(error)
         }
+        
+        NotificationCenter.default.post(name: Notification.Name("AddedNewPhoto"),
+                                        object: nil,
+                                        userInfo: ["photo": photo])
         return photo.id?.uuidString
     }
     

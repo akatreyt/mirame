@@ -127,10 +127,18 @@ struct AllPhotosPreviewList: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("AddedNewPhoto"))) { data in
+            guard let userInfo = data.userInfo, let photo = userInfo["photo"] as? Photo else {
+                return
+            }
+            photos.append(photo)
+            filteredPhotos = try! photos.filter(self.predicate)
+            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+        }
         .task {
             photos = try! await getDBTWoActor().getAll() ?? []
-            filteredPhotos = photos
-            print(photos.count)
+            filteredPhotos = try! photos.filter(self.predicate)
+            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
         }
         .onChange(of: $sortOrder.wrappedValue) {
             filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)

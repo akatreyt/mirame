@@ -61,7 +61,7 @@ class Photo: Identifiable, Codable {
     var savedDate : Date?
     var takenBy : String?
     var takenDate : Date?
-    var isVideo: Bool?
+    var isVideo: Bool? = false
     var videoFileName: String?
     var localImage: Bool?
     var allowedNumberOfViews: Int?

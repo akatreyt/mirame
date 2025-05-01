@@ -20,7 +20,7 @@ struct NewIn14App: App {
     }
     @State var hasAlert: Bool = false
     @State var newFileURL: URL?
-    @State private var isUnlocked = false
+    @AppStorage("isUnlocked") private var isUnlocked = false
     @State var codeToRunAfterAuth: (() -> Void)?
     @State private var subscriptions = Subscriptions()
     
@@ -65,6 +65,9 @@ struct NewIn14App: App {
                             //                                SaveDeleteContent.deleteOldVideoFiles()
                         }
                 }
+            }
+            .onAppear{
+                isUnlocked = true
             }
             .onOpenURL { url in
                 codeToRunAfterAuth = {

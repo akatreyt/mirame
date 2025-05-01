@@ -25,7 +25,7 @@ struct AllPhotosView: View {
     @State var showTakeImage: Bool = false
     @State var showSettings: Bool = false
     @State var selectMultiple: Bool = false
-    @State var selectedIDs: [UUID] = []
+    @State var selectedPhotosToShare: [Photo] = []
     @State var mediaType: AllPhotosFilterType = .All
     @State private var importImageItem = [PhotosPickerItem]()
     @State var showAlert: Bool = false
@@ -35,6 +35,8 @@ struct AllPhotosView: View {
             showAlert = alertConfig != nil
         }
     }
+    
+    @State private var currentFilterID = "thisIsRandom"
     
     @MainActor
     @State var scaledImages = [String : Image]()
@@ -121,15 +123,15 @@ struct AllPhotosView: View {
             wantsImported = true
             wantsLocal = true
         }
-        
+
         predicate = #Predicate<Photo> {
             ($0.videoFileName != nil || $0.imageData != nil) &&
-            ($0.localImage ?? false) == wantsLocal &&
-            ($0.localImage ?? false) != wantsImported &&
-            ($0.isVideo ?? false) == wantsVideos &&
-            ($0.isVideo ?? false) != wantsPhotos &&
-            ($0.isFavorite ?? false) == wantsFavorites
+            ((wantsPhotos != wantsVideos) ? ($0.isVideo ?? false) == wantsVideos : true) &&
+            ($0.isFavorite == wantsFavorites ? true : false) &&
+            (($0.localImage ?? false) == wantsImported ? false : true)
         }
+        
+        currentFilterID = String(wantsLocal ? 1 : 0) + String(wantsImported ? 1 : 0) + String(wantsFavorites ? 1 : 0) + String(wantsPhotos ? 1 : 0) + String(wantsVideos ? 1 : 0) + sortBy.rawValue
         
         return (sortOrder, predicate)
     }
@@ -152,7 +154,7 @@ struct AllPhotosView: View {
                 case .list:
                     AllPhotosCompactList(
                         selectMultiple: $selectMultiple,
-                        selectedIDs: $selectedIDs,
+                        selectedPhotosToShare: $selectedPhotosToShare,
                         viewType: $viewType,
                         photoToShow: $photoToShow,
                         showStoreView: $showStoreView,
@@ -162,11 +164,12 @@ struct AllPhotosView: View {
                     AllPhotosPreviewList(
                         viewType: $viewType,
                         selectMultiple: $selectMultiple,
-                        selectedIDs: $selectedIDs,
+                        selectedPhotosToShare: $selectedPhotosToShare,
                         showStoreView: $showStoreView,
                         photoToShow: $photoToShow,
                         sortOrder: sortOrder,
                         predicate: predicate)
+                    .id(currentFilterID)
                     .protectScreenshot()
                 
                 if viewType == .Taken && selectMultiple {
@@ -176,7 +179,7 @@ struct AllPhotosView: View {
                         VStack {
                             Image(systemName: "shareplay")
                                 .font(.title)
-                            Text("\(selectedIDs.count) selected")
+                            Text("\(selectedPhotosToShare.count) selected")
                                 .font(.caption)
                         }
                         .contentShape(Rectangle())
@@ -229,10 +232,9 @@ struct AllPhotosView: View {
                     }
                 })
         })
-//        .sheet(isPresented: $showSharePhotos, content: {
-//            let photos = photos.filter( { selectedIDs.contains($0.photoID) })
-//            PicOptionsView(photos: Array(photos))
-//        })
+        .sheet(isPresented: $showSharePhotos, content: {
+            PicOptionsView(photos: selectedPhotosToShare)
+        })
 //        .onAppear() {
 //            ScreenShield.shared.protectFromScreenRecording()
 //            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {

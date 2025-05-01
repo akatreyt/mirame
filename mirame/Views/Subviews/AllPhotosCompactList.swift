@@ -11,7 +11,7 @@ import SwiftDataPager
 
 struct AllPhotosCompactList: View {
     @Binding var selectMultiple: Bool
-    @Binding var selectedIDs: [UUID]
+    @Binding var selectedPhotosToShare: [Photo]
     @Binding var viewType: AllPhotosViewType
     @Binding var photoToShow: PhotoToShow?
     @PagedQuery() private var photos: [Photo]
@@ -20,9 +20,9 @@ struct AllPhotosCompactList: View {
     @AppStorage("isUnlocked") private var isUnlocked = false
     @State private var showUnlockMessage = false
     
-    init(selectMultiple: Binding<Bool>, selectedIDs: Binding<[UUID]>, viewType: Binding<AllPhotosViewType>, photoToShow: Binding<PhotoToShow?>, showStoreView: Binding<Bool>, isUnlocked: Bool = false, showUnlockMessage: Bool = false, sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
+    init(selectMultiple: Binding<Bool>, selectedPhotosToShare: Binding<[Photo]>, viewType: Binding<AllPhotosViewType>, photoToShow: Binding<PhotoToShow?>, showStoreView: Binding<Bool>, isUnlocked: Bool = false, showUnlockMessage: Bool = false, sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
         self._selectMultiple = selectMultiple
-        self._selectedIDs = selectedIDs
+        self._selectedPhotosToShare = selectedPhotosToShare
         self._viewType = viewType
         self._photoToShow = photoToShow
         self._showStoreView = showStoreView
@@ -43,7 +43,7 @@ struct AllPhotosCompactList: View {
                 HStack {
                     PhotoDetailView(photo: photo)
                         .cornerRadius(8)
-                        .border(.red, width: (selectMultiple && selectedIDs.contains(photo.photoID)) ? 4 : 0)
+                        .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -52,10 +52,10 @@ struct AllPhotosCompactList: View {
                     } else {
                         if viewType == .Taken {
                             if selectMultiple {
-                                if selectedIDs.contains(photo.photoID) {
-                                    selectedIDs.removeAll(where: { $0 == photo.photoID })
+                                if selectedPhotosToShare.contains(photo) {
+                                    selectedPhotosToShare.removeAll(where: { $0 == photo })
                                 } else {
-                                    selectedIDs.append(photo.photoID)
+                                    selectedPhotosToShare.append(photo)
                                 }
                             } else {
                                 photoToShow = PhotoToShow(

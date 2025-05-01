@@ -6,14 +6,14 @@
 //  Copyright © 2025 Trey Tartt. All rights reserved.
 //
 import SwiftUI
-import SwiftDataPager
+import SwiftData
 
 struct AllPhotosPreviewList: View {
     @Binding var photoToShow: PhotoToShow?
     @Binding var viewType: AllPhotosViewType
     @Binding var selectMultiple: Bool
     @Binding var selectedPhotosToShare: [Photo]
-    @PagedQuery var photos: [Photo]
+    @Query var photos: [Photo]
     
     @Binding var showStoreView: Bool
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
@@ -32,54 +32,15 @@ struct AllPhotosPreviewList: View {
         self.sortOrder = sortOrder
         self.predicate = predicate
         
-        print(predicate.debugDescription)
-        
-        _photos = PagedQuery(
-            fetchLimit: 30,
-            sortDescriptors: [sortOrder],
-            filterPredicate: predicate,
-            logger: .default
-        )
+        _photos = Query(filter: self.predicate, sort: [sortOrder])
     }
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(Array(photos.enumerated()), id: \.element) { index, photo in
-                    PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
-                        .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
-                        .cornerRadius(8)
-                        .contentShape(Rectangle())
-                        .listRowSeparator(.hidden)
-                        .onTapGesture {
-                            if !madeUnlockPurchase && index != 0 {
-                                showUnlockMessage = true
-                            } else {
-                                if let local = photo.localImage, local {
-                                    if selectMultiple {
-                                        if selectedPhotosToShare.contains(photo) {
-                                            selectedPhotosToShare.removeAll(where: { $0 == photo })
-                                        } else {
-                                            selectedPhotosToShare.append(photo)
-                                        }
-                                    } else {
-                                        photoToShow = PhotoToShow(
-                                            id: UUID(),
-                                            photo: photo,
-                                            keyDataSet: KeychainKeys.shared.personalKey)
-                                    }
-                                } else {
-                                    if let keyUUID = photo.privateKeyUUID,
-                                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
-                                        photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
-                                    }
-                                }
-                            }
-                        }
-                        .onPaginationThreshold(threshold: 10, item: photo, in: $photos)
-                    //                        .onLoadMore(item: photo, in: $photos)
+        ScrollView {
+            LazyVStack {
+                ForEach(photos, id: \.id) { photo in
+                    Text(photo.id?.uuidString ?? "")
                 }
-                .onDelete(perform: delete)
             }
         }
         .frame( maxWidth: .infinity)
@@ -99,3 +60,44 @@ struct AllPhotosPreviewList: View {
         DataBase.shared.deleteLocally(photo: photos[offsets.first!])
     }
 }
+
+/*
+ VStack {
+ List {
+ ForEach(Array(photos.enumerated()), id: \.element) { index, photo in
+ PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
+ .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
+ .cornerRadius(8)
+ .contentShape(Rectangle())
+ .listRowSeparator(.hidden)
+ .onTapGesture {
+ if !madeUnlockPurchase && index != 0 {
+ showUnlockMessage = true
+ } else {
+ if let local = photo.localImage, local {
+ if selectMultiple {
+ if selectedPhotosToShare.contains(photo) {
+ selectedPhotosToShare.removeAll(where: { $0 == photo })
+ } else {
+ selectedPhotosToShare.append(photo)
+ }
+ } else {
+ photoToShow = PhotoToShow(
+ id: UUID(),
+ photo: photo,
+ keyDataSet: KeychainKeys.shared.personalKey)
+ }
+ } else {
+ if let keyUUID = photo.privateKeyUUID,
+ let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
+ photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+ }
+ }
+ }
+ }
+ .onPaginationThreshold(threshold: 10, item: photo, in: $photos)
+ //                        .onLoadMore(item: photo, in: $photos)
+ }
+ .onDelete(perform: delete)
+ }
+ */

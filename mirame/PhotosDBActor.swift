@@ -10,7 +10,17 @@ import Foundation
 
 @ModelActor
 actor PhotosDBActor {
-    public func getAll<T: PersistentModel>() throws -> [T]? {
+    public func deletePhoto(photo: Photo) {
+        photo.imageData = nil
+        photo.videoFileName = nil
+        do {
+            try modelContext.save()
+        } catch {
+            print(error)
+        }
+    }
+    
+    public func getAll<T: PersistentModel>() throws -> [T] {
         do {
             let fetchDescriptor = FetchDescriptor<T>()
             let data = try modelContext.fetch(fetchDescriptor)
@@ -19,18 +29,4 @@ actor PhotosDBActor {
             return []
         }
     }
-    /*
-    public func getAll<T: PersistentModel>(sortOrder: SortDescriptor<T>, predicate: Predicate<T>) throws -> [T]? {
-        let fetchDescriptor = FetchDescriptor<T>(
-            predicate: predicate,
-            sortBy: [sortOrder]
-        )
-        do {
-            let data = try modelContext.fetch(fetchDescriptor)
-            return data
-        } catch {
-            return []
-        }
-    }
-     */
 }

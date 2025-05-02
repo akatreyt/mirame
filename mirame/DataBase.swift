@@ -60,6 +60,9 @@ class DataBase {
         photo.videoFileName = nil
         do {
             try sharedModelContainer.mainContext.save()
+            NotificationCenter.default.post(name: Notification.Name("DeletedPhoto"),
+                                            object: nil,
+                                            userInfo: ["photo": photo])
         } catch {
             print(error)
         }

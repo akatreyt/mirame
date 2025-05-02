@@ -150,7 +150,7 @@ struct AllPhotosView: View {
                 .padding(.horizontal)
             
             //                AllPhotosEmptyView(viewType: $viewType)
-            AllPhotosPreviewList(
+            AllPhotosList(
                 viewType: $viewType,
                 selectMultiple: $selectMultiple,
                 selectedPhotosToShare: $selectedPhotosToShare,

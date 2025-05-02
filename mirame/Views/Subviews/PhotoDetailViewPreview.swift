@@ -21,7 +21,7 @@ struct PhotoDetailViewPreview: View {
         ZStack {
             if let isVideo = photo.isVideo, isVideo {
                 Color(uiColor: .systemGroupedBackground)
-
+                
                 VStack {
                     Spacer()
                     Image(systemName: "video")
@@ -38,43 +38,38 @@ struct PhotoDetailViewPreview: View {
                         .resizable()
                         .scaledToFill()
                         .frame(minWidth: 0)
-                        .frame(height: 300)
-                        .clipped()
                         .cornerRadius(8)
-                        .padding(-20)
                         .background(photo.disableFeedPreview ?? false ? .ultraThinMaterial : .regular)
+                        .overlay(content: {
+                            if isLocked {
+                                ZStack {
+                                    Image(systemName: "lock")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundStyle(.secondary)
+                                        .padding(16)
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(.ultraThinMaterial)
+                            } else {
+                                if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
+                                    ZStack {
+                                        Image(systemName: "eye.slash")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .foregroundStyle(.secondary)
+                                            .padding(16)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.ultraThinMaterial)
+                                }
+                            }
+                        })
                 }, placeholder: {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                         .frame(height: 300)
                         .padding(.bottom, 50)
-                })
-                .overlay(content: {
-                    if isLocked {
-                        Image(systemName: "lock")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minWidth: 0)
-                            .frame(height: 300)
-                            .clipped()
-                            .cornerRadius(8)
-                            .padding(90)
-                            .background(.ultraThinMaterial)
-                            .foregroundStyle(.secondary)
-                    } else {
-                        if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
-                            Image(systemName: "eye.slash")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(minWidth: 0)
-                                .frame(height: 300)
-                                .clipped()
-                                .cornerRadius(8)
-                                .padding(90)
-                                .background(.ultraThinMaterial)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
                 })
             }
             

@@ -24,6 +24,7 @@ struct AllPhotosList: View {
     @State private var photos: [Photo] = []
     @State private var filteredPhotos: [Photo] = []
     @State private var dbTwo: PhotosDBActor?
+    @State private var isLoading = true
     
     @Environment(\.modelContext) private var context
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
@@ -52,31 +53,41 @@ struct AllPhotosList: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack {
-                ForEach(Array(filteredPhotos.enumerated()), id: \.element) { index, photo in
-                    switch layoutType {
-                    case .preview:
-                        PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
-                            .cornerRadius(8)
-                            .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
-//                            .frame(height: 300)
-//                            .clipped()
-                            .onTapGesture{
-                                rowTapped(photo: photo, index: index)
-                            }
-
-                    case .list:
-                        PhotoDetailView(photo: photo)
-                            .cornerRadius(8)
-                            .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
-                            .onTapGesture{
-                                rowTapped(photo: photo, index: index)
-                            }
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .padding(.top, 100)
+                    .scaleEffect(1.5, anchor: .center)
+                
+            } else if !isLoading && photos.isEmpty {
+                Text("you dont have shit")
+            } else {
+                LazyVStack {
+                    ForEach(Array(filteredPhotos.enumerated()), id: \.element) { index, photo in
+                        switch layoutType {
+                        case .preview:
+                            PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
+                                .cornerRadius(8)
+                                .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
+                            //                            .frame(height: 300)
+                            //                            .clipped()
+                                .onTapGesture{
+                                    rowTapped(photo: photo, index: index)
+                                }
+                            
+                        case .list:
+                            PhotoDetailView(photo: photo)
+                                .cornerRadius(8)
+                                .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
+                                .onTapGesture{
+                                    rowTapped(photo: photo, index: index)
+                                }
+                        }
                     }
+                    .onDelete(perform: delete)
                 }
-                .onDelete(perform: delete)
+                .listRowSeparator(.hidden)
             }
-            .listRowSeparator(.hidden)
         }
         .padding(.horizontal, 8)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("AddedNewPhoto"))) { data in
@@ -109,6 +120,7 @@ struct AllPhotosList: View {
                 withAnimation(.easeIn(duration: 0.25)) {
                     filteredPhotos = try! photos.filter(self.predicate)
                     filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+                    isLoading = false
                 }
             } catch {
                 

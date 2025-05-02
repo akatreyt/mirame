@@ -68,7 +68,7 @@ class TestDataCreator {
                                     keyName: keySet.name,
                                     isFavorite: false,
                                     importedID: UUID(),
-                                    disableFeedPreview: Bool.random()
+                                    disableFeedPreview: isLocal ? false : Bool.random()
                                 )
                                 newPhotos.append(newPhoto)
                             }

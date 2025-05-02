@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var deleteEverything = false
     @State private var isPresentedManageSubscription = false
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
+    @AppStorage("alwaysHideMedia")  private var alwaysHideMedia = false
     
     @State private var downloadMore = false
     
@@ -106,6 +107,10 @@ struct SettingsView: View {
                             .cornerRadius(10)
                     }
                 }
+            })
+            
+            Section(content: {
+                Toggle("Always hide media", isOn: $alwaysHideMedia)
             })
             
             if Toggles.isDownloadMoreEnabled {

@@ -15,21 +15,18 @@ struct AllPhotosList: View {
     @Binding var viewType: AllPhotosViewType
     @Binding var selectMultiple: Bool
     @Binding var selectedPhotosToShare: [Photo]
-    
-    
-    @Binding var showStoreView: Bool
-    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
-    @State private var showUnlockMessage = false
-    
     @Binding private var sortOrder: SortDescriptor<Photo>
     @Binding private var predicate: Predicate<Photo>
     @Binding private var predicateStringTempUpdateThing: String
-    
+    @Binding var showStoreView: Bool
+
+    @State private var showUnlockMessage = false
     @State private var photos: [Photo] = []
     @State private var filteredPhotos: [Photo] = []
+    @State private var dbTwo: PhotosDBActor?
     
     @Environment(\.modelContext) private var context
-    @State private var dbTwo: PhotosDBActor?
+    @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     
     func getDBTWoActor() -> PhotosDBActor {
         guard let dbTwo else {

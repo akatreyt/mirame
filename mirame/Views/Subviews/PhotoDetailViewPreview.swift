@@ -14,6 +14,8 @@ class PhotoDataCache {
 }
 
 struct PhotoDetailViewPreview: View {
+    @AppStorage("alwaysHideMedia")  private var alwaysHideMedia = false
+
     var photo: Photo
     var isLocked: Bool
     
@@ -52,7 +54,7 @@ struct PhotoDetailViewPreview: View {
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(.ultraThinMaterial)
                             } else {
-                                if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview {
+                                if let disableFeedPreview = photo.disableFeedPreview, disableFeedPreview || alwaysHideMedia {
                                     ZStack {
                                         Image(systemName: "eye.slash")
                                             .resizable()

@@ -86,19 +86,25 @@ struct AllPhotosList: View {
             guard let userInfo = data.userInfo, let photo = userInfo["photo"] as? Photo else {
                 return
             }
-            photos.append(photo)
-            filteredPhotos = try! photos.filter(self.predicate)
-            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            
+            withAnimation(.easeOut(duration: 0.25)) {
+                photos.append(photo)
+                filteredPhotos = try! photos.filter(self.predicate)
+                filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DeletedPhoto"))) { data in
             guard let userInfo = data.userInfo, let photo = userInfo["photo"] as? Photo else {
                 return
             }
-            Task {
-                await dbTwo?.deletePhoto(photo: photo)
+            
+            withAnimation(.easeOut(duration: 0.25)) {
+                Task {
+                    await dbTwo?.deletePhoto(photo: photo)
+                }
+                filteredPhotos = try! photos.filter(self.predicate)
+                filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
             }
-            filteredPhotos = try! photos.filter(self.predicate)
-            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
         }
         .task {
             do {

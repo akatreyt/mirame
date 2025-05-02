@@ -69,8 +69,6 @@ struct AllPhotosList: View {
                             PhotoDetailViewPreview(photo: photo, isLocked: !madeUnlockPurchase && index != 0)
                                 .cornerRadius(8)
                                 .border(.red, width: (selectMultiple && selectedPhotosToShare.contains(photo)) ? 4 : 0)
-                            //                            .frame(height: 300)
-                            //                            .clipped()
                                 .onTapGesture{
                                     rowTapped(photo: photo, index: index)
                                 }

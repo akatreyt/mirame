@@ -30,9 +30,10 @@ struct PhotoDetailViewPreview: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)
+                        .frame(height: 300)
+                        .contentShape(Rectangle())
                     Spacer()
                 }
-                .frame(height: 300)
             } else {
                 AsyncCachedImage(photo: photo,
                                  content: { image in
@@ -42,6 +43,10 @@ struct PhotoDetailViewPreview: View {
                         .frame(minWidth: 0)
                         .cornerRadius(8)
                         .background(photo.disableFeedPreview ?? false ? .ultraThinMaterial : .regular)
+                        .frame(height: 300)
+                        .scaleEffect(1.5)
+                        .clipped()
+                        .contentShape(Rectangle())
                         .overlay(content: {
                             if isLocked {
                                 ZStack {
@@ -70,7 +75,6 @@ struct PhotoDetailViewPreview: View {
                 }, placeholder: {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
-                        .frame(height: 300)
                         .padding(.bottom, 50)
                 })
             }

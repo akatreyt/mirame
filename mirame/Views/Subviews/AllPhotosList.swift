@@ -109,18 +109,24 @@ struct AllPhotosList: View {
         .task {
             do {
                 photos = try await getDBTWoActor().getAll()
-                filteredPhotos = try! photos.filter(self.predicate)
-                filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+                withAnimation(.easeIn(duration: 0.25)) {
+                    filteredPhotos = try! photos.filter(self.predicate)
+                    filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+                }
             } catch {
                 
             }
         }
         .onChange(of: $sortOrder.wrappedValue) {
-            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            withAnimation(.easeIn(duration: 0.25)) {
+                filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            }
         }
         .onChange(of: $predicateStringTempUpdateThing.wrappedValue) {
-            filteredPhotos = try! photos.filter(self.predicate)
-            filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            withAnimation(.easeIn(duration: 0.25)) {
+                filteredPhotos = try! photos.filter(self.predicate)
+                filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .contentMargins(.top, 0)

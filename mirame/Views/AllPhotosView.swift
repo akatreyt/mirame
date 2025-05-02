@@ -26,7 +26,8 @@ struct AllPhotosView: View {
     @State var showSettings: Bool = false
     @State var selectMultiple: Bool = false
     @State var selectedPhotosToShare: [Photo] = []
-    @State var mediaType: AllPhotosFilterType = .All
+    @State private var currentFilterID = "thisIsRandom"
+
     @State private var importImageItem = [PhotosPickerItem]()
     @State var showAlert: Bool = false
     @State var showSharePhotos: Bool = false
@@ -36,14 +37,12 @@ struct AllPhotosView: View {
         }
     }
     
-    @State private var currentFilterID = "thisIsRandom"
-    
-    @MainActor
-    @State var scaledImages = [String : Image]()
+
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
     @AppStorage("sortBy") var sortBy: AllPhotosSortType = .DateSavedAsc
+    @AppStorage("mediaType") var mediaType: AllPhotosFilterType = .All
     
     func updatePhotos(sortOrder: SortDescriptor<Photo>, predicate: Predicate<Photo>) {
         self.sortOrder = sortOrder

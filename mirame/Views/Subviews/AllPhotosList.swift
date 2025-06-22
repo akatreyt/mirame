@@ -60,7 +60,7 @@ struct AllPhotosList: View {
                     .scaleEffect(1.5, anchor: .center)
                 
             } else if !isLoading && photos.isEmpty {
-                Text("you dont have shit")
+                AllPhotosEmptyView(viewType: $viewType)
             } else {
                 LazyVStack {
                     ForEach(Array(filteredPhotos.enumerated()), id: \.element) { index, photo in

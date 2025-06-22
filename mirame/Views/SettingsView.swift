@@ -12,31 +12,44 @@ import StoreKit
 struct SettingsView: View {
     @State private var deleteEverything = false
     @State private var isPresentedManageSubscription = false
+    @State private var isAdding = false
+    @State private var isDeleting = false
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @AppStorage("alwaysHideMedia")  private var alwaysHideMedia = false
     
     @State private var downloadMore = false
-    
+        
     let icons = ["AltIcon1", "AltIcon2", "AltIcon8", "AltIcon10", "AltIcon11", "AltIcon9", "AltIcon3", "AltIcon4", "AltIcon5", "AltIcon6", "AltIcon7"]
     
     var body: some View {
         List {
             Section {
-                Button(action: {
-                    deleteEverything.toggle()
-                }, label: {
-                    Text("Delete Everything")
-                })
+                if isDeleting {
+                    ProgressView()
+                } else {
+                    Button(action: {
+                        deleteEverything.toggle()
+                    }, label: {
+                        Text("Delete Everything")
+                    })
+                }
             }
             
             if let bundleID = Bundle.main.bundleIdentifier,
                bundleID.contains("ios-dev") || bundleID.contains("hg"){
                 Section {
-                    Button("Format to test db", action: {
-                        Task {
-                            await TestDataCreator().populateTestData()
-                        }
-                    })
+                    if isAdding {
+                        ProgressView()
+                    } else {
+                        Button("Format to test db", action: {
+                            Task {
+                                isAdding = true
+                                await TestDataCreator().populateTestData(completion: {
+                                    isAdding = false
+                                })
+                            }
+                        })
+                    }
                 }
             }
             
@@ -126,8 +139,10 @@ struct SettingsView: View {
         .alert("Delete Everything", isPresented: $deleteEverything) {
             Button("Delete", role: .destructive, action: {
                 BioAuthView.authenticate(completedAuthSuccess: {
+                    isDeleting = true
                     DataBase.shared.deleteAll()
                     KeychainKeys.shared.deleteAll()
+                    isDeleting = false
                 }, failedAuth: {
                     
                 })

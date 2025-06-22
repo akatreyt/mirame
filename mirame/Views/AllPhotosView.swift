@@ -27,7 +27,8 @@ struct AllPhotosView: View {
     @State var selectMultiple: Bool = false
     @State var selectedPhotosToShare: [Photo] = []
     @State private var currentFilterID = "thisIsRandom"
-
+    @State private var dbTwo: PhotosDBActor?
+    
     @State private var importImageItem = [PhotosPickerItem]()
     @State var showAlert: Bool = false
     @State var showSharePhotos: Bool = false
@@ -37,7 +38,16 @@ struct AllPhotosView: View {
         }
     }
     
-
+    func getDBTWoActor() -> PhotosDBActor {
+        guard let dbTwo else {
+            let dbTwo = PhotosDBActor(modelContainer: DataBase.shared.sharedModelContainer)
+            self.dbTwo = dbTwo
+            return dbTwo
+        }
+        return dbTwo
+    }
+    
+    
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
     @AppStorage("viewType") var viewType: AllPhotosViewType = .Saved
     @AppStorage("layoutType") var layoutType: AllPhotosViewLayoutType = .list
@@ -148,7 +158,6 @@ struct AllPhotosView: View {
             viewPhotosTypePicker()
                 .padding(.horizontal)
             
-            //                AllPhotosEmptyView(viewType: $viewType)
             AllPhotosList(
                 viewType: $viewType,
                 selectMultiple: $selectMultiple,
@@ -228,19 +237,15 @@ struct AllPhotosView: View {
         .sheet(isPresented: $showSharePhotos, content: {
             PicOptionsView(photos: selectedPhotosToShare)
         })
-        //        .onAppear() {
-        //            ScreenShield.shared.protectFromScreenRecording()
-        //            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
-        //                alertConfig = AlertConfig(
-        //                    title: "Max number of views reached",
-        //                    message: "Item has been deleted",
-        //                    buttons: [])
-        //            }
-        //
-        //            if !Toggles.isIapEnabled {
-        //                isUnlocked = true
-        //            }
-        //        }
+        .onAppear() {
+            ScreenShield.shared.protectFromScreenRecording()
+            //            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
+            //                alertConfig = AlertConfig(
+            //                    title: "Max number of views reached",
+            //                    message: "Item has been deleted",
+            //                    buttons: [])
+            //            }
+        }
         .alert(alertConfig?.title ?? "",
                isPresented: $showAlert,
                actions: {
@@ -323,31 +328,28 @@ struct AllPhotosView: View {
     }
     
     func viewRandom() -> PhotoToShow? {
-        return nil
+        var returnPhoto: Photo? = nil
+        var keyDataSet: KeyDataSet? = nil
         
-        //        var returnPhoto: Photo? = nil
-        //        var keyDataSet: KeyDataSet? = nil
-        //
-        //        while returnPhoto == nil {
-        //            if let photo = photos.randomElement()  {
-        //                if let localImage = photo.localImage, localImage {
-        //                    keyDataSet = KeychainKeys.shared.personalKey
-        //                    returnPhoto = photo
-        //                } else {
-        //                    if let keyUUID = photo.privateKeyUUID,
-        //                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID),
-        //                       let _ = photo.decrypt(withKey: key) {
-        //                        keyDataSet = key
-        //                        returnPhoto = photo
-        //                    }
-        //                }
-        //            }
-        //        }
-        //
-        //        return PhotoToShow(
-        //            id: UUID(),
-        //            photo: returnPhoto!,
-        //            keyDataSet: keyDataSet!)
+        while returnPhoto == nil {
+            if let randomPhoto = try? getDBTWoActor().randomPhoto(withPredicate: self.predicate) {
+                if let localImage = randomPhoto.localImage, localImage {
+                    keyDataSet = KeychainKeys.shared.personalKey
+                    returnPhoto = randomPhoto
+                } else {
+                    if let keyUUID = randomPhoto.privateKeyUUID,
+                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID) {
+                        keyDataSet = key
+                        returnPhoto = randomPhoto
+                    }
+                }
+            }
+        }
+        
+        return PhotoToShow(
+            id: UUID(),
+            photo: returnPhoto!,
+            keyDataSet: keyDataSet!)
     }
 }
 //

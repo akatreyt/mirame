@@ -26,11 +26,13 @@ class TestDataCreator {
     }
     
     @MainActor
-    func populateTestData() async {
+    func populateTestData(completion: @escaping (() -> Void)) async {
         DataBase.shared.deleteAll()
         KeychainKeys.shared.deleteAll()
         
         try! KeychainKeys.shared.saveLocally(key: fakeImportKeyDataSet)
+        
+        let queue = DispatchQueue(label: "thread-safe-array")
         
         do {
             let photos = try FileManager.default.contentsOfDirectory(atPath: Bundle.main.bundlePath).filter({ $0.hasSuffix("jpg") })
@@ -70,7 +72,9 @@ class TestDataCreator {
                                     importedID: UUID(),
                                     disableFeedPreview: isLocal ? false : Bool.random()
                                 )
-                                newPhotos.append(newPhoto)
+                                queue.async() {
+                                    newPhotos.append(newPhoto)
+                                }
                             }
                             print(i)
                         }
@@ -104,17 +108,20 @@ class TestDataCreator {
                                 importedID: UUID(),
                                 disableFeedPreview: Bool.random()
                             )
-                            newPhotos.append(newPhoto)
+                            queue.async() {
+                                newPhotos.append(newPhoto)
+                            }
                             print(z)
                         }
                     }
                 }
-                print("new photso counts \(newPhotos.count)")
                 for photo in newPhotos {
                     DataBase.shared.sharedModelContainer.mainContext.insert(photo)
                 }
                 try! DataBase.shared.sharedModelContainer.mainContext.save()
+                print("new photos counts \(newPhotos.count)")
                 print("*************** TEST DATA: Complete ***************")
+                completion()
             }
         } catch {
             print(error)

@@ -29,4 +29,13 @@ actor PhotosDBActor {
             return []
         }
     }
+    
+    public func randomPhoto(withPredicate predicate: Predicate<Photo>) throws -> Photo? {
+        let allPhotos: [Photo] = try getAll().filter(predicate)
+        guard !allPhotos.isEmpty else {
+            return nil
+        }
+        let randomIndex = Int.random(in: 0..<allPhotos.count)
+        return allPhotos[randomIndex]
+    }
 }

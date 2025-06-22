@@ -20,6 +20,7 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
     init(photo: Photo?,
         @ViewBuilder content: @escaping (Image) -> ImageView,
         @ViewBuilder placeholder: @escaping () -> PlaceholderView) {
+        self.image = nil
         self.photo = photo
         self.content = content
         self.placeholder = placeholder
@@ -33,19 +34,22 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
                 placeholder()
                     .onAppear {
                         Task {
-                            image = await getImageData()
+                            if let results = await getImageData(),
+                               results.1 == photo?.photoID {
+                                image = results.0
+                            }
                         }
                     }
             }
         }
     }
     
-    func getImageData() async -> Image? {
+    func getImageData() async -> (Image?, UUID)? {
         guard let photo else { return nil }
         
         if let unlockedData = PhotoDataCache.shared.cache[photo.photoID.uuidString] {
             if let uiImage = UIImage(data: unlockedData) {
-                return Image(uiImage: uiImage)
+                return (Image(uiImage: uiImage), photo.photoID)
             }
         }
         
@@ -70,7 +74,7 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
         
         if let image {
             PhotoDataCache.shared.cache[photo.photoID.uuidString] = image.resized(toWidth: 300)!.jpegData(compressionQuality: 1)
-            return Image(uiImage: image)
+            return (Image(uiImage: image), photo.photoID)
         }
         return nil
     }

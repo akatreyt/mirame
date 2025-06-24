@@ -56,7 +56,7 @@ class TestDataCreator {
                                 let newPhoto = Photo(
                                     id: UUID(),
                                     imageData: enctrypedData,
-                                    savedDate: Date(),
+                                    savedDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
                                     takenBy: nil,
                                     takenDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
                                     isVideo: false,
@@ -92,9 +92,9 @@ class TestDataCreator {
                             let newPhoto = Photo(
                                 id: UUID(),
                                 imageData: nil,
-                                savedDate: Date(),
+                                savedDate: Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date()),
                                 takenBy: nil,
-                                takenDate:  Date(),
+                                takenDate:  Calendar.current.date(byAdding: .day, value: -(Int.random(in: 0..<40)), to: Date())!,
                                 isVideo: true,
                                 videoFileName: fileName,
                                 localImage: isLocal,
@@ -115,7 +115,7 @@ class TestDataCreator {
                         }
                     }
                 }
-                for photo in newPhotos {
+                for photo in newPhotos.shuffled() {
                     DataBase.shared.sharedModelContainer.mainContext.insert(photo)
                 }
                 try! DataBase.shared.sharedModelContainer.mainContext.save()

@@ -2188,7 +2188,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/akatreyt/SneakyCamPackage";
 			requirement = {
-				branch = feature/loadFromDocs;
+				branch = master;
 				kind = branch;
 			};
 		};

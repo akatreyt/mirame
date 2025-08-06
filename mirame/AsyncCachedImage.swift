@@ -36,12 +36,17 @@ struct AsyncCachedImage<ImageView: View, PlaceholderView: View>: View {
                         Task {
                             if let results = await getImageData(),
                                results.1 == photo?.photoID {
-                                image = results.0
+                                withAnimation(.easeOut(duration: 0.25)) {
+                                    image = results.0
+                                }
                             }
                         }
                     }
             }
         }
+        .onDisappear(perform: {
+            image = nil
+        })
     }
     
     func getImageData() async -> (Image?, UUID)? {

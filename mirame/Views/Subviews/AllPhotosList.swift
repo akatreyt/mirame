@@ -19,26 +19,19 @@ struct AllPhotosList: View {
     @Binding private var predicate: Predicate<Photo>
     @Binding private var predicateStringTempUpdateThing: String
     @Binding var showStoreView: Bool
+    @Binding private var filteredPhotos: [Photo]
 
     @State private var showUnlockMessage = false
     @State private var photos: [Photo] = []
-    @State private var filteredPhotos: [Photo] = []
-    @State private var dbTwo: PhotosDBActor?
+    @State private var dbTwo: PhotosDBActor = PhotosDBActor.shared
     @State private var isLoading = true
     
     @Environment(\.modelContext) private var context
     @AppStorage("madeUnlockPurchase") private var madeUnlockPurchase = false
+
     
-    func getDBTWoActor() -> PhotosDBActor {
-        guard let dbTwo else {
-            let dbTwo = PhotosDBActor(modelContainer: DataBase.shared.sharedModelContainer)
-            self.dbTwo = dbTwo
-            return dbTwo
-        }
-        return dbTwo
-    }
-    
-    init(viewType: Binding<AllPhotosViewType>, selectMultiple: Binding<Bool>, selectedPhotosToShare: Binding<[Photo]>, showStoreView: Binding<Bool>, showUnlockMessage: Bool = false, photoToShow: Binding<PhotoToShow?>, sortOrder: Binding<SortDescriptor<Photo>>, predicate: Binding<Predicate<Photo>>, predicateStringTempUpdateThing: Binding<String>, layoutType: Binding<AllPhotosViewLayoutType>) {
+    init(viewType: Binding<AllPhotosViewType>, selectMultiple: Binding<Bool>, selectedPhotosToShare: Binding<[Photo]>, showStoreView: Binding<Bool>, showUnlockMessage: Bool = false, photoToShow: Binding<PhotoToShow?>, sortOrder: Binding<SortDescriptor<Photo>>, predicate: Binding<Predicate<Photo>>, predicateStringTempUpdateThing: Binding<String>, layoutType: Binding<AllPhotosViewLayoutType>,
+         filteredPhotos: Binding<[Photo]>) {
         self._photoToShow = photoToShow
         self._viewType = viewType
         self._selectMultiple = selectMultiple
@@ -49,6 +42,7 @@ struct AllPhotosList: View {
         self._predicate = predicate
         self._predicateStringTempUpdateThing = predicateStringTempUpdateThing
         self._layoutType = layoutType
+        self._filteredPhotos = filteredPhotos
     }
     
     var body: some View {
@@ -106,7 +100,7 @@ struct AllPhotosList: View {
             
             withAnimation(.easeOut(duration: 0.25)) {
                 Task {
-                    await dbTwo?.deletePhoto(photo: photo)
+                    await dbTwo.deletePhoto(photo: photo)
                 }
                 filteredPhotos = try! photos.filter(self.predicate)
                 filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
@@ -114,7 +108,7 @@ struct AllPhotosList: View {
         }
         .task {
             do {
-                photos = try await getDBTWoActor().getAll()
+                photos = try await dbTwo.getAll()
                 withAnimation(.easeIn(duration: 0.25)) {
                     filteredPhotos = try! photos.filter(self.predicate)
                     filteredPhotos = filteredPhotos.sorted(using: self.sortOrder)
@@ -164,16 +158,22 @@ struct AllPhotosList: View {
                         keyDataSet: KeychainKeys.shared.personalKey)
                 }
             } else {
-                if let keyUUID = photo.privateKeyUUID,
-                   let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
-                    photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                if (photo.localImage ?? false) {
+                    photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: KeychainKeys.shared.personalKey)
+                } else {
+                    if let keyUUID = photo.privateKeyUUID,
+                       let key = KeychainKeys.shared.getKeyWith(id: keyUUID)  {
+                        photoToShow = PhotoToShow(id: UUID(), photo: photo, keyDataSet: key)
+                    }
                 }
             }
         }
     }
     
     func delete(at offsets: IndexSet) {
-        DataBase.shared.deleteLocally(photo: photos[offsets.first!])
+        Task {
+            await PhotosDBActor.shared.deleteLocally(photo: photos[offsets.first!])
+        }
     }
 }
 

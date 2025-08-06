@@ -27,7 +27,7 @@ class TestDataCreator {
     
     @MainActor
     func populateTestData(completion: @escaping (() -> Void)) async {
-        DataBase.shared.deleteAll()
+        await PhotosDBActor.shared.deleteAll()
         KeychainKeys.shared.deleteAll()
         
         try! KeychainKeys.shared.saveLocally(key: fakeImportKeyDataSet)
@@ -53,6 +53,7 @@ class TestDataCreator {
                                 let isLocal = Bool.random()
                                 let keySet = isLocal ? KeychainKeys.shared.personalKey : self.fakeImportKeyDataSet
                                 let enctrypedData = try! PrivateKeyStuff.encryptUsing(data: _data, keyDataSet: keySet)
+                                
                                 let newPhoto = Photo(
                                     id: UUID(),
                                     imageData: enctrypedData,
@@ -70,7 +71,7 @@ class TestDataCreator {
                                     keyName: keySet.name,
                                     isFavorite: false,
                                     importedID: UUID(),
-                                    disableFeedPreview: isLocal ? false : Bool.random()
+                                    disableFeedPreview: Bool.random()
                                 )
                                 queue.async() {
                                     newPhotos.append(newPhoto)
@@ -89,6 +90,7 @@ class TestDataCreator {
                             let data = try! Data(contentsOf: url)
                             let encryptedData = try! PrivateKeyStuff.encryptUsing(data: data, keyDataSet: keySet)
                             let fileName = try! VideoEncryption.saveVideoFileInDocuemnts(data: encryptedData)
+                            
                             let newPhoto = Photo(
                                 id: UUID(),
                                 imageData: nil,
@@ -111,14 +113,14 @@ class TestDataCreator {
                             queue.async() {
                                 newPhotos.append(newPhoto)
                             }
-                            print(z)
+                            print(fileName)
                         }
                     }
                 }
                 for photo in newPhotos.shuffled() {
-                    DataBase.shared.sharedModelContainer.mainContext.insert(photo)
+                    PhotosDBActor.shared.modelContainer.mainContext.insert(photo)
                 }
-                try! DataBase.shared.sharedModelContainer.mainContext.save()
+                try! PhotosDBActor.shared.modelContainer.mainContext.save()
                 print("new photos counts \(newPhotos.count)")
                 print("*************** TEST DATA: Complete ***************")
                 completion()

@@ -75,7 +75,7 @@ struct PhotoDetailViewPreview: View {
                 }, placeholder: {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
-                        .padding(.bottom, 50)
+                        .frame(height: 300)
                 })
             }
             

@@ -38,9 +38,11 @@ struct AllPhotosView: View {
         }
     }
     
+    @State var filteredPhotos: [Photo] = []
+    
     func getDBTWoActor() -> PhotosDBActor {
         guard let dbTwo else {
-            let dbTwo = PhotosDBActor(modelContainer: DataBase.shared.sharedModelContainer)
+            let dbTwo = PhotosDBActor(modelContainer: PhotosDBActor.sharedModelContainer)
             self.dbTwo = dbTwo
             return dbTwo
         }
@@ -133,11 +135,17 @@ struct AllPhotosView: View {
             wantsLocal = true
         }
         
-        predicate = #Predicate<Photo> {
-            ($0.videoFileName != nil || $0.imageData != nil) &&
-            ((wantsPhotos != wantsVideos) ? ($0.isVideo ?? false) == wantsVideos : true) &&
-            ($0.isFavorite == wantsFavorites ? true : false) &&
-            (($0.localImage ?? false) == wantsImported ? false : true)
+        if wantsFavorites {
+            predicate = #Predicate<Photo> {
+                ($0.videoFileName != nil || $0.imageData != nil) && $0.isFavorite == true
+            }
+        } else {
+            predicate = #Predicate<Photo> {
+                ($0.videoFileName != nil || $0.imageData != nil) &&
+                ((wantsPhotos != wantsVideos) ? ($0.isVideo ?? false) == wantsVideos : true) &&
+                ($0.isFavorite == wantsFavorites ? true : false) &&
+                (($0.localImage ?? false) == wantsImported ? false : true)
+            }
         }
         
         currentFilterID = String(wantsLocal ? 1 : 0) + String(wantsImported ? 1 : 0) + String(wantsFavorites ? 1 : 0) + String(wantsPhotos ? 1 : 0) + String(wantsVideos ? 1 : 0) + sortBy.rawValue
@@ -167,7 +175,8 @@ struct AllPhotosView: View {
                 sortOrder: $sortOrder,
                 predicate: $predicate,
                 predicateStringTempUpdateThing: $currentFilterID,
-                layoutType: $layoutType)
+                layoutType: $layoutType,
+                filteredPhotos: $filteredPhotos)
             .protectScreenshot()
             
             if viewType == .Taken && selectMultiple {
@@ -199,8 +208,10 @@ struct AllPhotosView: View {
                 selectMultiple: $selectMultiple,
                 isUnlocked: $madeUnlockPurchase,
                 viewRandom: {
-                    if let photo = viewRandom() {
-                        photoToShow = photo
+                    Task {
+                        if let photo = await viewRandom() {
+                            photoToShow = photo
+                        }
                     }
                 })
             .padding()
@@ -226,7 +237,7 @@ struct AllPhotosView: View {
                content: { thingy in
             ViewPhotoView(photo: thingy.photo, keyDataSet: thingy.keyDataSet)
                 .onDisappear(perform: {
-                    if DataBase.shared.deleteViewedPhotosIfNeeded(photos: [thingy.photo]) {
+                    if PhotosDBActor.shared.deleteViewedPhotosIfNeeded(photos: [thingy.photo]) {
                         alertConfig = AlertConfig(
                             title: "Max number of views reached",
                             message: "Item has been deleted",
@@ -239,7 +250,7 @@ struct AllPhotosView: View {
         })
         .onAppear() {
             ScreenShield.shared.protectFromScreenRecording()
-            //            if DataBase.shared.deleteViewedPhotosIfNeeded(photos: photos) {
+            //            if PhotosDBActor.shared.deleteViewedPhotosIfNeeded(photos: photos) {
             //                alertConfig = AlertConfig(
             //                    title: "Max number of views reached",
             //                    message: "Item has been deleted",
@@ -327,12 +338,12 @@ struct AllPhotosView: View {
         importImageItem = []
     }
     
-    func viewRandom() -> PhotoToShow? {
+    func viewRandom() async -> PhotoToShow? {
         var returnPhoto: Photo? = nil
         var keyDataSet: KeyDataSet? = nil
         
         while returnPhoto == nil {
-            if let randomPhoto = try? getDBTWoActor().randomPhoto(withPredicate: self.predicate) {
+            if let randomPhoto = filteredPhotos.randomElement() {
                 if let localImage = randomPhoto.localImage, localImage {
                     keyDataSet = KeychainKeys.shared.personalKey
                     returnPhoto = randomPhoto

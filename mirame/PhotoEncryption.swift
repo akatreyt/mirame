@@ -13,7 +13,7 @@ class VideoEncryption {
     required init()  {}
     static let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
     
-    static func saveVideoFileInDocuemnts(data:Data) throws -> String{
+    static func saveVideoFileInDocuemnts(data: Data) throws -> String {
         let dateURL = Date().saveVideoDate() + ".mov"
         let completeURL = URL(fileURLWithPath: VideoEncryption.documentDirectoryPath.appendingPathComponent(dateURL))
         

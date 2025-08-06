@@ -41,9 +41,9 @@ class ImportExport {
                 let photoToShow = try JSONDecoder().decode(PhotoShareObject.self, from: item)
                 
                 // if this photo already exist update the image data but keep all other data
-                if let photo = DataBase.shared.photoWithImportedID(id: photoToShow.id),
+                if let photo = await PhotosDBActor.shared.photoWithImportedID(id: photoToShow.id),
                    let imageData = photoToShow.imageData {
-                    try DataBase.shared.update(photo: photo, imageData: imageData)
+                    try await PhotosDBActor.shared.update(photo: photo, imageData: imageData)
                     allResults.append((true, 0, nil))
                 } else {
                     if let imageData = photoToShow.imageData {

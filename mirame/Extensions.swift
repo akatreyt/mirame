@@ -36,9 +36,9 @@ extension UIImage {
 }
 
 extension Date{
-    func saveVideoDate()->String{
+    func saveVideoDate() -> String {
         let _dateFormatter = DateFormatter()
-        _dateFormatter.dateFormat = "MMM_d_h_mm_ss_a"
+        _dateFormatter.dateFormat = "MMM_d_h_mm_ss_SSSS_a"
         let _str =  _dateFormatter.string(from: self)
         return _str
     }

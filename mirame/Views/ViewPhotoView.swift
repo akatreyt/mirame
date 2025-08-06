@@ -62,7 +62,9 @@ struct ViewPhotoView: View {
                 
                 HStack {
                     Button(action: {
-                        isFavorite = (try? DataBase.shared.favorite(photo: photo, isFavorite: !isFavorite)) ?? false
+                        Task {
+                            isFavorite = await (try? PhotosDBActor.shared.favorite(photo: photo, isFavorite: !isFavorite)) ?? false
+                        }
                     }, label: {
                         if isFavorite {
                             Image(systemName: "heart.fill")
@@ -87,8 +89,10 @@ struct ViewPhotoView: View {
                         .frame(maxWidth: .infinity)
                         
                         Button(action: {
-                            DataBase.shared.deleteLocally(photo: photo)
-                            dismiss()
+                            Task {
+                                await PhotosDBActor.shared.deleteLocally(photo: photo)
+                                dismiss()
+                            }
                         }, label: {
                             Image(systemName: "trash")
                                 .font(.title)
@@ -106,7 +110,9 @@ struct ViewPhotoView: View {
         }
         .onAppear() {
             isFavorite = photo.isFavorite ?? false
-            DataBase.shared.incrementViewCount(photo: photo)
+            Task {
+                await PhotosDBActor.shared.incrementViewCount(photo: photo)
+            }
             ScreenShield.shared.protectFromScreenRecording()
         }
         .alert(

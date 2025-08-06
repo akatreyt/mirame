@@ -170,7 +170,7 @@ struct PicOptionsView: View {
                 if let isVideo = photo.isVideo, isVideo {
                     if let url = photo.showVideo(key: KeychainKeys.shared.personalKey),
                        let decryptedData = try? Data(contentsOf: url) {
-                        let editablePhoto = EditablePhoto(id: photo.id ?? UUID(), image: nil, editableImage: nil, videoData: decryptedData)
+                        let editablePhoto = EditablePhoto(id: photo.photoID, image: nil, editableImage: nil, videoData: decryptedData)
                         editablePhotos.append(editablePhoto)
                     }
                 } else {

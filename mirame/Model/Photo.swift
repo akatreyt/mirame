@@ -54,7 +54,7 @@ struct PhotoShareObject: Codable, Identifiable {
 }
 
 @Model
-class Photo: Identifiable, Codable {
+final class Photo: Identifiable, Codable, Sendable {
     var id: UUID?
 
     var imageData : Data?
@@ -75,11 +75,12 @@ class Photo: Identifiable, Codable {
     var disableFeedPreview : Bool?
     
     var photoID : UUID {
-        if let id = id {
+        if let id {
             return id
         }
-        id = UUID()
-        return id!
+        let newID = UUID()
+        self.id = newID
+        return newID
     }
     
 //    var _allowedNumberOfViewsCount : Int {
@@ -270,9 +271,8 @@ extension Photo {
         do {
             if let _videoURL = self.videoFileName {
                 let url = VideoEncryption.getCompleteDocumentsURL(fileName: _videoURL)
-                if FileManager.default.fileExists(atPath: url.path){
+                if FileManager.default.fileExists(atPath: url.path) {
                     var playURL = url
-                    
                     let enctrypedData = try Data(contentsOf: url)
                     let decryptedData = try PrivateKeyStuff.decryptUsing(data: enctrypedData, keyDataSet: key)
                     let tempDirectoryURL = NSURL.fileURL(withPath: NSTemporaryDirectory(), isDirectory: true)

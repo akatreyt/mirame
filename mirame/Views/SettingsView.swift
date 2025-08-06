@@ -139,10 +139,12 @@ struct SettingsView: View {
         .alert("Delete Everything", isPresented: $deleteEverything) {
             Button("Delete", role: .destructive, action: {
                 BioAuthView.authenticate(completedAuthSuccess: {
-                    isDeleting = true
-                    DataBase.shared.deleteAll()
-                    KeychainKeys.shared.deleteAll()
-                    isDeleting = false
+                    Task {
+                        isDeleting = true
+                        await PhotosDBActor.shared.deleteAll()
+                        KeychainKeys.shared.deleteAll()
+                        isDeleting = false
+                    }
                 }, failedAuth: {
                     
                 })

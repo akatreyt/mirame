@@ -118,6 +118,6 @@ struct NewIn14App: App {
             }
             .environment(subscriptions)
         }
-        .modelContainer(DataBase.shared.sharedModelContainer)
+        .modelContainer(PhotosDBActor.sharedModelContainer)
     }
 }
